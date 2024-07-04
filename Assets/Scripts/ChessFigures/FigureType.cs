@@ -13,5 +13,6 @@ namespace Assets.Scripts.ChessFigures
         Bishop,
         Rook,
         Queen,
+        King
     }
 }

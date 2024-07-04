@@ -15,7 +15,13 @@ namespace Assets.Scripts.ChessFigures
 
         public override bool CanMove(Point toLocation, int[,] map)
         {
-            throw new NotImplementedException();
+            List<Point> whereCanMove = WhereCanMove(map);
+
+            if (whereCanMove.Contains(toLocation))
+            {
+                return true;
+            }
+            return false;
         }
 
         public override List<Point> WhereCanMove(int[,] map)

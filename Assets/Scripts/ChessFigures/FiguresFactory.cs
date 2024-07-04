@@ -25,6 +25,8 @@ namespace Assets.Scripts.ChessFigures
                     return new Rook(currentPosition);
                 case FigureType.Queen:
                     return new Queen(currentPosition);
+                case FigureType.King:
+                    return new King(currentPosition);
                 default:
                     throw new ArgumentException("Invalid enum value", nameof(currentPosition));
             }

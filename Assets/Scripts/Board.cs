@@ -91,6 +91,8 @@ namespace Assets.Scripts
                     return FigureType.Rook;
                 case 5:
                     return FigureType.Queen;
+                case 6:
+                    return FigureType.King;
             }
             return FigureType.Pawn;
         }
