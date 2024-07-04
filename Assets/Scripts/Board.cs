@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Assets.Scripts.ChessFigures;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assets.Scripts
@@ -12,14 +15,15 @@ namespace Assets.Scripts
     {
         public const int SIZE = 8;
         public const int PIECES = 7;
-        const int ADD_PIECES = 3;
+        const int ADD_PIECES = 5;
         private Random random = new Random();
 
         ShowBox ShowBox;
 
         int[,] map;
-        int fromX, fromY;
+        Point fromPosition;
         bool isPieceSelected;
+        FigureType typePieceSelected;
 
         public Board(ShowBox showBox)
         {
@@ -38,38 +42,57 @@ namespace Assets.Scripts
         {
             if (map[x, y] > 0)
             {
-                TakeBall(x, y);
+                TakePiece(x, y);
             }
             else
             {
-                MoveBall(x, y);
+                MovePiece(x, y);
             }
         }
 
-        private void MoveBall(int x, int y)
+        private void MovePiece(int x, int y)
         {
             if (!isPieceSelected) return;
-            if (!CanMove(x, y)) return;
-            SetMap(x, y, map[fromX, fromY]);
-            SetMap(fromX, fromY, 0);
+            if (!CanMove(new Point(x,y))) return;
+            SetMap(x, y, map[fromPosition.X, fromPosition.Y]);
+            SetMap(fromPosition.X, fromPosition.Y, 0);
             isPieceSelected = false;
-            if (CutLines())
-            {
 
-            }
-            else
+            CutLines();
+            do
             {
                 AddRandomPieces();
-                CutLines();
             }
+            while (CutLines());
 
         }
 
-        private void TakeBall(int x, int y)
+        private void TakePiece(int x, int y)
         {
-            fromX = x;
-            fromY = y;
+            fromPosition.X = x;
+            fromPosition.Y = y;
             isPieceSelected = true;
+            typePieceSelected = GetPieceType(x,y);
+        }
+
+        private FigureType GetPieceType(int x, int y)
+        {
+            int pieceType = map[x, y];
+
+            switch (pieceType)
+            {
+                case 1:
+                    return FigureType.Pawn;
+                case 2:
+                    return FigureType.Knight;
+                case 3:
+                    return FigureType.Bishop;
+                case 4:
+                    return FigureType.Rook;
+                case 5:
+                    return FigureType.Queen;
+            }
+            return FigureType.Pawn;
         }
 
         private bool[,] mark;
@@ -119,7 +142,7 @@ namespace Assets.Scripts
                 count++;
             }
 
-            if (count < 5)
+            if (count < 3)
             {
                 return 0;
             }
@@ -132,9 +155,11 @@ namespace Assets.Scripts
             return count;
         }
 
-        private bool CanMove(int x, int y)
+        private bool CanMove(Point toLocation)
         {
-            return true;
+            Figure figure = FiguresFactory.CreateFigure(typePieceSelected, fromPosition);
+
+            return figure.CanMove(toLocation, map);
         }
 
         private void ClearMap()
@@ -171,11 +196,11 @@ namespace Assets.Scripts
         {
             for (int j = 0; j < ADD_PIECES; j++)
             {
-                AddRandomBall();
+                AddRandomPiece();
             }
         }
 
-        private void AddRandomBall()
+        private void AddRandomPiece()
         {
             int x, y;
             int loop = SIZE * SIZE;
