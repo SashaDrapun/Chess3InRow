@@ -13,6 +13,33 @@ namespace Assets.Scripts.ChessFigures
         {
         }
 
+        public override List<Point> WhereCanMove(int[,] map)
+        {
+            List<Point> whereCanMove = new List<Point>
+            {
+                new Point(CurrentPosition.X + 2, CurrentPosition.Y - 1),
+                new Point(CurrentPosition.X + 2, CurrentPosition.Y + 1),
+                new Point(CurrentPosition.X - 2, CurrentPosition.Y - 1),
+                new Point(CurrentPosition.X - 2, CurrentPosition.Y + 1),
+                new Point(CurrentPosition.X - 1, CurrentPosition.Y + 2),
+                new Point(CurrentPosition.X + 1, CurrentPosition.Y + 2),
+                new Point(CurrentPosition.X - 1, CurrentPosition.Y - 2),
+                new Point(CurrentPosition.X + 1, CurrentPosition.Y + 2)
+            };
+
+            List<Point> result = new List<Point>();
+
+            foreach (Point point in whereCanMove)
+            {
+                if (GetMap(point.X, point.Y, map) == 0)
+                {
+                    result.Add(point);
+                }
+            }
+
+            return result;
+        }
+
         public override bool CanMove(Point toLocation, int[,] map)
         {
             List<Point> whereCanMove = WhereCanMove(map);
@@ -22,11 +49,6 @@ namespace Assets.Scripts.ChessFigures
                 return true;
             }
             return false;
-        }
-
-        public override List<Point> WhereCanMove(int[,] map)
-        {
-            throw new NotImplementedException();
         }
     }
 }

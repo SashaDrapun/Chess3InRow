@@ -13,14 +13,28 @@ namespace Assets.Scripts.ChessFigures
         {
         }
 
-        public override bool CanMove(Point toLocation, int[,] map)
-        {
-            throw new NotImplementedException();
-        }
-
         public override List<Point> WhereCanMove(int[,] map)
         {
-            throw new NotImplementedException();
+            List<Point> result = new List<Point>();
+            if (GetMap(CurrentPosition.X, CurrentPosition.Y - 1, map) == 0)
+            {
+                result.Add(new Point(CurrentPosition.X, CurrentPosition.Y - 1));
+            }
+
+            return result;
         }
+
+        public override bool CanMove(Point toLocation, int[,] map)
+        {
+            List<Point> whereCanMove = WhereCanMove(map);
+
+            if (whereCanMove.Contains(toLocation))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        
     }
 }
