@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=7c0dfe8373fd6b641846090acfa44fa1&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="Меню" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" class="header" />
+        <ui:Button text=" " parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="height: 233px; width: 797px; white-space: normal; -unity-text-align: middle-center; background-image: url(&quot;project://database/Assets/Images/GameMenu/buttonStart.png?fileID=2800000&amp;guid=e37cd199839a42745bec16d598da831b&amp;type=3#buttonStart&quot;);" />
+    </ui:VisualElement>
+</ui:UXML>

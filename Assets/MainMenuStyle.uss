@@ -1,0 +1,20 @@
+.header {
+    color: rgb(168, 31, 0);
+    font-size: 100px;
+}
+
+.button {
+    font-size: 77px;
+    height: 80px;
+    align-self: center;
+    width: 220px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background-image: url("project://database/Assets/Images/GameMenu/1K-Steel_-_Grainy_Gloss.jpg?fileID=2800000&guid=f52640ec124d6d04bbcdd2a7dcdba14f&type=3#1K-Steel_-_Grainy_Gloss");
+}
+
+.button:hover {
+    background-image: url("project://database/Assets/Images/GameMenu/buttonStart.png?fileID=2800000&guid=e37cd199839a42745bec16d598da831b&type=3#buttonStart");
+}
