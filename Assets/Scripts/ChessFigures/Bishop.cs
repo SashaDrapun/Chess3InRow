@@ -36,5 +36,17 @@ namespace Assets.Scripts.ChessFigures
             }
             return false;
         }
+
+        public override List<Point> ConnectedPieces(int[,] map)
+        {
+            List<Point> result = new List<Point>();
+
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 1, 1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 1, -1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, -1, 1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, -1, -1, map));
+
+            return result;
+        }
     }
 }
