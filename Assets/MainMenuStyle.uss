@@ -5,16 +5,34 @@
 
 .button {
     font-size: 77px;
-    height: 80px;
+    height: 173px;
     align-self: center;
-    width: 220px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-    background-image: url("project://database/Assets/Images/GameMenu/1K-Steel_-_Grainy_Gloss.jpg?fileID=2800000&guid=f52640ec124d6d04bbcdd2a7dcdba14f&type=3#1K-Steel_-_Grainy_Gloss");
+    width: 686px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-image: url("project://database/Assets/Images/GameMenu/buttonStartEd.png?fileID=2800000&guid=2e9751d79a68c134897ba8f51646888d&type=3#buttonStartEd");
+    background-color: rgba(255, 255, 255, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    margin-top: 257px;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+}
+
+.icon {
+    width: 327px;
+    height: 337px;
+    color: rgba(27, 27, 27, 0);
+    -unity-font-definition: initial;
+    margin-top: 55px;
 }
 
 .button:hover {
-    background-image: url("project://database/Assets/Images/GameMenu/buttonStart.png?fileID=2800000&guid=e37cd199839a42745bec16d598da831b&type=3#buttonStart");
+    scale: 0.95 0.95;
+    background-image: url("project://database/Assets/Images/GameMenu/buttonStartPressed.png?fileID=2800000&guid=ab443732233205e48a83e9190ba73755&type=3#buttonStartPressed");
 }
