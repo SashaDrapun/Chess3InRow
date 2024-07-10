@@ -11,6 +11,8 @@ public class MainMenuEvents : MonoBehaviour
 
     private Button _button;
 
+    private Button _settingsButton;
+
     private List<Button> _menuButtons = new List<Button>();
 
     private AudioSource _audioSource;
@@ -53,8 +55,15 @@ public class MainMenuEvents : MonoBehaviour
         ChangeScene();
     }
 
+    private void SettingsButtonClick(ClickEvent evt)
+    {
+
+    }
+
     private void OnAllButtonClick(ClickEvent evt)
     {
         _audioSource.Play();
     }
+
+
 }
