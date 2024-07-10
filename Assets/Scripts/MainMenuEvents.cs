@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class MainMenuEvents : MonoBehaviour
@@ -13,6 +14,12 @@ public class MainMenuEvents : MonoBehaviour
     private List<Button> _menuButtons = new List<Button>();
 
     private AudioSource _audioSource;
+
+    public int sceneNumber;
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene(sceneNumber);
+    }
 
     private void Awake()
     {
@@ -43,7 +50,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private void OnPlayGameClick(ClickEvent evt)
     {
-        
+        ChangeScene();
     }
 
     private void OnAllButtonClick(ClickEvent evt)
