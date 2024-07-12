@@ -3,6 +3,14 @@
     font-size: 100px;
 }
 
+.icon {
+    width: 327px;
+    height: 337px;
+    color: rgba(27, 27, 27, 0);
+    -unity-font-definition: initial;
+    margin-top: 55px;
+}
+
 .button {
     font-size: 77px;
     height: 173px;
@@ -24,15 +32,7 @@
     transition-timing-function: ease;
 }
 
-.icon {
-    width: 327px;
-    height: 337px;
-    color: rgba(27, 27, 27, 0);
-    -unity-font-definition: initial;
-    margin-top: 55px;
-}
-
 .button:hover {
-    scale: 0.95 0.95;
     background-image: url("project://database/Assets/Images/GameMenu/buttonStartPressed.png?fileID=2800000&guid=ab443732233205e48a83e9190ba73755&type=3#buttonStartPressed");
+    scale: 0.95 0.95;
 }
