@@ -79,7 +79,7 @@ namespace Assets.Scripts
         private FigureType GetPieceType(int x, int y)
         {
             int pieceType = map[x, y];
-
+            int test = 0;
             switch (pieceType)
             {
                 case 1:
