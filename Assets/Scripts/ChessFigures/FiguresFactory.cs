@@ -13,23 +13,16 @@ namespace Assets.Scripts.ChessFigures
     {
         public static Figure CreateFigure(FigureType figureType, Point currentPosition)
         {
-            switch (figureType)
+            return figureType switch
             {
-                case FigureType.Pawn:
-                    return new Pawn(currentPosition);
-                case FigureType.Knight:
-                    return new Knight(currentPosition);
-                case FigureType.Bishop:
-                    return new Bishop(currentPosition);
-                case FigureType.Rook:
-                    return new Rook(currentPosition);
-                case FigureType.Queen:
-                    return new Queen(currentPosition);
-                case FigureType.King:
-                    return new King(currentPosition);
-                default:
-                    throw new ArgumentException("Invalid enum value", nameof(currentPosition));
-            }
+                FigureType.Pawn => new Pawn(currentPosition),
+                FigureType.Knight => new Knight(currentPosition),
+                FigureType.Bishop => new Bishop(currentPosition),
+                FigureType.Rook => new Rook(currentPosition),
+                FigureType.Queen => new Queen(currentPosition),
+                FigureType.King => new King(currentPosition),
+                _ => throw new ArgumentException("Invalid enum value", nameof(figureType)),
+            };
         }
     }
 }

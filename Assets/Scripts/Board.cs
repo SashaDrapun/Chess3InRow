@@ -59,11 +59,12 @@ namespace Assets.Scripts
             isPieceSelected = false;
 
             CutLines();
-            do
-            {
-                AddRandomPieces();
-            }
-            while (CutLines());
+            AddRandomPieces();
+            //do
+            //{
+            //    AddRandomPieces();
+            //}
+            //while (CutLines());
 
         }
 
@@ -93,34 +94,26 @@ namespace Assets.Scripts
                     return FigureType.Queen;
                 case 6:
                     return FigureType.King;
+                default:
+                    break;
             }
             return FigureType.Pawn;
         }
 
-        private bool[,] mark;
+
         private bool CutLines()
         {
-            int balls = 0;
-            mark = new bool[SIZE, SIZE];
-            for (int x = 0; x < SIZE; x++)
-            {
-                for (int y = 0; y < SIZE; y++)
-                {
-                    balls += CalculateLine(x, y, 1, 0);
-                    balls += CalculateLine(x, y, 0, 1);
-                    balls += CalculateLine(x, y, 1, 1);
-                    balls += CalculateLine(x, y, -1, 1);
-                }
-            }
-
-            if (balls > 0)
+            MapExplore mapExplore = new(map);
+            mapExplore.SetPiecesToCut();
+            
+            if (mapExplore.Balls > 0)
             {
                 //playCut(); музыка
                 for (int x = 0; x < SIZE; x++)
                 {
                     for (int y = 0; y < SIZE; y++)
                     {
-                        if (mark[x, y])
+                        if (mapExplore.Mark[x, y])
                         {
                             SetMap(x, y, 0);
                         }
@@ -132,29 +125,6 @@ namespace Assets.Scripts
             {
                 return false;
             }
-        }
-
-        private int CalculateLine(int x0, int y0, int sx, int sy)
-        {
-            int ball = map[x0, y0];
-            if (ball == 0) return 0;
-            int count = 0;
-            for (int x = x0, y = y0; GetMap(x, y) == ball; x += sx, y += sy)
-            {
-                count++;
-            }
-
-            if (count < 3)
-            {
-                return 0;
-            }
-
-            for (int x = x0, y = y0; GetMap(x, y) == ball; x += sx, y += sy)
-            {
-                mark[x, y] = true;
-            }
-
-            return count;
         }
 
         private bool CanMove(Point toLocation)

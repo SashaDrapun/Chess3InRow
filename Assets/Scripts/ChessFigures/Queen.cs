@@ -29,6 +29,8 @@ namespace Assets.Scripts.ChessFigures
             return result;
         }
 
+
+
         public override bool CanMove(Point toLocation, int[,] map)
         {
             List<Point> whereCanMove = WhereCanMove(map);
@@ -38,6 +40,22 @@ namespace Assets.Scripts.ChessFigures
                 return true;
             }
             return false;
+        }
+
+        public override List<Point> ConnectedPieces(int[,] map)
+        {
+            List<Point> result = new List<Point>();
+
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 1, 0, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, -1, 0, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 0, 1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 0, -1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 1, 1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 1, -1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, -1, 1, map));
+            result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, -1, -1, map));
+
+            return result;
         }
     }
 }
