@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569b633b2548e834bb93a812b4fe7872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneNumber: 2
+  sceneNumber: 1
 --- !u!82 &1408161366
 AudioSource:
   m_ObjectHideFlags: 0
