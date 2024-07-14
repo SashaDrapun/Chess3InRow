@@ -30,24 +30,24 @@ public class Game : MonoBehaviour
     {
         string name = EventSystem.current.currentSelectedGameObject.name;
         int nr = GetNumber(name);
-        int x = nr % Board.SIZE;
-        int y = nr / Board.SIZE;
+        int x = nr % Map.SIZE;
+        int y = nr / Map.SIZE;
         board.Click(x, y);
     }
 
     private void InitButtons()
     {
-        buttons = new Button[Board.SIZE, Board.SIZE];
-        for (int nr = 0; nr < Board.SIZE * Board.SIZE; nr++)
+        buttons = new Button[Map.SIZE, Map.SIZE];
+        for (int nr = 0; nr < Map.SIZE * Map.SIZE; nr++)
         {
-            buttons[nr % Board.SIZE, nr / Board.SIZE] = GameObject.Find($"Button ({nr})").GetComponent<Button>();
+            buttons[nr % Map.SIZE, nr / Map.SIZE] = GameObject.Find($"Button ({nr})").GetComponent<Button>();
         }
     }
 
     private void InitImages()
     {
-        images = new Image[Board.PIECES];
-        for (int j = 0; j < Board.PIECES; j++)
+        images = new Image[Map.PIECES];
+        for (int j = 0; j < Map.PIECES; j++)
         {
             images[j] = GameObject.Find($"Image ({j})").GetComponent<Image>();
         }
