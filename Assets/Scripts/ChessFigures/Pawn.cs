@@ -21,7 +21,7 @@ namespace Assets.Scripts.ChessFigures
             
             foreach (Point point in whereCanMove)
             {
-                if (GetMap(point.X, point.Y, map) == 0)
+                if (Map.GetMap(point.X, point.Y, map) == 0)
                 {
                     result.Add(point);
                 }
@@ -48,7 +48,7 @@ namespace Assets.Scripts.ChessFigures
 
             foreach (Point point in whereCanShoot)
             {
-                if (GetMap(point.X, point.Y, map) == 1)
+                if (Map.GetMap(point.X, point.Y, map) == 1)
                 {
                     result.Add(point);
                 }
