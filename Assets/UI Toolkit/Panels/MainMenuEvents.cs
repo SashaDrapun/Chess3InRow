@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
@@ -18,6 +19,9 @@ public class MainMenuEvents : MonoBehaviour
     private AudioSource _audioSource;
 
     public int sceneNumber;
+
+    public Action OpenSettings { get; internal set; }
+
     public void ChangeScene()
     {
         SceneManager.LoadScene(sceneNumber);
@@ -29,7 +33,9 @@ public class MainMenuEvents : MonoBehaviour
         _document = GetComponent<UIDocument>();
 
         _button = _document.rootVisualElement.Q("StartGameButton") as Button;
+        _settingsButton = _document.rootVisualElement.Q("SettingsButton") as Button;
         _button.RegisterCallback<ClickEvent>(OnPlayGameClick);
+        _settingsButton.RegisterCallback<ClickEvent>(SettingsButtonClick);
 
         _menuButtons = _document.rootVisualElement.Query<Button>().ToList();
 
@@ -57,7 +63,8 @@ public class MainMenuEvents : MonoBehaviour
 
     private void SettingsButtonClick(ClickEvent evt)
     {
-
+        Debug.Log("clicked settings");
+        SceneManager.LoadScene("Settings");
     }
 
     private void OnAllButtonClick(ClickEvent evt)
