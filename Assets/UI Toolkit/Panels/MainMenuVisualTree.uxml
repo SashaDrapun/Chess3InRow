@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Panels/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=7c0dfe8373fd6b641846090acfa44fa1&amp;type=3#MainMenuStyle" />
     <Style src="project://database/Assets/UI%20Toolkit/Styles/button-style.uss?fileID=7433441132597879392&amp;guid=cf5bd0ff6089a684c9aeadeb66e6b02a&amp;type=3#button-style" />
-    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartGameButton" class="button" style="margin-top: 906px; width: 700px; height: 200px;" />
+    <ui:Button parse-escape-sequences="false" display-tooltip-when-elided="true" name="StartGameButton" class="button" style="margin-top: 906px; width: 700px; height: 200px; position: relative; display: flex; opacity: 1;" />
 </ui:UXML>
