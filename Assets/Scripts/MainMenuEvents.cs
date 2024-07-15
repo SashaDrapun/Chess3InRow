@@ -5,33 +5,40 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using ButtonUIElements = UnityEngine.UIElements.Button;
 
-public class SettingsMainMenu : MonoBehaviour
+
+public class MainMenuEvents : MonoBehaviour
 {
 
     public static bool SettingsMenu;
     public GameObject openSettingsMenu;
-    private ButtonUIElements startButton;
-    private UIDocument document;
+    public int sceneNumber;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
-        document = GetComponent<UIDocument>();
-
-        startButton = document.rootVisualElement.Q("StartGameButton") as ButtonUIElements;
+        _audioSource = GetComponent<AudioSource>();
     }
     public void SettingsButton()
     {
+        _audioSource.Play();
         openSettingsMenu.SetActive(true);
         SettingsMenu = true;
-        startButton.visible = false;
     }
 
     public void BackToMenu()
     {
+        _audioSource.Play();
         openSettingsMenu.SetActive(false);
         SettingsMenu = false;
-        startButton.visible = true;
+    }
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene(sceneNumber);
+    }
+    public void StartButton()
+    {
+        _audioSource.Play();
+        ChangeScene();
     }
 }
