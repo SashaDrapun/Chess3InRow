@@ -1,16 +1,3 @@
-.header {
-    color: rgb(168, 31, 0);
-    font-size: 100px;
-}
-
-.icon {
-    width: 327px;
-    height: 337px;
-    color: rgba(27, 27, 27, 0);
-    -unity-font-definition: initial;
-    margin-top: 55px;
-}
-
 .button {
     font-size: 77px;
     height: 173px;
