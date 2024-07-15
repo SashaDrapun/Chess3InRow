@@ -1,4 +1,0 @@
-repository "Chess3InARow@unity_DFE3054E602B51E63C50@cloud"
-  path "/"
-    br "/main"
-    co "/main"
