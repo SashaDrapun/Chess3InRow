@@ -13,22 +13,24 @@ public class MainMenuEvents : MonoBehaviour
     public static bool SettingsMenu;
     public GameObject openSettingsMenu;
     public int sceneNumber;
-    private AudioSource _audioSource;
+    private AudioSource audioSourceBackgroundMusic;
 
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        audioSourceBackgroundMusic = GetComponent<AudioSource>();
+        audioSourceBackgroundMusic.Play();
+
     }
     public void SettingsButton()
     {
-        _audioSource.Play();
+        audioSourceBackgroundMusic.Play();
         openSettingsMenu.SetActive(true);
         SettingsMenu = true;
     }
 
     public void BackToMenu()
     {
-        _audioSource.Play();
+        audioSourceBackgroundMusic.Play();
         openSettingsMenu.SetActive(false);
         SettingsMenu = false;
     }
@@ -38,7 +40,7 @@ public class MainMenuEvents : MonoBehaviour
     }
     public void StartButton()
     {
-        _audioSource.Play();
+        audioSourceBackgroundMusic.Play();
         ChangeScene();
     }
 }
