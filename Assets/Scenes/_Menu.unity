@@ -206,18 +206,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 653856110}
         m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
-        m_MethodName: OnAllButtonClickPlay
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 653856110}
-        m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
         m_MethodName: OnButtonSoundsClick
         m_Mode: 1
         m_Arguments:
@@ -348,21 +336,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 653856110}
-        m_TargetAssemblyTypeName: SettingsMainMenu, Assembly-CSharp
-        m_MethodName: BackToMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 653856110}
-        m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
-        m_MethodName: OnAllButtonClickPlay
+      - m_Target: {fileID: 653856114}
+        m_TargetAssemblyTypeName: Assets.Scripts.Menu.ShowAndHideSettings, Assembly-CSharp
+        m_MethodName: OnBackToMenuClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -492,21 +468,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 653856113}
         m_TargetAssemblyTypeName: Assets.Scripts.Menu.OnStartButton, Assembly-CSharp
         m_MethodName: OnStartButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 653856110}
-        m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
-        m_MethodName: OnAllButtonClickPlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -776,6 +740,8 @@ GameObject:
   - component: {fileID: 653856109}
   - component: {fileID: 653856110}
   - component: {fileID: 653856113}
+  - component: {fileID: 653856114}
+  - component: {fileID: 653856115}
   - component: {fileID: 653856111}
   - component: {fileID: 653856112}
   m_Layer: 0
@@ -898,7 +864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be87002b92419b2449cd11835a4bc36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openSettingsMenu: {fileID: 1627548112}
 --- !u!82 &653856111
 AudioSource:
   m_ObjectHideFlags: 0
@@ -911,7 +876,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c1e76a2b5ca174540828bcac36c7c606, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.21
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1104,6 +1069,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneNumberToGo: 1
+--- !u!114 &653856114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653856104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af68ee5bdb9aea24e8d4fe1ccb8deaa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openSettingsMenu: {fileID: 1627548112}
+--- !u!114 &653856115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653856104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1ec1b468850f846ac2baa79112c7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &707957521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,21 +1483,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 653856110}
-        m_TargetAssemblyTypeName: SettingsMainMenu, Assembly-CSharp
-        m_MethodName: SettingsButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 653856110}
-        m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
-        m_MethodName: OnAllButtonClickPlay
+      - m_Target: {fileID: 653856114}
+        m_TargetAssemblyTypeName: Assets.Scripts.Menu.ShowAndHideSettings, Assembly-CSharp
+        m_MethodName: OnSettingsButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1959,7 +1937,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1987,18 +1965,6 @@ MonoBehaviour:
       - m_Target: {fileID: 653856110}
         m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
         m_MethodName: OnButtonMusicClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 653856110}
-        m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
-        m_MethodName: OnAllButtonClickPlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
