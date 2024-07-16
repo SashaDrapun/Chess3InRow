@@ -86,11 +86,6 @@ public class MainMenuEvents : MonoBehaviour
         }
     }
 
-    public void OnAllButtonClickPlay()
-    {
-        audioSourseOnButtonClick.Play();
-    }
-
     public void OnButtonMusicClick()
     {
         SettingsState musicStatus = SettingsStatusService.GetCurrentMusicStatus();
