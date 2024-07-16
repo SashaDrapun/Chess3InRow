@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts
 {
-    public delegate void ShowBox(int x, int y, int piece);
+    public delegate void ShowBox(int x, int y, MapCellType mapElement);
 
     public class Board
     {

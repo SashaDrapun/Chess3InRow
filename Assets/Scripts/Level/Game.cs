@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Assets.Scripts.ChessFigures;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -21,9 +22,9 @@ public class Game : MonoBehaviour
         board.Start();
     }
 
-    public void ShowBox(int x, int y, int piece)
+    public void ShowBox(int x, int y, MapCellType mapElement)
     {
-        buttons[x, y].GetComponent<Image>().sprite = images[piece].sprite;
+        buttons[x, y].GetComponent<Image>().sprite = images[(int)mapElement].sprite;
     }
 
     public void Click()

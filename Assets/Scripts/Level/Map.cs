@@ -108,7 +108,7 @@ namespace Assets.Scripts
                 {
                     if (whereUserCanGo[x,y])
                     {
-                        ShowBox(x, y, 7);
+                        ShowBox(x, y, MapCellType.AllocatedSpace);
                     }
                 }
             }
@@ -144,6 +144,32 @@ namespace Assets.Scripts
                     break;
             }
             return FigureType.Pawn;
+        }
+
+        private MapCellType GetPieceType(int mapElement)
+        {
+            switch (mapElement)
+            {
+                case 0:
+                    return MapCellType.EmptyPlace;
+                case 1:
+                    return MapCellType.Pawn;
+                case 2:
+                    return MapCellType.Knight;
+                case 3:
+                    return MapCellType.Bishop;
+                case 4:
+                    return MapCellType.Rook;
+                case 5:
+                    return MapCellType.Queen;
+                case 6:
+                    return MapCellType.King;
+                case 7:
+                    return MapCellType.AllocatedSpace;
+                default:
+                    break;
+            }
+            return MapCellType.Pawn;
         }
 
         private bool CutLines()
@@ -263,10 +289,17 @@ namespace Assets.Scripts
             return x >= 0 && x < SIZE && y >= 0 && y < SIZE;
         }
 
+        public void SetMap(int x, int y, MapCellType mapElement)
+        {
+            map[x, y] = (int)mapElement;
+            ShowBox(x, y, mapElement);
+        }
+
         public void SetMap(int x, int y, int piece)
         {
             map[x, y] = piece;
-            ShowBox(x, y, piece);
+            MapCellType mapElement = GetPieceType(piece);
+            ShowBox(x, y, mapElement);
         }
 
         private void AddRandomPieces()
