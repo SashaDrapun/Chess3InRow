@@ -17,7 +17,7 @@ namespace Assets.Scripts.ChessFigures
         {
             List<Point> whereCanMove = WhereCanMove();
 
-            List<Point> result = new List<Point>();
+            List<Point> result = new();
 
             foreach (Point point in whereCanMove)
             {
@@ -45,7 +45,7 @@ namespace Assets.Scripts.ChessFigures
         {
             List<Point> whereCanMove = WhereCanMove();
 
-            List<Point> result = new List<Point>();
+            List<Point> result = new();
 
             foreach (Point point in whereCanMove)
             {
@@ -62,14 +62,14 @@ namespace Assets.Scripts.ChessFigures
         {
             return new List<Point>
             {
-                new Point(CurrentPosition.X + 1, CurrentPosition.Y),
-                new Point(CurrentPosition.X - 1, CurrentPosition.Y),
-                new Point(CurrentPosition.X, CurrentPosition.Y + 1),
-                new Point(CurrentPosition.X, CurrentPosition.Y - 1),
-                new Point(CurrentPosition.X + 1, CurrentPosition.Y + 1),
-                new Point(CurrentPosition.X + 1, CurrentPosition.Y - 1),
-                new Point(CurrentPosition.X - 1, CurrentPosition.Y + 1),
-                new Point(CurrentPosition.X - 1, CurrentPosition.Y - 1)
+                new(CurrentPosition.X + 1, CurrentPosition.Y),
+                new(CurrentPosition.X - 1, CurrentPosition.Y),
+                new(CurrentPosition.X, CurrentPosition.Y + 1),
+                new(CurrentPosition.X, CurrentPosition.Y - 1),
+                new(CurrentPosition.X + 1, CurrentPosition.Y + 1),
+                new(CurrentPosition.X + 1, CurrentPosition.Y - 1),
+                new(CurrentPosition.X - 1, CurrentPosition.Y + 1),
+                new(CurrentPosition.X - 1, CurrentPosition.Y - 1)
             };
         }
     }

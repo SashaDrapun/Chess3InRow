@@ -57,7 +57,7 @@ public class Game : MonoBehaviour
 
     private int GetNumber(string name)
     {
-        Regex regex = new Regex("\\((\\d+)\\)");
+        Regex regex = new("\\((\\d+)\\)");
         Match match = regex.Match(name);
         if (!match.Success)
         {

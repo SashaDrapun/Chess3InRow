@@ -21,8 +21,8 @@ namespace Assets.Scripts
         private bool[,] counted;
         private bool[,] whereUserCanGo;
 
-        ShowBox ShowBox;
-        private static Random random = new Random();
+        readonly ShowBox ShowBox;
+        private static readonly Random random = new();
         Point fromPosition;
         bool isPieceSelected;
         FigureType typePieceSelected;
@@ -221,7 +221,6 @@ namespace Assets.Scripts
 
         private int CalculateConnectedFigures(int x0, int y0, FigureType figureType)
         {
-            int piece = GetMap(x0, y0);
             Figure figure = FiguresFactory.CreateFigure(figureType, new Point(x0, y0));
             int count = 1;
             counted[x0, y0] = true;
@@ -238,7 +237,6 @@ namespace Assets.Scripts
 
         private void MarkLongRangeFigures(int x0, int y0, FigureType figureType)
         {
-            int piece = GetMap(x0, y0);
             Figure figure = FiguresFactory.CreateFigure(figureType, new Point(x0, y0));
             Mark[x0, y0] = true;
             List<Point> connectedPieces = figure.ConnectedPieces(map);
