@@ -1,10 +1,7 @@
 using Assets.Scripts.Menu;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,19 +11,18 @@ public class MainMenuEvents : MonoBehaviour
 {
     public static bool SettingsMenu;
     public GameObject openSettingsMenu;
-    public int sceneNumber;
+    
     private AudioSource audioSourceBackgroundMusic;
     private AudioSource audioSourseOnButtonClick;
-
 
     private void Awake()
     {
         CheckPrefsForSettings();
-        SetAudiosources();
+        SetAudioSources();
         LoadSettings();
     }
 
-    private void SetAudiosources()
+    private void SetAudioSources()
     {
         List<AudioSource> audioSources = GetComponents<AudioSource>().ToList();
         audioSourceBackgroundMusic = audioSources[0];
@@ -41,7 +37,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private void LoadMusic(SettingsState settingsState)
     {
-        Button musicButton = FindMusicButton();
+        Button musicButton = FindButton("Music");
         if (settingsState == SettingsState.On)
         {
             audioSourceBackgroundMusic.Play();
@@ -57,7 +53,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private void LoadSounds(SettingsState settingsState)
     {
-        Button soundsButton = FindSoundsButton();
+        Button soundsButton = FindButton("Sounds");
 
         if (settingsState == SettingsState.On)
         {
@@ -71,25 +67,12 @@ public class MainMenuEvents : MonoBehaviour
         }
     }
 
-    private Button FindMusicButton()
+    private Button FindButton(string objectName)
     {
         Button[] allButtons = Resources.FindObjectsOfTypeAll<Button>();
-        string objectName = "Music";
-
         Button hiddenMusicButton = Array.Find(allButtons, btn => btn.name == objectName && !btn.gameObject.activeInHierarchy);
 
         if (hiddenMusicButton != null) return hiddenMusicButton;
-        else return GameObject.Find(objectName).GetComponent<Button>();
-    }
-
-    private Button FindSoundsButton()
-    {
-        Button[] allButtons = Resources.FindObjectsOfTypeAll<Button>();
-        string objectName = "Sounds";
-
-        Button hiddenSoundsButton = Array.Find(allButtons, btn => btn.name == objectName && !btn.gameObject.activeInHierarchy);
-
-        if (hiddenSoundsButton != null) return hiddenSoundsButton;
         else return GameObject.Find(objectName).GetComponent<Button>();
     }
 
@@ -140,14 +123,5 @@ public class MainMenuEvents : MonoBehaviour
 
         LoadSounds(changedSoundsStatus);
         SettingsStatusService.SetCurrentSoundsStatus(changedSoundsStatus);
-    }
-
-    public void ChangeScene()
-    {
-        SceneManager.LoadScene(sceneNumber);
-    }
-    public void StartButton()
-    {
-        ChangeScene();
     }
 }
