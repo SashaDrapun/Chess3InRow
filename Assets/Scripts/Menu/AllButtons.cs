@@ -15,15 +15,19 @@ namespace Assets.Scripts.Menu
 
         private void Awake()
         {
-            List<AudioSource> audioSources = GetComponents<AudioSource>().ToList();
-            audioSourseOnButtonClick = audioSources[1];
-
+            LoadAudioSourse();
             List<Button> allButtons = GetAllButtons();
 
             foreach (Button button in allButtons)
             {
                 button.onClick.AddListener(OnAllButtonClick);
             }
+        }
+
+        private void LoadAudioSourse()
+        {
+            List<AudioSource> audioSources = GetComponents<AudioSource>().ToList();
+            audioSourseOnButtonClick = audioSources[1];
         }
 
         private List<Button> GetAllButtons()
