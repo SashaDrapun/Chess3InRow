@@ -9,9 +9,6 @@ using UnityEngine.UI;
 
 public class MainMenuEvents : MonoBehaviour
 {
-    public static bool SettingsMenu;
-    public GameObject openSettingsMenu;
-    
     private AudioSource audioSourceBackgroundMusic;
     private AudioSource audioSourseOnButtonClick;
 
@@ -87,19 +84,6 @@ public class MainMenuEvents : MonoBehaviour
         {
             PlayerPrefs.SetInt("Sounds", (int)SettingsState.On);
         }
-    }
-
-    public void SettingsButton()
-    {
-        audioSourseOnButtonClick.Play();
-        openSettingsMenu.SetActive(true);
-        SettingsMenu = true;
-    }
-
-    public void BackToMenu()
-    {
-        openSettingsMenu.SetActive(false);
-        SettingsMenu = false;
     }
 
     public void OnAllButtonClickPlay()
