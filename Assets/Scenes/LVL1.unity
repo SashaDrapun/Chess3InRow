@@ -2982,7 +2982,7 @@ GameObject:
   - component: {fileID: 641098922}
   - component: {fileID: 641098921}
   m_Layer: 0
-  m_Name: PawnText
+  m_Name: CollectedPawnsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

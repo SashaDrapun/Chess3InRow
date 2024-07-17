@@ -70,9 +70,10 @@ namespace Assets.Scripts
             SetMap(fromPosition.X, fromPosition.Y, 0);
             isPieceSelected = false;
             levelProgress.CountMoves++;
-            ShowProgressOfTheLevel(levelProgress);
+            
             CutLines();
             AddRandomPieces();
+            ShowProgressOfTheLevel(levelProgress);
             //do
             //{
             //    AddRandomPieces();

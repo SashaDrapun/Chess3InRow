@@ -33,7 +33,25 @@ public class Game : MonoBehaviour
 
     public void ShowStatistics(LevelProgress levelProgress)
     {
-       // TextMeshPro text = GameObject.Find($"CollectedPawnsText").GetComponent<TextMeshPro>();
+        OutputInformation("CollectedPawnsText", levelProgress.CountCollectedPawns + "/15");
+        OutputInformation("CollectedKnightsText", levelProgress.CountCollectedKnights + "/15");
+        OutputInformation("CollectedBishopsText", levelProgress.CountCollectedBishops + "/15");
+        OutputInformation("CollectedRooksText", levelProgress.CountCollectedRooks + "/15");
+        OutputInformation("CollectedQueensText", levelProgress.CountCollectedQueens + "/15");
+        OutputInformation("CollectedKingsText", levelProgress.CountCollectedKings + "/15");
+    }
+
+    private void OutputInformation(string textMeshProName, string outputInformation)
+    {
+        TextMeshProUGUI[] textMeshProObjects = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>();
+        foreach (TextMeshProUGUI obj in textMeshProObjects)
+        {
+            if (obj.name == textMeshProName)
+            {
+                obj.text = outputInformation;
+                return;
+            }
+        }
     }
 
     public void Click()
