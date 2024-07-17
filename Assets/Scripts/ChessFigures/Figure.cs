@@ -15,7 +15,7 @@ public abstract class Figure
         this.CurrentPosition = currentPosition;
     }
 
-    public List<Point> WhereCanMoveByMap(int x0, int y0, int sx, int sy, int[,] map)
+    public List<Point> WhereCanMoveByMap(int x0, int y0, int sx, int sy, MapCellType[,] map)
     {
         List<Point> result = new();
 
@@ -27,10 +27,10 @@ public abstract class Figure
         return result;
     }
 
-    public List<Point> FindConnectedPiecesForLongRangeFigures(int x0, int y0, int sx, int sy, int[,] map)
+    public List<Point> FindConnectedPiecesForLongRangeFigures(int x0, int y0, int sx, int sy, MapCellType[,] map)
     {
         List<Point> result = new();
-        int piece = Map.GetMap(x0, y0, map);
+        MapCellType piece = Map.GetMap(x0, y0, map);
 
         for (int x = x0 + sx, y = y0 + sy; (Map.GetMap(x, y, map) == (int)MapCellType.EmptyPlace) || (Map.GetMap(x, y, map) == piece); x += sx, y += sy)
         {
@@ -44,9 +44,9 @@ public abstract class Figure
         return result;
     }
 
-    public abstract bool CanMove(Point toLocation, int[,] map);
+    public abstract bool CanMove(Point toLocation, MapCellType[,] map);
 
-    public abstract List<Point> WhereCanMove(int[,] map);
+    public abstract List<Point> WhereCanMove(MapCellType[,] map);
 
-    public abstract List<Point> ConnectedPieces(int[,] map);
+    public abstract List<Point> ConnectedPieces(MapCellType[,] map);
 }

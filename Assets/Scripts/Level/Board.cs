@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.ChessFigures;
+using Assets.Scripts.Level;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,15 +11,15 @@ using System.Threading.Tasks;
 namespace Assets.Scripts
 {
     public delegate void ShowBox(int x, int y, MapCellType mapElement);
+    public delegate void ShowProgressOfTheLevel(LevelProgress levelProgress);
 
     public class Board
     {
         public Map map;
  
-
-        public Board(ShowBox showBox)
+        public Board(ShowBox showBox,ShowProgressOfTheLevel showStatisticsOnTheScreen)
         {
-            map = new Map(showBox);
+            map = new Map(showBox, showStatisticsOnTheScreen);
         }
 
         public void Start()

@@ -1,22 +1,26 @@
 using Assets.Scripts;
 using Assets.Scripts.ChessFigures;
+using Assets.Scripts.Level;
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class Game : MonoBehaviour
 {
+    public TextMeshPro CountCollectedPawns;
+
+
     Button[,] buttons;
     Image[] images;
     private Board board;
+    
 
     void Start()
     {
-        this.board = new Board(ShowBox);
+        this.board = new Board(ShowBox, ShowStatistics);
         InitButtons();
         InitImages();
         board.Start();
@@ -25,6 +29,11 @@ public class Game : MonoBehaviour
     public void ShowBox(int x, int y, MapCellType mapElement)
     {
         buttons[x, y].GetComponent<Image>().sprite = images[(int)mapElement].sprite;
+    }
+
+    public void ShowStatistics(LevelProgress levelProgress)
+    {
+        TextMeshPro text = GameObject.Find($"CollectedPawnsText").GetComponent<TextMeshPro>();
     }
 
     public void Click()

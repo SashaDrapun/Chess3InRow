@@ -15,6 +15,7 @@ namespace Assets.Scripts.ChessFigures
         Rook,
         Queen,
         King,
-        AllocatedSpace
+        AllocatedSpace,
+        NotOnMap
     }
 }

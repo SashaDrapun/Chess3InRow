@@ -7,12 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using UnityEngine.UI;
+using Assets.Scripts.Level;
+using Assets.Scripts.Menu;
 
 namespace Assets.Scripts
 {
     public class Map
     {
-        public int[,] map;
+        public MapCellType[,] map;
         public const int SIZE = 8;
         public const int PIECES = 8;
         const int ADD_PIECES = 5;
@@ -20,19 +22,22 @@ namespace Assets.Scripts
         public int PiecesToDelete;
         private bool[,] counted;
         private bool[,] whereUserCanGo;
-
+        private LevelProgress levelProgress;
         readonly ShowBox ShowBox;
+        readonly ShowProgressOfTheLevel ShowProgressOfTheLevel;
         private static readonly Random random = new();
         Point fromPosition;
         bool isPieceSelected;
         FigureType typePieceSelected;
 
-        public Map(ShowBox showBox)
+        public Map(ShowBox showBox, ShowProgressOfTheLevel showProgressOfTheLevel)
         {
-            map = new int[SIZE, SIZE];
+            map = new MapCellType[SIZE, SIZE];
             ShowBox = showBox;
+            this.ShowProgressOfTheLevel = showProgressOfTheLevel;
             whereUserCanGo = new bool[SIZE, SIZE];
             Mark = new bool[SIZE, SIZE];
+            levelProgress = new LevelProgress();
         }
 
         public void Refresh()
@@ -64,7 +69,8 @@ namespace Assets.Scripts
             SetMap(x, y, map[fromPosition.X, fromPosition.Y]);
             SetMap(fromPosition.X, fromPosition.Y, 0);
             isPieceSelected = false;
-
+            levelProgress.CountMoves++;
+            ShowProgressOfTheLevel(levelProgress);
             CutLines();
             AddRandomPieces();
             //do
@@ -80,7 +86,7 @@ namespace Assets.Scripts
             fromPosition.X = x;
             fromPosition.Y = y;
             isPieceSelected = true;
-            typePieceSelected = GetPieceType(x, y);
+            typePieceSelected = GetPieceType(map[x,y]);
             SetWhereUserCanGo();
         }
 
@@ -123,53 +129,30 @@ namespace Assets.Scripts
             }
         }
 
-        private FigureType GetPieceType(int x, int y)
+        private FigureType GetPieceType(MapCellType mapElement)
         {
-            int pieceType = map[x, y];
-            switch (pieceType)
+            switch (mapElement)
             {
-                case 1:
+                case MapCellType.EmptyPlace:
                     return FigureType.Pawn;
-                case 2:
+                case MapCellType.Pawn:
+                    return FigureType.Pawn;
+                case MapCellType.Knight:
                     return FigureType.Knight;
-                case 3:
+                case MapCellType.Bishop:
                     return FigureType.Bishop;
-                case 4:
+                case MapCellType.Rook:
                     return FigureType.Rook;
-                case 5:
+                case MapCellType.Queen:
                     return FigureType.Queen;
-                case 6:
+                case MapCellType.King:
                     return FigureType.King;
+                case MapCellType.AllocatedSpace:
+                    return FigureType.Pawn;
                 default:
                     break;
             }
             return FigureType.Pawn;
-        }
-
-        private MapCellType GetPieceType(int mapElement)
-        {
-            switch (mapElement)
-            {
-                case 0:
-                    return MapCellType.EmptyPlace;
-                case 1:
-                    return MapCellType.Pawn;
-                case 2:
-                    return MapCellType.Knight;
-                case 3:
-                    return MapCellType.Bishop;
-                case 4:
-                    return MapCellType.Rook;
-                case 5:
-                    return MapCellType.Queen;
-                case 6:
-                    return MapCellType.King;
-                case 7:
-                    return MapCellType.AllocatedSpace;
-                default:
-                    break;
-            }
-            return MapCellType.Pawn;
         }
 
         private bool CutLines()
@@ -178,23 +161,65 @@ namespace Assets.Scripts
 
             if (PiecesToDelete > 0)
             {
-                //playCut(); музыка
+                AddPiecesToStatistics();
                 for (int x = 0; x < SIZE; x++)
                 {
                     for (int y = 0; y < SIZE; y++)
                     {
                         if (Mark[x, y])
                         {
-                            SetMap(x, y, 0);
+                            SetMap(x, y, MapCellType.EmptyPlace);
                         }
                     }
                 }
+
                 return true;
             }
             else
             {
                 return false;
             }
+        }
+
+        private void AddPiecesToStatistics()
+        {
+            for (int x = 0; x < SIZE; x++)
+            {
+                for (int y = 0; y < SIZE; y++)
+                {
+                    if (Mark[x, y])
+                    {
+                        switch (map[x, y])
+                        {
+                            case MapCellType.EmptyPlace:
+                                break;
+                            case MapCellType.Pawn:
+                                levelProgress.CountCollectedPawns++;
+                                break;
+                            case MapCellType.Knight:
+                                levelProgress.CountCollectedKnights++;
+                                break;
+                            case MapCellType.Bishop:
+                                levelProgress.CountCollectedBishops++;
+                                break;
+                            case MapCellType.Rook:
+                                levelProgress.CountCollectedRooks++;
+                                break; 
+                            case MapCellType.Queen:
+                                levelProgress.CountCollectedQueens++;
+                                break;
+                            case MapCellType.King:
+                                levelProgress.CountCollectedKings++;
+                                break;
+                            case MapCellType.AllocatedSpace:
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
         }
 
         public void SetPiecesToCut()
@@ -205,9 +230,9 @@ namespace Assets.Scripts
             {
                 for (int y = 0; y < SIZE; y++)
                 {
-                    int piece = GetMap(x, y);
-                    if (piece == 0) continue;
-                    FigureType figureType = GetPieceType(x, y);
+                    MapCellType mapCellType = GetMap(x, y);
+                    if (mapCellType == MapCellType.EmptyPlace) continue;
+                    FigureType figureType = GetPieceType(mapCellType);
                     counted = new bool[SIZE, SIZE];
                     int countConnectedPieces = CalculateConnectedFigures(x, y, figureType);
                     if (countConnectedPieces >= 3)
@@ -270,33 +295,26 @@ namespace Assets.Scripts
             return x >= 0 && x < SIZE && y >= 0 && y < SIZE;
         }
 
-        public int GetMap(int x, int y)
+        public MapCellType GetMap(int x, int y)
         {
-            if (!OnMap(x, y)) return -1;
+            if (!OnMap(x, y)) return MapCellType.NotOnMap;
             return map[x, y];
         }
 
-        public static int GetMap(int x, int y, int[,] map)
+        public static MapCellType GetMap(int x, int y, MapCellType[,] map)
         {
-            if (!OnMap(x, y, map)) return -1;
+            if (!OnMap(x, y, map)) return MapCellType.NotOnMap;
             return map[x, y];
         }
 
-        public static bool OnMap(int x, int y, int[,] map)
+        public static bool OnMap(int x, int y, MapCellType[,] map)
         {
             return x >= 0 && x < SIZE && y >= 0 && y < SIZE;
         }
 
         public void SetMap(int x, int y, MapCellType mapElement)
         {
-            map[x, y] = (int)mapElement;
-            ShowBox(x, y, mapElement);
-        }
-
-        public void SetMap(int x, int y, int piece)
-        {
-            map[x, y] = piece;
-            MapCellType mapElement = GetPieceType(piece);
+            map[x, y] = mapElement;
             ShowBox(x, y, mapElement);
         }
 
@@ -320,7 +338,7 @@ namespace Assets.Scripts
             }
             while (map[x, y] > 0);
             int piece = 1 + random.Next(PIECES - 2);
-            SetMap(x, y, piece);
+            SetMap(x, y, (MapCellType)piece);
         }
     }
 }

@@ -14,14 +14,14 @@ namespace Assets.Scripts.ChessFigures
         {
         }
 
-        public override List<Point> WhereCanMove(int[,] map)
+        public override List<Point> WhereCanMove(MapCellType[,] map)
         {
             List<Point> whereCanMove = WhereCanMove();
             List<Point> result = new();
             
             foreach (Point point in whereCanMove)
             {
-                if (Map.GetMap(point.X, point.Y, map) == (int)MapCellType.EmptyPlace)
+                if (Map.GetMap(point.X, point.Y, map) == MapCellType.EmptyPlace)
                 {
                     result.Add(point);
                 }
@@ -30,7 +30,7 @@ namespace Assets.Scripts.ChessFigures
             return result;
         }
 
-        public override bool CanMove(Point toLocation, int[,] map)
+        public override bool CanMove(Point toLocation, MapCellType[,] map)
         {
             List<Point> whereCanMove = WhereCanMove(map);
 
@@ -41,14 +41,14 @@ namespace Assets.Scripts.ChessFigures
             return false;
         }
 
-        public override List<Point> ConnectedPieces(int[,] map)
+        public override List<Point> ConnectedPieces(MapCellType[,] map)
         {
             List<Point> whereCanShoot = WhereCanShoot();
             List<Point> result = new();
 
             foreach (Point point in whereCanShoot)
             {
-                if (Map.GetMap(point.X, point.Y, map) == (int)MapCellType.Pawn)
+                if (Map.GetMap(point.X, point.Y, map) == MapCellType.Pawn)
                 {
                     result.Add(point);
                 }
