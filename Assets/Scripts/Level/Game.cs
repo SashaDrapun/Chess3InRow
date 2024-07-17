@@ -33,7 +33,7 @@ public class Game : MonoBehaviour
 
     public void ShowStatistics(LevelProgress levelProgress)
     {
-        TextMeshPro text = GameObject.Find($"CollectedPawnsText").GetComponent<TextMeshPro>();
+       // TextMeshPro text = GameObject.Find($"CollectedPawnsText").GetComponent<TextMeshPro>();
     }
 
     public void Click()
