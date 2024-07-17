@@ -9,41 +9,35 @@ using UnityEngine.UI;
 
 public class MainMenuEvents : MonoBehaviour
 {
-    private AudioSource audioSourceBackgroundMusic;
-    private AudioSource audioSourseOnButtonClick;
-
     private void Awake()
     {
         CheckPrefsForSettings();
-        SetAudioSources();
         LoadSettings();
-    }
-
-    private void SetAudioSources()
-    {
-        List<AudioSource> audioSources = GetComponents<AudioSource>().ToList();
-        audioSourceBackgroundMusic = audioSources[0];
-        audioSourseOnButtonClick = audioSources[1];
     }
 
     private void LoadSettings()
     {
+        SetAudioSources();
         LoadMusic(SettingsStatusService.GetCurrentMusicStatus());
         LoadSounds(SettingsStatusService.GetCurrentSoundsStatus());
+    }
+    private void SetAudioSources()
+    {
+        List<AudioSource> audioSources = GetComponents<AudioSource>().ToList();
+        AudioSourseListeners.AudioSourceBackgroundMusic = audioSources[0];
+        AudioSourseListeners.AudioSourseOnButtonClick = audioSources[1];
     }
 
     private void LoadMusic(SettingsState settingsState)
     {
         Button musicButton = FindButton("Music");
+        AudioListenersService.ChangeAudioListenerBackgroundMusicStatus(settingsState);
         if (settingsState == SettingsState.On)
         {
-            audioSourceBackgroundMusic.Play();
-            
             musicButton.GetComponent<Image>().sprite = GameObject.Find($"MusicOn").GetComponent<Image>().sprite;
         }
         else
         {
-            audioSourceBackgroundMusic.Stop();
             musicButton.GetComponent<Image>().sprite = GameObject.Find($"MusicOff").GetComponent<Image>().sprite;
         }
     }
@@ -51,15 +45,13 @@ public class MainMenuEvents : MonoBehaviour
     private void LoadSounds(SettingsState settingsState)
     {
         Button soundsButton = FindButton("Sounds");
-
+        AudioListenersService.ChangeAudioListenerSoundsStatus(settingsState);
         if (settingsState == SettingsState.On)
         {
-            audioSourseOnButtonClick.mute = false;
             soundsButton.GetComponent<Image>().sprite = GameObject.Find($"SoundsOn").GetComponent<Image>().sprite;
         }
         else
         {
-            audioSourseOnButtonClick.mute = true;
             soundsButton.GetComponent<Image>().sprite = GameObject.Find($"SoundsOff").GetComponent<Image>().sprite;
         }
     }

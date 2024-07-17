@@ -17,11 +17,11 @@ namespace Assets.Scripts.ChessFigures
         public override List<Point> WhereCanMove(int[,] map)
         {
             List<Point> whereCanMove = WhereCanMove();
-            List<Point> result = new List<Point>();
+            List<Point> result = new();
             
             foreach (Point point in whereCanMove)
             {
-                if (Map.GetMap(point.X, point.Y, map) == 0)
+                if (Map.GetMap(point.X, point.Y, map) == (int)MapCellType.EmptyPlace)
                 {
                     result.Add(point);
                 }
@@ -44,11 +44,11 @@ namespace Assets.Scripts.ChessFigures
         public override List<Point> ConnectedPieces(int[,] map)
         {
             List<Point> whereCanShoot = WhereCanShoot();
-            List<Point> result = new List<Point>();
+            List<Point> result = new();
 
             foreach (Point point in whereCanShoot)
             {
-                if (Map.GetMap(point.X, point.Y, map) == 1)
+                if (Map.GetMap(point.X, point.Y, map) == (int)MapCellType.Pawn)
                 {
                     result.Add(point);
                 }
@@ -61,7 +61,7 @@ namespace Assets.Scripts.ChessFigures
         {
             return new List<Point>
             {
-                new Point(CurrentPosition.X, CurrentPosition.Y - 1)
+                new(CurrentPosition.X, CurrentPosition.Y - 1)
             };
         }
 
@@ -69,8 +69,8 @@ namespace Assets.Scripts.ChessFigures
         {
             return new List<Point>
             {
-                new Point(CurrentPosition.X + 1, CurrentPosition.Y - 1),
-                new Point(CurrentPosition.X - 1, CurrentPosition.Y - 1)
+                new(CurrentPosition.X + 1, CurrentPosition.Y - 1),
+                new(CurrentPosition.X - 1, CurrentPosition.Y - 1)
             };
         }
     }

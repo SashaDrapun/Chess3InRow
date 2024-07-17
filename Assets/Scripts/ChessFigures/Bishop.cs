@@ -16,7 +16,7 @@ namespace Assets.Scripts.ChessFigures
 
         public override List<Point> WhereCanMove(int[,] map)
         {
-            List<Point> result = new List<Point>();
+            List<Point> result = new();
 
             result.AddRange(WhereCanMoveByMap(CurrentPosition.X, CurrentPosition.Y, 1, 1, map));
             result.AddRange(WhereCanMoveByMap(CurrentPosition.X, CurrentPosition.Y, 1, -1, map));
@@ -39,7 +39,7 @@ namespace Assets.Scripts.ChessFigures
 
         public override List<Point> ConnectedPieces(int[,] map)
         {
-            List<Point> result = new List<Point>();
+            List<Point> result = new();
 
             result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 1, 1, map));
             result.AddRange(FindConnectedPiecesForLongRangeFigures(CurrentPosition.X, CurrentPosition.Y, 1, -1, map));

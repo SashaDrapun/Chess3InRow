@@ -4,6 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using System.Drawing;
 using Assets.Scripts;
+using Assets.Scripts.ChessFigures;
 
 public abstract class Figure
 {
@@ -18,7 +19,7 @@ public abstract class Figure
     {
         List<Point> result = new();
 
-        for (int x = x0 + sx, y = y0 + sy; Map.GetMap(x, y, map) == 0; x += sx, y += sy)
+        for (int x = x0 + sx, y = y0 + sy; Map.GetMap(x, y, map) == (int)MapCellType.EmptyPlace; x += sx, y += sy)
         {
             result.Add(new Point(x, y));
         }
@@ -31,7 +32,7 @@ public abstract class Figure
         List<Point> result = new();
         int piece = Map.GetMap(x0, y0, map);
 
-        for (int x = x0 + sx, y = y0 + sy; (Map.GetMap(x, y, map) == 0) || (Map.GetMap(x, y, map) == piece); x += sx, y += sy)
+        for (int x = x0 + sx, y = y0 + sy; (Map.GetMap(x, y, map) == (int)MapCellType.EmptyPlace) || (Map.GetMap(x, y, map) == piece); x += sx, y += sy)
         {
             if (Map.GetMap(x, y, map) == piece)
             {
