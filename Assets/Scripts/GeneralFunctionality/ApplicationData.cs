@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class ApplicationData
 {
-    public static int SelectedLevel;
+    public static string SelectedLevel;
 }

@@ -11,7 +11,7 @@ namespace Assets.Scripts.Menu
     
     public class AllButtons : MonoBehaviour
     {
-        private void Awake()
+        private void OnEnable()
         {
             List<Button> allButtons = GetAllButtons();
 
@@ -25,12 +25,12 @@ namespace Assets.Scripts.Menu
         {
             Button[] hiddenButtons = Resources.FindObjectsOfTypeAll<Button>();
             Button[] visibleButtons = FindObjectsOfType<Button>();
-            return hiddenButtons.ToList().Concat(visibleButtons.ToList()).ToList();
+            return hiddenButtons.ToList().Concat(visibleButtons.ToList()).Distinct().ToList();
         }
 
         public void OnAllButtonClick()
         {
-            AudioSourseListeners.AudioSourseOnButtonClick.Play();
+            //AudioSourseListeners.AudioSourseOnButtonClick.Play();
         }
     }
 }

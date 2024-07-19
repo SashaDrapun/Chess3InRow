@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MapEducation.unity
     guid: 3f97bc379d169f94c9baae92e764ac13
   - enabled: 1
+    path: Assets/Scenes/BeforeLVLStart.unity
+    guid: 88c6b3ff6ccaefa458f7fac8ee498f51
+  - enabled: 1
     path: Assets/Scenes/LVL1.unity
     guid: 9518f2707e8a36a42a905dce92ef1cfd
   - enabled: 1

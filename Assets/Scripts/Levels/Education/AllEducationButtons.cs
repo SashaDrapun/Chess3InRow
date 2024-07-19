@@ -5,20 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Map.Education
 {
-    public class AllButtons : MonoBehaviour
+    public class AllEducationButtons : MonoBehaviour
     {
 
-        private void Awake()
+        private void OnEnable()
         {
             List<Button> allButtons = GetAllButtons();
 
             foreach (Button button in allButtons)
             {
-                button.onClick.AddListener(OnAllButtonClick);
+                button.onClick.AddListener(OnAllButtonEducationClick);
             }
         }
 
@@ -29,9 +31,11 @@ namespace Assets.Scripts.Map.Education
             return hiddenButtons.ToList().Concat(visibleButtons.ToList()).ToList();
         }
 
-        public void OnAllButtonClick()
+        public void OnAllButtonEducationClick()
         {
-            AudioSourseListeners.AudioSourseOnButtonClick.Play();
+            GameObject button = EventSystem.current.currentSelectedGameObject;
+            ApplicationData.SelectedLevel = button.tag;
+            SceneManager.LoadScene(2);
         }
     }
 }
