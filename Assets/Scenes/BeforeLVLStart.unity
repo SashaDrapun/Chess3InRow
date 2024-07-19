@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 554293448}
   - component: {fileID: 554293447}
   m_Layer: 0
-  m_Name: BeforeBishopLevelStart (1)
+  m_Name: BeforeBishopLevelStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1725,7 +1725,7 @@ GameObject:
   - component: {fileID: 1230626756}
   - component: {fileID: 1230626755}
   m_Layer: 0
-  m_Name: BeforeKnightLevelStart (2)
+  m_Name: BeforeKnightLevelStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

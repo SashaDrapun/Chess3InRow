@@ -33,6 +33,7 @@ public class Game : MonoBehaviour
 
     public void ShowStatistics(LevelProgress levelProgress)
     {
+        OutputInformation("Moves", levelProgress.CountMoves.ToString());
         OutputInformation("CollectedPawnsText", levelProgress.CountCollectedPawns + "/15");
         OutputInformation("CollectedKnightsText", levelProgress.CountCollectedKnights + "/15");
         OutputInformation("CollectedBishopsText", levelProgress.CountCollectedBishops + "/15");
