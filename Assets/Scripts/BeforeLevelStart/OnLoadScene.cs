@@ -21,12 +21,12 @@ namespace Assets.Scripts.BeforeLevelStart
 
             if (ApplicationData.SelectedLevel == "Knight")
             {
-                background.sprite = GameObject.Find($"BeforePawnLevelStart").GetComponent<Image>().sprite;
+                background.sprite = GameObject.Find($"BeforeKnightLevelStart").GetComponent<Image>().sprite;
             }
 
             if (ApplicationData.SelectedLevel == "Bishop")
             {
-                background.sprite = GameObject.Find($"BeforePawnLevelStart").GetComponent<Image>().sprite;
+                background.sprite = GameObject.Find($"BeforeBishopLevelStart").GetComponent<Image>().sprite;
             }
 
             if (ApplicationData.SelectedLevel == "Rook")
