@@ -12,7 +12,7 @@ using Assets.Scripts.Menu;
 
 namespace Assets.Scripts
 {
-    public class Map
+    public class MainMap
     {
         public MapCellType[,] map;
         public const int SIZE = 8;
@@ -30,7 +30,7 @@ namespace Assets.Scripts
         bool isPieceSelected;
         FigureType typePieceSelected;
 
-        public Map(ShowBox showBox, ShowProgressOfTheLevel showProgressOfTheLevel)
+        public MainMap(ShowBox showBox, ShowProgressOfTheLevel showProgressOfTheLevel)
         {
             map = new MapCellType[SIZE, SIZE];
             ShowBox = showBox;

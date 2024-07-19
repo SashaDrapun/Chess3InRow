@@ -19,7 +19,7 @@ public abstract class Figure
     {
         List<Point> result = new();
 
-        for (int x = x0 + sx, y = y0 + sy; Map.GetMap(x, y, map) == (int)MapCellType.EmptyPlace; x += sx, y += sy)
+        for (int x = x0 + sx, y = y0 + sy; MainMap.GetMap(x, y, map) == (int)MapCellType.EmptyPlace; x += sx, y += sy)
         {
             result.Add(new Point(x, y));
         }
@@ -30,11 +30,11 @@ public abstract class Figure
     public List<Point> FindConnectedPiecesForLongRangeFigures(int x0, int y0, int sx, int sy, MapCellType[,] map)
     {
         List<Point> result = new();
-        MapCellType piece = Map.GetMap(x0, y0, map);
+        MapCellType piece = MainMap.GetMap(x0, y0, map);
 
-        for (int x = x0 + sx, y = y0 + sy; (Map.GetMap(x, y, map) == (int)MapCellType.EmptyPlace) || (Map.GetMap(x, y, map) == piece); x += sx, y += sy)
+        for (int x = x0 + sx, y = y0 + sy; (MainMap.GetMap(x, y, map) == (int)MapCellType.EmptyPlace) || (MainMap.GetMap(x, y, map) == piece); x += sx, y += sy)
         {
-            if (Map.GetMap(x, y, map) == piece)
+            if (MainMap.GetMap(x, y, map) == piece)
             {
                 result.Add(new Point(x, y));
                 break;

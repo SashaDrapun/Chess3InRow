@@ -11,23 +11,14 @@ namespace Assets.Scripts.Menu
     
     public class AllButtons : MonoBehaviour
     {
-        private AudioSource audioSourseOnButtonClick;
-
         private void Awake()
         {
-            LoadAudioSourse();
             List<Button> allButtons = GetAllButtons();
 
             foreach (Button button in allButtons)
             {
                 button.onClick.AddListener(OnAllButtonClick);
             }
-        }
-
-        private void LoadAudioSourse()
-        {
-            List<AudioSource> audioSources = GetComponents<AudioSource>().ToList();
-            audioSourseOnButtonClick = audioSources[1];
         }
 
         private List<Button> GetAllButtons()
@@ -39,7 +30,7 @@ namespace Assets.Scripts.Menu
 
         public void OnAllButtonClick()
         {
-            audioSourseOnButtonClick.Play();
+            AudioSourseListeners.AudioSourseOnButtonClick.Play();
         }
     }
 }

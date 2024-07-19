@@ -15,11 +15,11 @@ namespace Assets.Scripts
 
     public class Board
     {
-        public Map map;
+        public MainMap map;
  
         public Board(ShowBox showBox,ShowProgressOfTheLevel showStatisticsOnTheScreen)
         {
-            map = new Map(showBox, showStatisticsOnTheScreen);
+            map = new MainMap(showBox, showStatisticsOnTheScreen);
         }
 
         public void Start()
