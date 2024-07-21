@@ -10,8 +10,6 @@ using TMPro;
 
 public class Game : MonoBehaviour
 {
-    public TextMeshPro CountCollectedPawns;
-
 
     Button[,] buttons;
     Image[] images;

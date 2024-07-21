@@ -27,7 +27,7 @@ namespace Assets.Scripts.Map.Education
         private List<Button> GetAllButtons()
         {
             Button[] hiddenButtons = Resources.FindObjectsOfTypeAll<Button>();
-            Button[] visibleButtons = FindObjectsOfType<Button>();
+            Button[] visibleButtons = FindObjectsByType<Button>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
             return hiddenButtons.ToList().Concat(visibleButtons.ToList()).ToList();
         }
 
