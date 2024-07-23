@@ -23,14 +23,12 @@ namespace Assets.Scripts.Menu
 
         private List<Button> GetAllButtons()
         {
-            Button[] hiddenButtons = Resources.FindObjectsOfTypeAll<Button>();
-            Button[] visibleButtons = FindObjectsOfType<Button>();
-            return hiddenButtons.ToList().Concat(visibleButtons.ToList()).Distinct().ToList();
+            return FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
         }
 
         public void OnAllButtonClick()
         {
-            //AudioSourseListeners.AudioSourseOnButtonClick.Play();
+            AudioSourseListeners.AudioSourseOnButtonClick.Play();
         }
     }
 }

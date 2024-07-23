@@ -21,11 +21,12 @@ public class MainMenuEvents : MonoBehaviour
         LoadMusic(SettingsStatusService.GetCurrentMusicStatus());
         LoadSounds(SettingsStatusService.GetCurrentSoundsStatus());
     }
+
     private void SetAudioSources()
     {
-        List<AudioSource> audioSources = GetComponents<AudioSource>().ToList();
-        AudioSourseListeners.AudioSourceBackgroundMusic = audioSources[0];
-        AudioSourseListeners.AudioSourseOnButtonClick = audioSources[1];
+        List<AudioSource> audioSources = FindObjectsByType<AudioSource>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList();
+        AudioSourseListeners.AudioSourceBackgroundMusic = audioSources[1];
+        AudioSourseListeners.AudioSourseOnButtonClick = audioSources[0];
     }
 
     private void LoadMusic(SettingsState settingsState)

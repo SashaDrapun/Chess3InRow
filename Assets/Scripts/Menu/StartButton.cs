@@ -10,11 +10,10 @@ namespace Assets.Scripts.Menu
 {
     public class OnStartButton : MonoBehaviour
     {
-        public int sceneNumberToGo;
 
         public void OnStartButtonClick()
         {
-            SceneManager.LoadScene(sceneNumberToGo);
+            SceneManager.LoadScene(1);
         }
     }
 }
