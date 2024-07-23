@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BeforeBishopLVLBackground_0: 2884549002130556013
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BeforeKnightLVLBackground_0: 4042686030490032818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

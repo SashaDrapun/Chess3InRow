@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine.UI;
 using Assets.Scripts.Level;
 using Assets.Scripts.Menu;
+using Unity.VisualScripting;
 
 namespace Assets.Scripts
 {
@@ -153,6 +154,28 @@ namespace Assets.Scripts
                     break;
             }
             return FigureType.Pawn;
+        }
+
+        private MapCellType GetMapCellFromFigure(FigureType figureType)
+        {
+            switch (figureType)
+            {
+                case FigureType.Pawn:
+                    return MapCellType.Pawn;
+                case FigureType.Knight:
+                    return MapCellType.Knight;
+                case FigureType.Bishop:
+                    return MapCellType.Bishop;
+                case FigureType.Rook:
+                    return MapCellType.Rook;
+                case FigureType.Queen:
+                    return MapCellType.Queen;
+                case FigureType.King:
+                    return MapCellType.King;
+                default:
+                    break;
+            }
+            return MapCellType.Pawn;
         }
 
         private bool CutLines()
@@ -328,17 +351,41 @@ namespace Assets.Scripts
 
         private void AddRandomPiece()
         {
-            int x, y;
-            int loop = SIZE * SIZE;
-            do
+            Point randomPlace = GetRandomEmptyPlace();
+            FigureType randomFigure = GetRandomFigureTypeFromAvailable();
+            MapCellType piece = GetMapCellFromFigure(randomFigure);
+
+            SetMap(randomPlace.X, randomPlace.Y, piece);
+        }
+
+        private FigureType GetRandomFigureTypeFromAvailable()
+        {
+            if (ApplicationData.FiguresAvailableOnLevel == null)
             {
-                x = random.Next(SIZE);
-                y = random.Next(SIZE);
-                if (--loop <= 0) return;
+                throw new NullReferenceException();
             }
-            while (map[x, y] > 0);
-            int piece = 1 + random.Next(PIECES - 2);
-            SetMap(x, y, (MapCellType)piece);
+
+            int randomNumber = random.Next(0, ApplicationData.FiguresAvailableOnLevel.Count);
+            return ApplicationData.FiguresAvailableOnLevel[randomNumber];
+        }
+
+        private Point GetRandomEmptyPlace()
+        {
+            List<Point> emptyPlaces = new();
+            for (int x = 0; x < SIZE; x++)
+            {
+                for (int y = 0; y < SIZE; y++)
+                {
+                    if (map[x, y] == MapCellType.EmptyPlace || map[x,y] == MapCellType.AllocatedSpace)
+                    {
+                        emptyPlaces.Add(new Point(x, y));
+                    }
+                }
+            }
+
+            int randomPosition = random.Next(0, emptyPlaces.Count);
+
+            return emptyPlaces[randomPosition];
         }
     }
 }
