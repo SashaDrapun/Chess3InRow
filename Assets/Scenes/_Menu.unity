@@ -419,7 +419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36682814, y: 0.23933333}
   m_AnchorMax: {x: 0.6311719, y: 0.349}
-  m_AnchoredPosition: {x: 2.059906, y: 7.499939}
+  m_AnchoredPosition: {x: 2.0599365, y: 7.499817}
   m_SizeDelta: {x: 11, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &184205761
@@ -757,7 +757,6 @@ GameObject:
   - component: {fileID: 653856108}
   - component: {fileID: 653856107}
   - component: {fileID: 653856106}
-  - component: {fileID: 653856109}
   - component: {fileID: 653856110}
   - component: {fileID: 653856113}
   - component: {fileID: 653856114}
@@ -858,22 +857,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &653856109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653856104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: d374d6eabc74ae24b9b4d008540e7a10, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
-  m_SortingOrder: 0
 --- !u!114 &653856110
 MonoBehaviour:
   m_ObjectHideFlags: 0
