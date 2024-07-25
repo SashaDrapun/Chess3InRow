@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class Game : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Game : MonoBehaviour
     Button[,] buttons;
     Image[] images;
     private Board board;
-    
+
 
     void Start()
     {
@@ -24,6 +25,65 @@ public class Game : MonoBehaviour
         InitButtons();
         InitImages();
         board.Start();
+        SetGoals();
+    }
+
+    private void SetGoals()
+    {
+        int goalNumber = 1;
+        foreach (var key in ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount.Keys)
+        {
+            string goalImageName = "GoalPicture" + goalNumber;
+            string pictureName = GetPictureNameFromFigureType(key);
+            string goalTextName = "GoalText" + goalNumber++;
+
+            GameObject goalImageObject = FindHiddenObjectByName(goalImageName);
+            Image goalImage = goalImageObject.GetComponent<Image>();
+            Image goalPicture = GameObject.Find(pictureName).GetComponent<Image>();
+            goalImageObject.SetActive(true);
+            goalImage.sprite = goalPicture.sprite;
+
+            GameObject goalTextObject = FindHiddenObjectByName(goalTextName);
+            goalTextObject.SetActive(true);
+            OutputInformation(goalTextName, $"0/{ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount[key]}");
+        }
+        OutputInformation("Moves", "0");
+        OutputInformation("GoalMoves", ApplicationData.GoalsOnTheLevel.CountMoves.ToString());
+    }
+
+    private GameObject FindHiddenObjectByName(string name)
+    {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name == name)
+            {
+                return obj;
+            }
+        }
+
+        return null;
+    }
+
+    private string GetPictureNameFromFigureType(FigureType figureType)
+    {
+        switch (figureType)
+        {
+            case FigureType.Pawn:
+                return "Pawn";
+            case FigureType.Knight:
+                return "Knight";
+            case FigureType.Bishop:
+                return "Bishop";
+            case FigureType.Rook:
+                return "Rook";
+            case FigureType.Queen:
+                return "Queen";
+            case FigureType.King:
+                return "King";
+            default: return "Pawn";
+        }
     }
 
     public void ShowBox(int x, int y, MapCellType mapElement)
@@ -33,13 +93,35 @@ public class Game : MonoBehaviour
 
     public void ShowStatistics(LevelProgress levelProgress)
     {
+        int goalNumber = 1;
         OutputInformation("Moves", levelProgress.CountMoves.ToString());
-        OutputInformation("CollectedPawnsText", levelProgress.CountCollectedPawns + "/15");
-        OutputInformation("CollectedKnightsText", levelProgress.CountCollectedKnights + "/15");
-        OutputInformation("CollectedBishopsText", levelProgress.CountCollectedBishops + "/15");
-        OutputInformation("CollectedRooksText", levelProgress.CountCollectedRooks + "/15");
-        OutputInformation("CollectedQueensText", levelProgress.CountCollectedQueens + "/15");
-        OutputInformation("CollectedKingsText", levelProgress.CountCollectedKings + "/15");
+        foreach (var key in ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount.Keys)
+        {
+            string goalTextName = "GoalText" + goalNumber++;
+
+            GameObject goalTextObject = FindHiddenObjectByName(goalTextName);
+            OutputInformation(goalTextName, $"{GetFigureProgress(levelProgress, key)}/{ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount[key]}");
+        }
+    }
+
+    private int GetFigureProgress(LevelProgress levelProgress, FigureType figureType)
+    {
+        switch (figureType)
+        {
+            case FigureType.Pawn:
+                return levelProgress.CountCollectedPawns;
+            case FigureType.Knight:
+                return levelProgress.CountCollectedKnights;
+            case FigureType.Bishop:
+                return levelProgress.CountCollectedBishops;
+            case FigureType.Rook:
+                return levelProgress.CountCollectedRooks;
+            case FigureType.Queen:
+                return levelProgress.CountCollectedQueens;
+            case FigureType.King:
+                return levelProgress.CountCollectedKings;
+            default: return levelProgress.CountCollectedPawns;
+        }
     }
 
     private void OutputInformation(string textMeshProName, string outputInformation)
