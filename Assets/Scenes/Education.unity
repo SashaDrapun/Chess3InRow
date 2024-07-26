@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 61526925}
   - component: {fileID: 61526924}
   - component: {fileID: 61526923}
+  - component: {fileID: 61526926}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -212,6 +213,18 @@ Transform:
   - {fileID: 511740882}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &61526926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61526922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4404210515c4fe34e83f646ca5832990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &160544878
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +539,7 @@ GameObject:
   - component: {fileID: 511740883}
   m_Layer: 0
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: King
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1474,9 +1487,10 @@ GameObject:
   - component: {fileID: 1042895405}
   - component: {fileID: 1042895404}
   - component: {fileID: 1042895403}
+  - component: {fileID: 1042895406}
   m_Layer: 0
   m_Name: Rook
-  m_TagString: Untagged
+  m_TagString: Rook
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1582,6 +1596,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042895401}
   m_CullTransparentMesh: 1
+--- !u!114 &1042895406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042895401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae92fc8e0b5c6f4681aae927563694f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 1
 --- !u!1 &1069299438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,9 +1621,10 @@ GameObject:
   - component: {fileID: 1069299442}
   - component: {fileID: 1069299441}
   - component: {fileID: 1069299440}
+  - component: {fileID: 1069299443}
   m_Layer: 0
   m_Name: Knight
-  m_TagString: Untagged
+  m_TagString: Knight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1702,6 +1730,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069299438}
   m_CullTransparentMesh: 1
+--- !u!114 &1069299443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069299438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae92fc8e0b5c6f4681aae927563694f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 1
 --- !u!1 &1104038161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,10 +1754,11 @@ GameObject:
   - component: {fileID: 1104038162}
   - component: {fileID: 1104038165}
   - component: {fileID: 1104038164}
+  - component: {fileID: 1104038166}
   - component: {fileID: 1104038163}
   m_Layer: 0
   m_Name: King
-  m_TagString: Untagged
+  m_TagString: King
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1822,6 +1864,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104038161}
   m_CullTransparentMesh: 1
+--- !u!114 &1104038166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104038161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae92fc8e0b5c6f4681aae927563694f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 1
 --- !u!1 &1150049922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,9 +2114,10 @@ GameObject:
   - component: {fileID: 1568372786}
   - component: {fileID: 1568372785}
   - component: {fileID: 1568372784}
+  - component: {fileID: 1568372787}
   m_Layer: 0
   m_Name: Pawn
-  m_TagString: Untagged
+  m_TagString: Pawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2167,6 +2223,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568372782}
   m_CullTransparentMesh: 1
+--- !u!114 &1568372787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568372782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae92fc8e0b5c6f4681aae927563694f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 1
 --- !u!1 &1591697049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2254,9 +2323,10 @@ GameObject:
   - component: {fileID: 1618740114}
   - component: {fileID: 1618740113}
   - component: {fileID: 1618740112}
+  - component: {fileID: 1618740115}
   m_Layer: 0
   m_Name: Bishop
-  m_TagString: Untagged
+  m_TagString: Bishop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2307,7 +2377,7 @@ MonoBehaviour:
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -2362,6 +2432,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618740110}
   m_CullTransparentMesh: 1
+--- !u!114 &1618740115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618740110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae92fc8e0b5c6f4681aae927563694f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 0.1
 --- !u!1 &1715518816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,10 +2456,11 @@ GameObject:
   - component: {fileID: 1715518817}
   - component: {fileID: 1715518820}
   - component: {fileID: 1715518819}
+  - component: {fileID: 1715518821}
   - component: {fileID: 1715518818}
   m_Layer: 0
   m_Name: Queen
-  m_TagString: Untagged
+  m_TagString: Queen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2482,6 +2566,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715518816}
   m_CullTransparentMesh: 1
+--- !u!114 &1715518821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715518816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae92fc8e0b5c6f4681aae927563694f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 1
 --- !u!1 &1723007171
 GameObject:
   m_ObjectHideFlags: 0

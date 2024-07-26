@@ -106,12 +106,20 @@ public class Game : MonoBehaviour
     
     private void CheckIsItNeedToChangeCountStars(LevelProgress levelProgress)
     {
-        
+        if (levelProgress.CountMoves == ApplicationData.GoalsOnTheLevel.CountMoveFor3Stars)
+        {
+
+        }
+
+        if (levelProgress.CountMoves == ApplicationData.GoalsOnTheLevel.CountMoveFor2Stars)
+        {
+
+        }
     }
 
-    private void CheckIsEndGame()
+    private bool CheckIsEndGame()
     {
-
+        return true;
     }
 
     private int GetFigureProgress(LevelProgress levelProgress, FigureType figureType)
