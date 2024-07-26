@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Menu
+namespace Assets.Scripts.GoToScene
 {
-    public class OnStartButton : MonoBehaviour
+    public class GoToLevel : MonoBehaviour
     {
-
-        public void OnStartButtonClick()
+        public void GoToLevelScene()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(3);
         }
     }
 }

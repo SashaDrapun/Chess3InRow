@@ -13,7 +13,7 @@ namespace Assets.Scripts.GeneralFunctionality
 
         public int CountMoveFor3Stars;
         public int CountMoveFor2Stars;
-        public int CountMoveFor1Stars;
+        public int CountMoveFor1Star;
 
         public GoalsOnTheLevel(int countMoves)
         {
@@ -26,7 +26,7 @@ namespace Assets.Scripts.GeneralFunctionality
             PieceToCollectAndCount = pieceToCollectAndCount;
             CountMoveFor3Stars = countMoveFor3Stars;
             CountMoveFor2Stars = countMoveFor2Stars;
-            CountMoveFor1Stars = countMoveFor1Stars;
+            CountMoveFor1Star = countMoveFor1Stars;
         }
     }
 }

@@ -10,6 +10,7 @@ using TMPro;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEditor;
+using System.Diagnostics;
 
 public class Game : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Game : MonoBehaviour
     Button[,] buttons;
     Image[] images;
     private Board board;
+    Image starOff;
+    Image firstStar;
+    Image secondStar;
+    Image thirdStar;
 
 
     void Start()
@@ -102,24 +107,90 @@ public class Game : MonoBehaviour
             GameObject goalTextObject = FindHiddenObjectByName(goalTextName);
             OutputInformation(goalTextName, $"{GetFigureProgress(levelProgress, key)}/{ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount[key]}");
         }
+
+        if (CheckIsEndGame(levelProgress))
+        {
+            return;
+        }
+        CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(levelProgress);
     }
-    
-    private void CheckIsItNeedToChangeCountStars(LevelProgress levelProgress)
+
+    private void CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(LevelProgress levelProgress)
     {
         if (levelProgress.CountMoves == ApplicationData.GoalsOnTheLevel.CountMoveFor3Stars)
         {
-
+            thirdStar.sprite = starOff.sprite;
+            OutputInformation("GoalMoves", ApplicationData.GoalsOnTheLevel.CountMoveFor2Stars.ToString());
         }
 
         if (levelProgress.CountMoves == ApplicationData.GoalsOnTheLevel.CountMoveFor2Stars)
         {
-
+            secondStar.sprite = starOff.sprite;
+            OutputInformation("GoalMoves", ApplicationData.GoalsOnTheLevel.CountMoveFor1Star.ToString());
         }
     }
 
-    private bool CheckIsEndGame()
+    private bool CheckIsEndGame(LevelProgress levelProgress)
     {
-        return true;
+        if (IsAllGoalsAchieved(levelProgress))
+        {
+            Win();
+            return true;
+        }
+
+        if (levelProgress.CountMoves == ApplicationData.GoalsOnTheLevel.CountMoveFor1Star)
+        {
+            Lose();
+            return true;
+        }
+
+        return false;
+    }
+
+    private void Win()
+    {
+        GameObject levelCompleted = FindHiddenObjectByName("LVLCompleted");
+        levelCompleted.SetActive(true);
+    }
+
+    private void Lose()
+    {
+        firstStar.sprite = starOff.sprite;
+        GameObject levelCompleted = FindHiddenObjectByName("LVLFailed");
+        levelCompleted.SetActive(true);
+    }
+
+    
+
+    private bool IsAllGoalsAchieved(LevelProgress levelProgress)
+    {
+        bool result = true;
+        foreach (var key in ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount.Keys)
+        {
+            result = IsGoalAchieved(levelProgress, key, ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount[key]);
+        }
+
+        return result;
+    }
+
+    private bool IsGoalAchieved(LevelProgress levelProgress, FigureType figureType, int goalToCollect)
+    {
+        switch (figureType)
+        {
+            case FigureType.Pawn:
+                return levelProgress.CountCollectedPawns >= goalToCollect;
+            case FigureType.Knight:
+                return levelProgress.CountCollectedKnights >= goalToCollect;
+            case FigureType.Bishop:
+                return levelProgress.CountCollectedBishops >= goalToCollect;
+            case FigureType.Rook:
+                return levelProgress.CountCollectedRooks >= goalToCollect;
+            case FigureType.Queen:
+                return levelProgress.CountCollectedQueens >= goalToCollect;
+            case FigureType.King:
+                return levelProgress.CountCollectedKings >= goalToCollect;
+            default: return false;
+        }
     }
 
     private int GetFigureProgress(LevelProgress levelProgress, FigureType figureType)
@@ -181,6 +252,10 @@ public class Game : MonoBehaviour
             images[j] = GameObject.Find($"Image ({j})").GetComponent<Image>();
         }
 
+        starOff = GameObject.Find($"StarOff").GetComponent<Image>();
+        firstStar = GameObject.Find($"Star1Statistics").GetComponent<Image>();
+        secondStar = GameObject.Find($"Star2Statistics").GetComponent<Image>();
+        thirdStar = GameObject.Find($"Star3Statistics").GetComponent<Image>();
     }
 
     private int GetNumber(string name)
@@ -189,7 +264,7 @@ public class Game : MonoBehaviour
         Match match = regex.Match(name);
         if (!match.Success)
         {
-            throw new System.Exception("Unrecognized object name");
+            throw new Exception("Unrecognized object name");
         }
 
         Group group = match.Groups[1];

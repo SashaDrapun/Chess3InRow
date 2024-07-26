@@ -467,8 +467,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 653856113}
-        m_TargetAssemblyTypeName: Assets.Scripts.Menu.OnStartButton, Assembly-CSharp
-        m_MethodName: OnStartButtonClick
+        m_TargetAssemblyTypeName: Assets.Scripts.Menu.GoToEducationMap, Assembly-CSharp
+        m_MethodName: GoToMapEducation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

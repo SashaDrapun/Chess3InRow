@@ -66,42 +66,35 @@ namespace Assets.Scripts.BeforeLevelStart
 
         private void SetGoalsOnLevel()
         {
-            int countMoves = 0;
             Dictionary<FigureType, int> pieceToCollectAndCount = new Dictionary<FigureType, int>();
 
             if (ApplicationData.SelectedLevel == "Pawn")
             {
-                countMoves = 30;
                 pieceToCollectAndCount.Add(FigureType.Pawn, 150);
             }
 
             if (ApplicationData.SelectedLevel == "Knight")
             {
-                countMoves = 10;
                 pieceToCollectAndCount.Add(FigureType.Knight, 30);
             }
 
             if (ApplicationData.SelectedLevel == "Bishop")
             {
-                countMoves = 10;
                 pieceToCollectAndCount.Add(FigureType.Bishop, 30);
             }
 
             if (ApplicationData.SelectedLevel == "Rook")
             {
-                countMoves = 10;
                 pieceToCollectAndCount.Add(FigureType.Rook, 30);
             }
 
             if (ApplicationData.SelectedLevel == "Queen")
             {
-                countMoves = 10;
                 pieceToCollectAndCount.Add(FigureType.Queen, 30);
             }
 
             if (ApplicationData.SelectedLevel == "King")
             {
-                countMoves = 10;
                 pieceToCollectAndCount.Add(FigureType.King, 30);
             }
 
