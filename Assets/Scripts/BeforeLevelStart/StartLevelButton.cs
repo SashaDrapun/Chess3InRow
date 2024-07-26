@@ -110,7 +110,7 @@ namespace Assets.Scripts.BeforeLevelStart
                 SetAllFigureAvailableOnLevel();
             }
 
-            ApplicationData.GoalsOnTheLevel = new GoalsOnTheLevel(pieceToCollectAndCount, countMoves);
+            ApplicationData.GoalsOnTheLevel = new GoalsOnTheLevel(pieceToCollectAndCount, 10,15,20);
         }
 
         private void SetAllFigureAvailableOnLevel()

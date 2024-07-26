@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      QueenButtonOFF_0: -2383678836580509812
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

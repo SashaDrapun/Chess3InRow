@@ -11,18 +11,22 @@ namespace Assets.Scripts.GeneralFunctionality
     {
         public Dictionary<FigureType, int> PieceToCollectAndCount;
 
-        public int CountMoves;
+        public int CountMoveFor3Stars;
+        public int CountMoveFor2Stars;
+        public int CountMoveFor1Stars;
 
         public GoalsOnTheLevel(int countMoves)
         {
-            CountMoves = countMoves;
+            CountMoveFor3Stars = countMoves;
             PieceToCollectAndCount = new Dictionary<FigureType, int>();
         }
 
-        public GoalsOnTheLevel(Dictionary<FigureType, int> pieceToCollectAndCount, int countMoves)
+        public GoalsOnTheLevel(Dictionary<FigureType, int> pieceToCollectAndCount, int countMoveFor3Stars, int countMoveFor2Stars, int countMoveFor1Stars)
         {
             PieceToCollectAndCount = pieceToCollectAndCount;
-            CountMoves = countMoves;
+            CountMoveFor3Stars = countMoveFor3Stars;
+            CountMoveFor2Stars = countMoveFor2Stars;
+            CountMoveFor1Stars = countMoveFor1Stars;
         }
     }
 }

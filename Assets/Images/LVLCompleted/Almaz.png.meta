@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Almaz_0: 5840365419065773901
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

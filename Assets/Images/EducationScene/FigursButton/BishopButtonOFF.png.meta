@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BishopButtonOFF_0: 8312634637328256540
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

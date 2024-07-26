@@ -48,7 +48,7 @@ public class Game : MonoBehaviour
             OutputInformation(goalTextName, $"0/{ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount[key]}");
         }
         OutputInformation("Moves", "0");
-        OutputInformation("GoalMoves", ApplicationData.GoalsOnTheLevel.CountMoves.ToString());
+        OutputInformation("GoalMoves", ApplicationData.GoalsOnTheLevel.CountMoveFor3Stars.ToString());
     }
 
     private GameObject FindHiddenObjectByName(string name)
@@ -102,6 +102,16 @@ public class Game : MonoBehaviour
             GameObject goalTextObject = FindHiddenObjectByName(goalTextName);
             OutputInformation(goalTextName, $"{GetFigureProgress(levelProgress, key)}/{ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount[key]}");
         }
+    }
+    
+    private void CheckIsItNeedToChangeCountStars(LevelProgress levelProgress)
+    {
+        
+    }
+
+    private void CheckIsEndGame()
+    {
+
     }
 
     private int GetFigureProgress(LevelProgress levelProgress, FigureType figureType)
