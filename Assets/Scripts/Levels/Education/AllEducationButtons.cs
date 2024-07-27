@@ -34,6 +34,7 @@ namespace Assets.Scripts.Map.Education
         public void OnAllButtonEducationClick()
         {
             GameObject button = EventSystem.current.currentSelectedGameObject;
+            if (button.CompareTag("Locked")) return;
             ApplicationData.SelectedLevel = button.tag;
             SceneManager.LoadScene(2);
         }

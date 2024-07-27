@@ -10,6 +10,8 @@ TagManager:
   - Bishop
   - Rook
   - King
+  - Star
+  - Locked
   layers:
   - Default
   - TransparentFX

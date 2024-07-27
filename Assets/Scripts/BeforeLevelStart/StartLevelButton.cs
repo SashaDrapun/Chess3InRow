@@ -71,31 +71,37 @@ namespace Assets.Scripts.BeforeLevelStart
             if (ApplicationData.SelectedLevel == "Pawn")
             {
                 pieceToCollectAndCount.Add(FigureType.Pawn, 150);
+                ApplicationData.CurrentLevel = 5;
             }
 
             if (ApplicationData.SelectedLevel == "Knight")
             {
                 pieceToCollectAndCount.Add(FigureType.Knight, 30);
+                ApplicationData.CurrentLevel = 4;
             }
 
             if (ApplicationData.SelectedLevel == "Bishop")
             {
                 pieceToCollectAndCount.Add(FigureType.Bishop, 30);
+                ApplicationData.CurrentLevel = 1;
             }
 
             if (ApplicationData.SelectedLevel == "Rook")
             {
                 pieceToCollectAndCount.Add(FigureType.Rook, 30);
+                ApplicationData.CurrentLevel = 0;
             }
 
             if (ApplicationData.SelectedLevel == "Queen")
             {
                 pieceToCollectAndCount.Add(FigureType.Queen, 30);
+                ApplicationData.CurrentLevel = 2;
             }
 
             if (ApplicationData.SelectedLevel == "King")
             {
                 pieceToCollectAndCount.Add(FigureType.King, 30);
+                ApplicationData.CurrentLevel = 3;
             }
 
             if (ApplicationData.SelectedLevel == "Standart")

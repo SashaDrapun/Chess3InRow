@@ -11,6 +11,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEditor;
 using System.Diagnostics;
+using Assets.Scripts.DataService;
 
 public class Game : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class Game : MonoBehaviour
     Image firstStar;
     Image secondStar;
     Image thirdStar;
+
+    int countStars = 3;
 
 
     void Start()
@@ -119,12 +122,14 @@ public class Game : MonoBehaviour
     {
         if (levelProgress.CountMoves == ApplicationData.GoalsOnTheLevel.CountMoveFor3Stars)
         {
-            thirdStar.sprite = starOff.sprite;
+            countStars = 2;
+            thirdStar.sprite = starOff.sprite;         
             OutputInformation("GoalMoves", ApplicationData.GoalsOnTheLevel.CountMoveFor2Stars.ToString());
         }
 
         if (levelProgress.CountMoves == ApplicationData.GoalsOnTheLevel.CountMoveFor2Stars)
         {
+            countStars = 1;
             secondStar.sprite = starOff.sprite;
             OutputInformation("GoalMoves", ApplicationData.GoalsOnTheLevel.CountMoveFor1Star.ToString());
         }
@@ -151,6 +156,14 @@ public class Game : MonoBehaviour
     {
         GameObject levelCompleted = FindHiddenObjectByName("LVLCompleted");
         levelCompleted.SetActive(true);
+
+        if ((int)ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < countStars)
+        {
+            ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] = (LevelStatus)countStars;
+        }
+
+        DataManipulator dataManipulator = new DataManipulator();
+        dataManipulator.SaveMapInformation(ApplicationData.MapInformation);
     }
 
     private void Lose()
