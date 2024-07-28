@@ -8,11 +8,11 @@ namespace Assets.Scripts.DataService
 {
     public enum LevelStatus
     {
-        failed, 
-        oneStar,
-        twoStars,
-        threeStars,
-        silverWings,
-        goldenWings
+        Failed, 
+        OneStar,
+        TwoStars,
+        ThreeStars,
+        SilverWings,
+        GoldenWings
     }
 }

@@ -14,7 +14,7 @@ namespace Assets.Scripts.DataService
             Levels = new List<LevelStatus>();
             for (int i = 0; i < 6; i++)
             {
-                Levels.Add(LevelStatus.failed);
+                Levels.Add(LevelStatus.Failed);
             }
         }
 

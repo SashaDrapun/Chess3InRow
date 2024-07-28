@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.DataService;
+using Assets.Scripts.GeneralFunctionality;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,16 @@ namespace Assets.Scripts.Levels.Education
         { 
             DataManipulator dataManipulator = new DataManipulator();
             ApplicationData.MapInformation = dataManipulator.LoadMapInformation();
+            LoadSprites();
             LoadScene();
         }
+
+        private void LoadSprites()
+        {
+            starOnSprite = ObjectManager.GetSprite("StarOn");
+        }
+
+        Sprite starOnSprite;
 
         private void LoadScene()
         {
@@ -38,19 +47,19 @@ namespace Assets.Scripts.Levels.Education
         {
             if ((int)ApplicationData.MapInformation.Levels[0] >= 1)
             {
-                SetPicture("RookStar1", "StarOn");
-                SetPicture("Bishop", "BishopActive");
-                SetTag("Bishop", "Bishop");
+                ObjectManager.SetPicture("RookStar1", starOnSprite);
+                ObjectManager.SetPicture("Bishop", "BishopActive");
+                ObjectManager.SetTag("Bishop", "Bishop");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[0] >= 2)
             {
-                SetPicture("RookStar2", "StarOn");
+                ObjectManager.SetPicture("RookStar2", starOnSprite);
             }
 
             if ((int)ApplicationData.MapInformation.Levels[0] >= 3)
             {
-                SetPicture("RookStar3", "StarOn");
+                ObjectManager.SetPicture("RookStar3", starOnSprite);
             }
         }
 
@@ -58,19 +67,19 @@ namespace Assets.Scripts.Levels.Education
         {
             if ((int)ApplicationData.MapInformation.Levels[1] >= 1)
             {
-                SetPicture("BishopStar1", "StarOn");
-                SetPicture("Queen", "QueenActive");
-                SetTag("Queen", "Queen");
+                ObjectManager.SetPicture("BishopStar1", starOnSprite);
+                ObjectManager.SetPicture("Queen", "QueenActive");
+                ObjectManager.SetTag("Queen", "Queen");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[1] >= 2)
             {
-                SetPicture("BishopStar2", "StarOn");
+                ObjectManager.SetPicture("BishopStar2", starOnSprite);
             }
 
             if ((int)ApplicationData.MapInformation.Levels[1] >= 3)
             {
-                SetPicture("BishopStar3", "StarOn");
+                ObjectManager.SetPicture("BishopStar3", starOnSprite);
             }
         }
 
@@ -78,19 +87,19 @@ namespace Assets.Scripts.Levels.Education
         {
             if ((int)ApplicationData.MapInformation.Levels[2] >= 1)
             {
-                SetPicture("QueenStar1", "StarOn");
-                SetPicture("King", "KingActive");
-                SetTag("King", "King");
+                ObjectManager.SetPicture("QueenStar1", starOnSprite);
+                ObjectManager.SetPicture("King", "KingActive");
+                ObjectManager.SetTag("King", "King");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[2] >= 2)
             {
-                SetPicture("QueenStar2", "StarOn");
+                ObjectManager.SetPicture("QueenStar2", starOnSprite);
             }
 
             if ((int)ApplicationData.MapInformation.Levels[2] >= 3)
             {
-                SetPicture("QueenStar3", "StarOn");
+                ObjectManager.SetPicture("QueenStar3", "StarOn");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[2] >= 4)
@@ -103,19 +112,19 @@ namespace Assets.Scripts.Levels.Education
         {
             if ((int)ApplicationData.MapInformation.Levels[3] >= 1)
             {
-                SetPicture("KingStar1", "StarOn");
-                SetPicture("Knight", "KnightActive");
-                SetTag("Knight", "Knight");
+                ObjectManager.SetPicture("KingStar1", starOnSprite);
+                ObjectManager.SetPicture("Knight", "KnightActive");
+                ObjectManager.SetTag("Knight", "Knight");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[3] >= 2)
             {
-                SetPicture("KingStar2", "StarOn");
+                ObjectManager.SetPicture("KingStar2", starOnSprite);
             }
 
             if ((int)ApplicationData.MapInformation.Levels[3] >= 3)
             {
-                SetPicture("KingStar3", "StarOn");
+                ObjectManager.SetPicture("KingStar3", starOnSprite);
             }
         }
 
@@ -123,19 +132,19 @@ namespace Assets.Scripts.Levels.Education
         {
             if ((int)ApplicationData.MapInformation.Levels[4] >= 1)
             {
-                SetPicture("KnightStar1", "StarOn");
-                SetPicture("Pawn", "PawnActive");
-                SetTag("Pawn", "Pawn");
+                ObjectManager.SetPicture("KnightStar1", starOnSprite);
+                ObjectManager.SetPicture("Pawn", "PawnActive");
+                ObjectManager.SetTag("Pawn", "Pawn");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[4] >= 2)
             {
-                SetPicture("KnightStar2", "StarOn");
+                ObjectManager.SetPicture("KnightStar2", starOnSprite);
             }
 
             if ((int)ApplicationData.MapInformation.Levels[4] >= 3)
             {
-                SetPicture("KnightStar3", "StarOn");
+                ObjectManager.SetPicture("KnightStar3", "StarOn");
             }
         }
 
@@ -143,32 +152,18 @@ namespace Assets.Scripts.Levels.Education
         {
             if ((int)ApplicationData.MapInformation.Levels[5] >= 1)
             {
-                SetPicture("PawnStar1", "StarOn");
+                ObjectManager.SetPicture("PawnStar1", starOnSprite);
             }
 
             if ((int)ApplicationData.MapInformation.Levels[5] >= 2)
             {
-                SetPicture("PawnStar2", "StarOn");
+                ObjectManager.SetPicture("PawnStar2", starOnSprite);
             }
 
             if ((int)ApplicationData.MapInformation.Levels[5] >= 3)
             {
-                SetPicture("PawnStar3", "StarOn");
+                ObjectManager.SetPicture("PawnStar3", starOnSprite);
             }
-        }
-
-        private void SetPicture(string objectToSetPictureName, string objectFromSetPictureName)
-        {
-            Image objectToSetPicture = GameObject.Find(objectToSetPictureName).GetComponent<Image>();
-            Image objectFromSetPicture = GameObject.Find(objectFromSetPictureName).GetComponent<Image>();
-
-            objectToSetPicture.sprite = objectFromSetPicture.sprite;
-        }
-
-        private void SetTag(string objectToSetTagName, string tag)
-        {
-            GameObject objectToSetTag = GameObject.Find(objectToSetTagName);
-            objectToSetTag.tag = tag;
         }
     }
 }

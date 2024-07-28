@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts.DataService;
+using Assets.Scripts.GeneralFunctionality;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,36 +14,42 @@ namespace Assets.Scripts.BeforeLevelStart
     {
         private void OnEnable()
         {
+            SetBackground();
+            SetSceneElements();
+        }
+
+        private void SetBackground()
+        {
             Image background = GameObject.Find($"Background").GetComponent<Image>();
+            string imageToLoadName = "Before" + ApplicationData.SelectedLevel + "LevelStart";
+            background.sprite = GameObject.Find(imageToLoadName).GetComponent<Image>().sprite;
+        }
 
-            if (ApplicationData.SelectedLevel == "Pawn")
+        private void SetSceneElements()
+        {
+            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.OneStar)
             {
-                background.sprite = GameObject.Find($"BeforePawnLevelStart").GetComponent<Image>().sprite;
+                ObjectManager.SetPicture("Star1", "StarOn");
             }
 
-            if (ApplicationData.SelectedLevel == "Knight")
+            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.TwoStars)
             {
-                background.sprite = GameObject.Find($"BeforeKnightLevelStart").GetComponent<Image>().sprite;
+                ObjectManager.SetPicture("Star2", "StarOn");
             }
 
-            if (ApplicationData.SelectedLevel == "Bishop")
+            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.ThreeStars)
             {
-                background.sprite = GameObject.Find($"BeforeBishopLevelStart").GetComponent<Image>().sprite;
+                ObjectManager.SetPicture("Star3", "StarOn");
             }
 
-            if (ApplicationData.SelectedLevel == "Rook")
+            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.SilverWings)
             {
-                background.sprite = GameObject.Find($"BeforeRookLevelStart").GetComponent<Image>().sprite;
+                ObjectManager.SetPicture("MediumModeIndicator", "MediumModeOn"); 
             }
 
-            if (ApplicationData.SelectedLevel == "Queen")
+            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.GoldenWings)
             {
-                background.sprite = GameObject.Find($"BeforeQueenLevelStart").GetComponent<Image>().sprite;
-            }
-
-            if (ApplicationData.SelectedLevel == "King")
-            {
-                background.sprite = GameObject.Find($"BeforeKingLevelStart").GetComponent<Image>().sprite;
+                ObjectManager.SetPicture("MediumModeIndicator", "HardModeOn");
             }
         }
     }

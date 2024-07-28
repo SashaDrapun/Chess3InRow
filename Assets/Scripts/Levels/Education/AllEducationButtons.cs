@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Menu;
+﻿using Assets.Scripts.Levels;
+using Assets.Scripts.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,14 @@ namespace Assets.Scripts.Map.Education
             GameObject button = EventSystem.current.currentSelectedGameObject;
             if (button.CompareTag("Locked")) return;
             ApplicationData.SelectedLevel = button.tag;
+            SetAllLevelSettings();
             SceneManager.LoadScene(2);
+        }
+
+        private void SetAllLevelSettings()
+        {
+            SetLevelSettings.SetFiguresAvailableOnLevel();
+            SetLevelSettings.SetGoalsOnLevel();
         }
     }
 }
