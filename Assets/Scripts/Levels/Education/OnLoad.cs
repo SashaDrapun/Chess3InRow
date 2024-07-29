@@ -49,7 +49,7 @@ namespace Assets.Scripts.Levels.Education
             {
                 ObjectManager.SetPicture("RookStar1", starOnSprite);
                 ObjectManager.SetPicture("Bishop", "BishopActive");
-                ObjectManager.SetTag("Bishop", "Bishop");
+                ObjectManager.SetTag("Bishop", "1");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[0] >= 2)
@@ -69,7 +69,7 @@ namespace Assets.Scripts.Levels.Education
             {
                 ObjectManager.SetPicture("BishopStar1", starOnSprite);
                 ObjectManager.SetPicture("Queen", "QueenActive");
-                ObjectManager.SetTag("Queen", "Queen");
+                ObjectManager.SetTag("Queen", "2");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[1] >= 2)
@@ -89,7 +89,7 @@ namespace Assets.Scripts.Levels.Education
             {
                 ObjectManager.SetPicture("QueenStar1", starOnSprite);
                 ObjectManager.SetPicture("King", "KingActive");
-                ObjectManager.SetTag("King", "King");
+                ObjectManager.SetTag("King", "3");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[2] >= 2)
@@ -114,7 +114,7 @@ namespace Assets.Scripts.Levels.Education
             {
                 ObjectManager.SetPicture("KingStar1", starOnSprite);
                 ObjectManager.SetPicture("Knight", "KnightActive");
-                ObjectManager.SetTag("Knight", "Knight");
+                ObjectManager.SetTag("Knight", "4");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[3] >= 2)
@@ -134,7 +134,7 @@ namespace Assets.Scripts.Levels.Education
             {
                 ObjectManager.SetPicture("KnightStar1", starOnSprite);
                 ObjectManager.SetPicture("Pawn", "PawnActive");
-                ObjectManager.SetTag("Pawn", "Pawn");
+                ObjectManager.SetTag("Pawn", "5");
             }
 
             if ((int)ApplicationData.MapInformation.Levels[4] >= 2)
@@ -144,7 +144,7 @@ namespace Assets.Scripts.Levels.Education
 
             if ((int)ApplicationData.MapInformation.Levels[4] >= 3)
             {
-                ObjectManager.SetPicture("KnightStar3", "StarOn");
+                ObjectManager.SetPicture("KnightStar3", starOnSprite);
             }
         }
 

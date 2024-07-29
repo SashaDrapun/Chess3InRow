@@ -36,15 +36,8 @@ namespace Assets.Scripts.Map.Education
         {
             GameObject button = EventSystem.current.currentSelectedGameObject;
             if (button.CompareTag("Locked")) return;
-            ApplicationData.SelectedLevel = button.tag;
-            SetAllLevelSettings();
+            ApplicationData.CurrentLevel = Convert.ToInt32(button.tag);
             SceneManager.LoadScene(2);
-        }
-
-        private void SetAllLevelSettings()
-        {
-            SetLevelSettings.SetFiguresAvailableOnLevel();
-            SetLevelSettings.SetGoalsOnLevel();
         }
     }
 }

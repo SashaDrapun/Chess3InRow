@@ -3243,8 +3243,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: da9521f6e20463c4c942e2bba11007a8, type: 2}
-  m_sharedMaterial: {fileID: 6275059630657135426, guid: da9521f6e20463c4c942e2bba11007a8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3986,8 +3986,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 02:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: da9521f6e20463c4c942e2bba11007a8, type: 2}
-  m_sharedMaterial: {fileID: 6275059630657135426, guid: da9521f6e20463c4c942e2bba11007a8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5308,8 +5308,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: da9521f6e20463c4c942e2bba11007a8, type: 2}
-  m_sharedMaterial: {fileID: 6275059630657135426, guid: da9521f6e20463c4c942e2bba11007a8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11138,6 +11138,7 @@ GameObject:
   - component: {fileID: 1554147342}
   - component: {fileID: 1554147343}
   - component: {fileID: 1554147344}
+  - component: {fileID: 1554147345}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11232,6 +11233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ada0eeff871b4a4e91e314ec19f8f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1554147345}
 --- !u!114 &1554147341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11282,6 +11284,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2789a056b156e488029b76bd8ad309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1554147345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554147336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9bbf25a6304204a89a2a740235e01c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelSettings:
+  - {fileID: 11400000, guid: d533f89b9a54ec84e9d1f24cb727f986, type: 2}
+  - {fileID: 11400000, guid: 3e7facbc9fb407743b3b941405712f6b, type: 2}
+  - {fileID: 11400000, guid: 4f337e9489ec8e843bc87abb00692266, type: 2}
+  - {fileID: 11400000, guid: a1b59c24539950346bb23a14f58988e9, type: 2}
+  - {fileID: 11400000, guid: 30986ed5f000af24ba5178c0f886e6ed, type: 2}
+  - {fileID: 11400000, guid: 89ccc2562a13c994dbda0f1555a9d515, type: 2}
 --- !u!1 &1558652479
 GameObject:
   m_ObjectHideFlags: 0

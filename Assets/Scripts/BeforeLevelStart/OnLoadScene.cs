@@ -21,7 +21,7 @@ namespace Assets.Scripts.BeforeLevelStart
         private void SetBackground()
         {
             Image background = GameObject.Find($"Background").GetComponent<Image>();
-            string imageToLoadName = "Before" + ApplicationData.SelectedLevel + "LevelStart";
+            string imageToLoadName = "Before" + (FigureTypeByEducationLevel)ApplicationData.CurrentLevel + "LevelStart";
             background.sprite = GameObject.Find(imageToLoadName).GetComponent<Image>().sprite;
         }
 

@@ -12,14 +12,15 @@ namespace Assets.Scripts
 {
     public delegate void ShowBox(int x, int y, MapCellType mapElement);
     public delegate void ShowProgressOfTheLevel(LevelProgress levelProgress);
+    public delegate FigureType GetRandomFigureFromAvailable();
 
     public class Board
     {
         public MainMap map;
  
-        public Board(ShowBox showBox,ShowProgressOfTheLevel showStatisticsOnTheScreen)
+        public Board(ShowBox showBox,ShowProgressOfTheLevel showStatisticsOnTheScreen, GetRandomFigureFromAvailable getRandomFigureFromAvailable)
         {
-            map = new MainMap(showBox, showStatisticsOnTheScreen);
+            map = new MainMap(showBox, showStatisticsOnTheScreen, getRandomFigureFromAvailable);
         }
 
         public void Start()

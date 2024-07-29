@@ -4,14 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Pawn
-  - Knight
-  - Queen
-  - Bishop
-  - Rook
   - King
   - Star
   - Locked
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
   layers:
   - Default
   - TransparentFX

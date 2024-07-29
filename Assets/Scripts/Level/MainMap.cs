@@ -23,17 +23,21 @@ namespace Assets.Scripts
         private bool[,] counted;
         private bool[,] whereUserCanGo;
         private LevelProgress levelProgress;
+
         readonly ShowBox ShowBox;
         readonly ShowProgressOfTheLevel ShowProgressOfTheLevel;
+        readonly GetRandomFigureFromAvailable GetRandomFigureFromAvailable;
+
         private static readonly Random random = new();
         Point fromPosition;
         bool isPieceSelected;
         FigureType typePieceSelected;
 
-        public MainMap(ShowBox showBox, ShowProgressOfTheLevel showProgressOfTheLevel)
+        public MainMap(ShowBox showBox, ShowProgressOfTheLevel showProgressOfTheLevel, GetRandomFigureFromAvailable getRandomFigureFromAvailable)
         {
             map = new MapCellType[SIZE, SIZE];
             ShowBox = showBox;
+            GetRandomFigureFromAvailable = getRandomFigureFromAvailable;
             this.ShowProgressOfTheLevel = showProgressOfTheLevel;
             whereUserCanGo = new bool[SIZE, SIZE];
             Mark = new bool[SIZE, SIZE];
@@ -352,21 +356,10 @@ namespace Assets.Scripts
         private void AddRandomPiece()
         {
             Point randomPlace = GetRandomEmptyPlace();
-            FigureType randomFigure = GetRandomFigureTypeFromAvailable();
+            FigureType randomFigure = GetRandomFigureFromAvailable();
             MapCellType piece = GetMapCellFromFigure(randomFigure);
 
             SetMap(randomPlace.X, randomPlace.Y, piece);
-        }
-
-        private FigureType GetRandomFigureTypeFromAvailable()
-        {
-            if (ApplicationData.FiguresAvailableOnLevel == null)
-            {
-                throw new NullReferenceException();
-            }
-
-            int randomNumber = random.Next(0, ApplicationData.FiguresAvailableOnLevel.Count);
-            return ApplicationData.FiguresAvailableOnLevel[randomNumber];
         }
 
         private Point GetRandomEmptyPlace()
