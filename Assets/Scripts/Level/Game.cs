@@ -39,9 +39,11 @@ public class Game : MonoBehaviour
         InitButtons();
         InitImages();
         SetGoals();
-        SetElements();
+        
         this.board = new Board(ShowBox, ShowStatistics, GetRandomFigureFromAvailable);
         board.Start();
+
+        SetElements();
     }
 
     private void LoadLevelSettings()

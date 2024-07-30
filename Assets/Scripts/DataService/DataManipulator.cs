@@ -22,7 +22,6 @@ namespace Assets.Scripts.DataService
 
         public MapInformation LoadMapInformation()
         {
-            bool ggg = File.Exists(Application.persistentDataPath + "/mapInformation.dat");
             if (File.Exists(Application.persistentDataPath + "/mapInformation.dat"))
             {
                 BinaryFormatter bf = new BinaryFormatter();

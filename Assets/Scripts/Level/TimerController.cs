@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TimerController : MonoBehaviour
 {
-    public Text timerText;
+    public TextMeshProUGUI timerText;
 
     private float timeRemaining;
     private bool isTimerRunning;

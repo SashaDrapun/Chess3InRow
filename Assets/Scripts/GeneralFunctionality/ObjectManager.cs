@@ -63,7 +63,8 @@ namespace Assets.Scripts.GeneralFunctionality
 
         public static void SetObjectNonActive(string name)
         {
-            GameObject.Find(name).SetActive(false);
+            GameObject gameObject = GameObject.Find(name);
+            gameObject.SetActive(false);
         }
 
         public static Button FindButton(string objectName)

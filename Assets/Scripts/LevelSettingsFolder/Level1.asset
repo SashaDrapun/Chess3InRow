@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b6da4d657b490459361dd1f56cc7ce, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  levelName: Rook
-  levelNumber: 1
   FiguresAvailableOnLevel: 03000000
   CountMoveFor3Stars: 7
   CountMoveFor2Stars: 15
   CountMoveFor1Star: 20
   PieceToCollectAndCountSerializable:
     keys: 03000000
-    values: 32000000
+    values: 19000000
   CountSecondsForSilverDificulty: 180
   CountSecondsForGoldDificulty: 180
   CountMovesForGoldDificulty: 10
