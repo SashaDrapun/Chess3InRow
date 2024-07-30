@@ -14,8 +14,6 @@ namespace Assets.Scripts.LevelSettingsFolder
     [CreateAssetMenu(fileName = "LevelSettings", menuName = "Settings/LevelSettings", order = 1)]
     public class LevelSettings : ScriptableObject
     {
-        public string levelName;
-        public int levelNumber;
         public List<FigureType> FiguresAvailableOnLevel;
         public int CountMoveFor3Stars;
         public int CountMoveFor2Stars;

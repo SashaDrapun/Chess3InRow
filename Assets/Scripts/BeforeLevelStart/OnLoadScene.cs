@@ -40,16 +40,21 @@ namespace Assets.Scripts.BeforeLevelStart
             if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.ThreeStars)
             {
                 ObjectManager.SetPicture("Star3", "StarOn");
+                ObjectManager.SetPicture("MediumMode", "MediumModeOn");
+                ObjectManager.SetTag("MediumMode", "Silver");
+                
             }
 
             if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.SilverWings)
             {
-                ObjectManager.SetPicture("MediumModeIndicator", "MediumModeOn"); 
+                ObjectManager.SetPicture("MediumModeIndicator", "MediumIndicatorModeOn");
+                ObjectManager.SetPicture("HardMode", "HardModeOn");
+                ObjectManager.SetTag("HardMode", "Gold");
             }
 
             if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] >= LevelStatus.GoldenWings)
             {
-                ObjectManager.SetPicture("MediumModeIndicator", "HardModeOn");
+                ObjectManager.SetPicture("HardModeIndicator", "HardModeIndicatorOn");
             }
         }
     }

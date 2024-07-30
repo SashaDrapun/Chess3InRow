@@ -1,3 +1,4 @@
+using Assets.Scripts.GeneralFunctionality;
 using Assets.Scripts.Menu;
 using System;
 using System.Collections.Generic;
@@ -31,39 +32,30 @@ public class MainMenuEvents : MonoBehaviour
 
     private void LoadMusic(SettingsState settingsState)
     {
-        Button musicButton = FindButton("Music");
+        Button musicButton = ObjectManager.FindButton("Music");
         AudioListenersService.ChangeAudioListenerBackgroundMusicStatus(settingsState);
         if (settingsState == SettingsState.On)
         {
-            musicButton.GetComponent<Image>().sprite = GameObject.Find($"MusicOn").GetComponent<Image>().sprite;
+            ObjectManager.SetPicture(musicButton, "MusicOn");
         }
         else
         {
-            musicButton.GetComponent<Image>().sprite = GameObject.Find($"MusicOff").GetComponent<Image>().sprite;
+            ObjectManager.SetPicture(musicButton, "MusicOff");
         }
     }
 
     private void LoadSounds(SettingsState settingsState)
     {
-        Button soundsButton = FindButton("Sounds");
+        Button soundsButton = ObjectManager.FindButton("Sounds");
         AudioListenersService.ChangeAudioListenerSoundsStatus(settingsState);
         if (settingsState == SettingsState.On)
         {
-            soundsButton.GetComponent<Image>().sprite = GameObject.Find($"SoundsOn").GetComponent<Image>().sprite;
+            ObjectManager.SetPicture(soundsButton, "SoundsOn");
         }
         else
         {
-            soundsButton.GetComponent<Image>().sprite = GameObject.Find($"SoundsOff").GetComponent<Image>().sprite;
+            ObjectManager.SetPicture(soundsButton, "SoundsOff");
         }
-    }
-
-    private Button FindButton(string objectName)
-    {
-        Button[] allButtons = Resources.FindObjectsOfTypeAll<Button>();
-        Button hiddenMusicButton = Array.Find(allButtons, btn => btn.name == objectName && !btn.gameObject.activeInHierarchy);
-
-        if (hiddenMusicButton != null) return hiddenMusicButton;
-        else return GameObject.Find(objectName).GetComponent<Button>();
     }
 
     private void CheckPrefsForSettings()

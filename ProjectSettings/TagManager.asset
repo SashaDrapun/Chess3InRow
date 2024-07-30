@@ -13,6 +13,9 @@ TagManager:
   - 3
   - 4
   - 5
+  - Usual
+  - Silver
+  - Gold
   layers:
   - Default
   - TransparentFX
