@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ShopBackground_0: -2765467171962141693
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

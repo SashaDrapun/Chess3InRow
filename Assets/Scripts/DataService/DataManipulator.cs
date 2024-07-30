@@ -35,5 +35,16 @@ namespace Assets.Scripts.DataService
             return new MapInformation();
         }
 
+        public void ResetData()
+        {
+            if (File.Exists(Application.persistentDataPath + "/mapInformation.dat"))
+            {
+                File.Delete(Application.persistentDataPath + "/mapInformation.dat");
+                
+                Debug.Log("Data reset complete!");
+            }
+            else Debug.LogError("No save data to delete.");
+        }
+
     }
 }

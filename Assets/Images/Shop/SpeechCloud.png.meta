@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SpeechCloud_0: 848157584867517141
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
