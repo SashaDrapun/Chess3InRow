@@ -13,10 +13,13 @@ using UnityEditor;
 using System.Diagnostics;
 using Assets.Scripts.DataService;
 using Assets.Scripts.LevelSettingsFolder;
+using Assets.Scripts.GeneralFunctionality;
 
 public class Game : MonoBehaviour
 {
     public LevelManager levelManager;
+    public TimerController timerController;
+
     private LevelSettings levelSettings;
     private static System.Random random = new();
 
@@ -36,6 +39,7 @@ public class Game : MonoBehaviour
         InitButtons();
         InitImages();
         SetGoals();
+        SetElements();
         this.board = new Board(ShowBox, ShowStatistics, GetRandomFigureFromAvailable);
         board.Start();
     }
@@ -45,6 +49,25 @@ public class Game : MonoBehaviour
         levelSettings = levelManager.GetLevelSettings(ApplicationData.CurrentLevel);
     }
 
+    private void SetElements()
+    {
+        if (ApplicationData.CurrentLevelMode >= LevelMode.Silver)
+        {
+            ObjectManager.SetObjectNonActive("InfinitySymbol");
+            ObjectManager.FindHiddenObjectAndSetActive("Timer");
+        }
+
+        if (ApplicationData.CurrentLevelMode == LevelMode.Silver)
+        {
+            timerController.StartTimer(levelSettings.CountSecondsForSilverDificulty);
+        }
+
+        if (ApplicationData.CurrentLevelMode == LevelMode.Gold)
+        {
+            timerController.StartTimer(levelSettings.CountSecondsForGoldDificulty);
+        }
+    }
+
     private void SetGoals()
     {
         int goalNumber = 1;
@@ -52,57 +75,19 @@ public class Game : MonoBehaviour
         foreach (var keyValuePair in levelSettings.PieceToCollectAndCount)
         {
             string goalImageName = "GoalPicture" + goalNumber;
-            string pictureName = GetPictureNameFromFigureType(keyValuePair.Key);
+            string pictureName = keyValuePair.Key.ToString();
             string goalTextName = "GoalText" + goalNumber++;
 
-            GameObject goalImageObject = FindHiddenObjectByName(goalImageName);
-            Image goalImage = goalImageObject.GetComponent<Image>();
-            Image goalPicture = GameObject.Find(pictureName).GetComponent<Image>();
-            goalImageObject.SetActive(true);
-            goalImage.sprite = goalPicture.sprite;
-
-            GameObject goalTextObject = FindHiddenObjectByName(goalTextName);
-            goalTextObject.SetActive(true);
-            OutputInformation(goalTextName, $"0/{levelSettings.PieceToCollectAndCount[keyValuePair.Key]}");
+            ObjectManager.FindHiddenObjectAndSetActive(goalImageName);
+            ObjectManager.FindHiddenObjectAndSetActive(goalTextName);
+            ObjectManager.SetPicture(goalImageName, pictureName);
+                       
+            
+            ObjectManager.OutputInformation(goalTextName, $"0/{levelSettings.PieceToCollectAndCount[keyValuePair.Key]}");
         }
 
-        OutputInformation("Moves", "0");
-        OutputInformation("GoalMoves", levelSettings.CountMoveFor3Stars.ToString());
-    }
-
-    private GameObject FindHiddenObjectByName(string name)
-    {
-        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-
-        foreach (GameObject obj in allObjects)
-        {
-            if (obj.name == name)
-            {
-                return obj;
-            }
-        }
-
-        return null;
-    }
-
-    private string GetPictureNameFromFigureType(FigureType figureType)
-    {
-        switch (figureType)
-        {
-            case FigureType.Pawn:
-                return "Pawn";
-            case FigureType.Knight:
-                return "Knight";
-            case FigureType.Bishop:
-                return "Bishop";
-            case FigureType.Rook:
-                return "Rook";
-            case FigureType.Queen:
-                return "Queen";
-            case FigureType.King:
-                return "King";
-            default: return "Pawn";
-        }
+        ObjectManager.OutputInformation("Moves", "0");
+        ObjectManager.OutputInformation("GoalMoves", levelSettings.CountMoveFor3Stars.ToString());
     }
 
     public void ShowBox(int x, int y, MapCellType mapElement)
@@ -124,23 +109,14 @@ public class Game : MonoBehaviour
     public void ShowStatistics(LevelProgress levelProgress)
     {
         int goalNumber = 1;
-        OutputInformation("Moves", levelProgress.CountMoves.ToString());
+        ObjectManager.OutputInformation("Moves", levelProgress.CountMoves.ToString());
 
         foreach (var keyValuePair in levelSettings.PieceToCollectAndCount)
         {
             string goalTextName = "GoalText" + goalNumber++;
 
-            GameObject goalTextObject = FindHiddenObjectByName(goalTextName);
-            OutputInformation(goalTextName, $"{GetFigureProgress(levelProgress, keyValuePair.Key)}/{keyValuePair.Value}");
+            ObjectManager.OutputInformation(goalTextName, $"{GetFigureProgress(levelProgress, keyValuePair.Key)}/{keyValuePair.Value}");
         }
-
-        //foreach (var key in ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount.Keys)
-        //{
-        //    string goalTextName = "GoalText" + goalNumber++;
-
-        //    GameObject goalTextObject = FindHiddenObjectByName(goalTextName);
-        //    OutputInformation(goalTextName, $"{GetFigureProgress(levelProgress, key)}/{ApplicationData.GoalsOnTheLevel.PieceToCollectAndCount[key]}");
-        //}
 
         if (CheckIsEndGame(levelProgress))
         {
@@ -151,18 +127,21 @@ public class Game : MonoBehaviour
 
     private void CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(LevelProgress levelProgress)
     {
-        if (levelProgress.CountMoves == levelSettings.CountMoveFor3Stars)
+        if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
         {
-            countStars = 2;
-            thirdStar.sprite = starOff.sprite;         
-            OutputInformation("GoalMoves", levelSettings.CountMoveFor2Stars.ToString());
-        }
+            if (levelProgress.CountMoves == levelSettings.CountMoveFor3Stars)
+            {
+                countStars = 2;
+                thirdStar.sprite = starOff.sprite;
+                ObjectManager.OutputInformation("GoalMoves", levelSettings.CountMoveFor2Stars.ToString());
+            }
 
-        if (levelProgress.CountMoves == levelSettings.CountMoveFor2Stars)
-        {
-            countStars = 1;
-            secondStar.sprite = starOff.sprite;
-            OutputInformation("GoalMoves", levelSettings.CountMoveFor1Star.ToString());
+            if (levelProgress.CountMoves == levelSettings.CountMoveFor2Stars)
+            {
+                countStars = 1;
+                secondStar.sprite = starOff.sprite;
+                ObjectManager.OutputInformation("GoalMoves", levelSettings.CountMoveFor1Star.ToString());
+            }
         }
     }
 
@@ -185,8 +164,7 @@ public class Game : MonoBehaviour
 
     private void Win()
     {
-        GameObject levelCompleted = FindHiddenObjectByName("LVLCompleted");
-        levelCompleted.SetActive(true);
+        ObjectManager.FindHiddenObjectAndSetActive("LVLCompleted");
 
         if ((int)ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < countStars)
         {
@@ -200,8 +178,7 @@ public class Game : MonoBehaviour
     private void Lose()
     {
         firstStar.sprite = starOff.sprite;
-        GameObject levelCompleted = FindHiddenObjectByName("LVLFailed");
-        levelCompleted.SetActive(true);
+        ObjectManager.FindHiddenObjectAndSetActive("LVLFailed");
     }
 
     
@@ -257,18 +234,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void OutputInformation(string textMeshProName, string outputInformation)
-    {
-        TextMeshProUGUI[] textMeshProObjects = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>();
-        foreach (TextMeshProUGUI obj in textMeshProObjects)
-        {
-            if (obj.name == textMeshProName)
-            {
-                obj.text = outputInformation;
-                return;
-            }
-        }
-    }
+    
 
     public void Click()
     {
