@@ -19,5 +19,8 @@ MonoBehaviour:
   CountMoveFor2Stars: 15
   CountMoveFor1Star: 20
   PieceToCollectAndCountSerializable:
-    keys: 
-    values: 
+    keys: 03000000
+    values: 32000000
+  CountSecondsForSilverDificulty: 180
+  CountSecondsForGoldDificulty: 180
+  CountMovesForGoldDificulty: 10

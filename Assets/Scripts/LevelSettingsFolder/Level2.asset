@@ -15,11 +15,12 @@ MonoBehaviour:
   levelName: Bishop
   levelNumber: 2
   FiguresAvailableOnLevel: 02000000
-  MapInformation:
-    Levels: 000000000000000000000000000000000000000000000000
   CountMoveFor3Stars: 20
   CountMoveFor2Stars: 10
   CountMoveFor1Star: 5
-  PieceToCollectAndCount:
+  PieceToCollectAndCountSerializable:
     keys: 02000000
-    values: 64000000
+    values: 32000000
+  CountSecondsForSilverDificulty: 180
+  CountSecondsForGoldDificulty: 180
+  CountMovesForGoldDificulty: 10
