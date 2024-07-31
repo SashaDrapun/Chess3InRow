@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GoLVLComplButton_0: -5487740644420305495
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
