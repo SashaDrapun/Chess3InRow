@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.DataService;
 using Assets.Scripts.GeneralFunctionality;
+using Assets.Scripts.Level;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Assets.Scripts.BeforeLevelStart
     {
         private void OnEnable()
         {
+            ApplicationData.CurrentLevelMode = LevelMode.Usual;
             SetBackground();
             SetSceneElements();
         }

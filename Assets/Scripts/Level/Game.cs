@@ -44,6 +44,12 @@ public class Game : MonoBehaviour
         board.Start();
 
         SetElements();
+        timerController.OnTimerEnded += OnTimerEnded;
+    }
+
+    private void OnTimerEnded()
+    {
+        Lose();
     }
 
     private void LoadLevelSettings()
@@ -217,8 +223,6 @@ public class Game : MonoBehaviour
             timerController.StopTimer();
         }
 
-        
-        
         ObjectManager.FindHiddenObjectAndSetActive("LVLFailed");
     }
 
@@ -229,7 +233,11 @@ public class Game : MonoBehaviour
         bool result = true;
         foreach (var keyValuePair in levelSettings.PieceToCollectAndCount)
         {
-            result = IsGoalAchieved(levelProgress, keyValuePair.Key, keyValuePair.Value);
+            if (!IsGoalAchieved(levelProgress, keyValuePair.Key, keyValuePair.Value))
+            {
+                result = false;
+                break;
+            }
         }
 
         return result;
@@ -237,42 +245,30 @@ public class Game : MonoBehaviour
 
     private bool IsGoalAchieved(LevelProgress levelProgress, FigureType figureType, int goalToCollect)
     {
-        switch (figureType)
+        return figureType switch
         {
-            case FigureType.Pawn:
-                return levelProgress.CountCollectedPawns >= goalToCollect;
-            case FigureType.Knight:
-                return levelProgress.CountCollectedKnights >= goalToCollect;
-            case FigureType.Bishop:
-                return levelProgress.CountCollectedBishops >= goalToCollect;
-            case FigureType.Rook:
-                return levelProgress.CountCollectedRooks >= goalToCollect;
-            case FigureType.Queen:
-                return levelProgress.CountCollectedQueens >= goalToCollect;
-            case FigureType.King:
-                return levelProgress.CountCollectedKings >= goalToCollect;
-            default: return false;
-        }
+            FigureType.Pawn => levelProgress.CountCollectedPawns >= goalToCollect,
+            FigureType.Knight => levelProgress.CountCollectedKnights >= goalToCollect,
+            FigureType.Bishop => levelProgress.CountCollectedBishops >= goalToCollect,
+            FigureType.Rook => levelProgress.CountCollectedRooks >= goalToCollect,
+            FigureType.Queen => levelProgress.CountCollectedQueens >= goalToCollect,
+            FigureType.King => levelProgress.CountCollectedKings >= goalToCollect,
+            _ => false,
+        };
     }
 
     private int GetFigureProgress(LevelProgress levelProgress, FigureType figureType)
     {
-        switch (figureType)
+        return figureType switch
         {
-            case FigureType.Pawn:
-                return levelProgress.CountCollectedPawns;
-            case FigureType.Knight:
-                return levelProgress.CountCollectedKnights;
-            case FigureType.Bishop:
-                return levelProgress.CountCollectedBishops;
-            case FigureType.Rook:
-                return levelProgress.CountCollectedRooks;
-            case FigureType.Queen:
-                return levelProgress.CountCollectedQueens;
-            case FigureType.King:
-                return levelProgress.CountCollectedKings;
-            default: return levelProgress.CountCollectedPawns;
-        }
+            FigureType.Pawn => levelProgress.CountCollectedPawns,
+            FigureType.Knight => levelProgress.CountCollectedKnights,
+            FigureType.Bishop => levelProgress.CountCollectedBishops,
+            FigureType.Rook => levelProgress.CountCollectedRooks,
+            FigureType.Queen => levelProgress.CountCollectedQueens,
+            FigureType.King => levelProgress.CountCollectedKings,
+            _ => levelProgress.CountCollectedPawns,
+        };
     }
 
     

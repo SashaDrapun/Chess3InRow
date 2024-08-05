@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class TimerController : MonoBehaviour
     private float timeRemaining;
     private bool isTimerRunning;
 
+    public event Action OnTimerEnded;
+
     void Update()
     {
         if (isTimerRunning)
@@ -18,6 +21,7 @@ public class TimerController : MonoBehaviour
             {
                 timeRemaining = 0;
                 isTimerRunning = false;
+                OnTimerEnded?.Invoke();
             }
             UpdateTimerText();
         }
