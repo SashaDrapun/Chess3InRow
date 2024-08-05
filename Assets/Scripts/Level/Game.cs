@@ -171,31 +171,36 @@ public class Game : MonoBehaviour
     {
         ObjectManager.FindHiddenObjectAndSetActive("LVLCompleted");
         bool someChanges = false;
-        if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
-        {
-            if ((int)ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < countStars)
-            {
-                ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] = (LevelStatus)countStars;
-            }
 
-            someChanges = true;
+        void UpdateLevelStatus(LevelStatus newStatus)
+        {
+            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < newStatus)
+            {
+                ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] = newStatus;
+                someChanges = true;
+            }
         }
 
+        if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
+        {
+            UpdateLevelStatus((LevelStatus)countStars);
+        }
 
         if (ApplicationData.CurrentLevelMode >= LevelMode.Silver)
         {
             timerController.StopTimer();
-
-            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < LevelStatus.SilverWings)
-            {
-                ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] = LevelStatus.SilverWings;
-                someChanges = true;
-            }
+            UpdateLevelStatus(LevelStatus.SilverWings);
         }
-        
+
+        if (ApplicationData.CurrentLevelMode >= LevelMode.Gold)
+        {
+            timerController.StopTimer();
+            UpdateLevelStatus(LevelStatus.GoldenWings);
+        }
+
         if (someChanges)
         {
-            DataManipulator dataManipulator = new DataManipulator();
+            DataManipulator dataManipulator = new();
             dataManipulator.SaveMapInformation(ApplicationData.MapInformation);
         }
     }
