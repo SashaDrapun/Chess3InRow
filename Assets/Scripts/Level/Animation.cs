@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] GameObject LVLCompleted, Background, LVLSuccess, Star1, Star2, Star3, Coin, GoButton;
+    [SerializeField] GameObject LVLCompleted, Background, LVLSuccess, Star1, Star2, Star3, Coin, GoButton, BackgroundFailed, againButton, MenuButton;
+
     private Vector3 backgroundTargetPosition;
+    private Vector3 backgroundFailedTargetPosition;
 
     public void AnimateWin()
     {
@@ -52,7 +55,16 @@ public class AnimationController : MonoBehaviour
 
     void Start()
     {
-        
+        Vector3 currentPosition = LVLSuccess.transform.position;
+        Vector3 targetPosition = new Vector3(currentPosition.x, currentPosition.y + 3.7f, currentPosition.z);
+        backgroundFailedTargetPosition = new Vector3(targetPosition.x, targetPosition.y - 1f, targetPosition.z);
 
+        LeanTween.moveLocal(BackgroundFailed, backgroundFailedTargetPosition, 0.7f).setDelay(0.5f).setEase(LeanTweenType.easeOutCirc);
+
+        LeanTween.scale(againButton, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.moveLocalY(againButton, againButton.transform.localPosition.y + 50f, 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
+
+        LeanTween.scale(MenuButton, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.moveLocalY(MenuButton, MenuButton.transform.localPosition.y + 50f, 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
     }
 }
