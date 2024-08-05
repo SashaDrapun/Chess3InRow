@@ -45,124 +45,191 @@ namespace Assets.Scripts.Levels.Education
 
         private void SetRookStarsAndWings()
         {
-            if ((int)ApplicationData.MapInformation.Levels[0] >= 1)
+            var rookLevelStatus = ApplicationData.MapInformation.Levels[(int)FigureTypeByEducationLevel.Rook];
+
+            if (rookLevelStatus >= LevelStatus.OneStar)
             {
                 ObjectManager.SetPicture("RookStar1", starOnSprite);
                 ObjectManager.SetPicture("Bishop", "BishopActive");
                 ObjectManager.SetTag("Bishop", "1");
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[0] >= 2)
+            if (rookLevelStatus >= LevelStatus.TwoStars)
             {
                 ObjectManager.SetPicture("RookStar2", starOnSprite);
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[0] >= 3)
+            if (rookLevelStatus >= LevelStatus.ThreeStars)
             {
                 ObjectManager.SetPicture("RookStar3", starOnSprite);
+            }
+
+            if (rookLevelStatus >= LevelStatus.SilverWings)
+            {
+                ObjectManager.FindHiddenObjectAndSetActive("RookWings");
+            }
+
+            if (rookLevelStatus >= LevelStatus.GoldenWings)
+            {
+                ObjectManager.SetPicture("RookWings", "WingsGolden");
             }
         }
 
         private void SetBishopStarsAndWings()
         {
-            if ((int)ApplicationData.MapInformation.Levels[1] >= 1)
+            var bishopLevelStatus = ApplicationData.MapInformation.Levels[(int)FigureTypeByEducationLevel.Bishop];
+
+            if (bishopLevelStatus >= LevelStatus.OneStar)
             {
                 ObjectManager.SetPicture("BishopStar1", starOnSprite);
                 ObjectManager.SetPicture("Queen", "QueenActive");
                 ObjectManager.SetTag("Queen", "2");
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[1] >= 2)
+            if (bishopLevelStatus >= LevelStatus.TwoStars)
             {
                 ObjectManager.SetPicture("BishopStar2", starOnSprite);
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[1] >= 3)
+            if (bishopLevelStatus >= LevelStatus.ThreeStars)
             {
                 ObjectManager.SetPicture("BishopStar3", starOnSprite);
+            }
+
+            if (bishopLevelStatus >= LevelStatus.SilverWings)
+            {
+                ObjectManager.FindHiddenObjectAndSetActive("BishopWings");
+            }
+
+            if (bishopLevelStatus >= LevelStatus.GoldenWings)
+            {
+                ObjectManager.SetPicture("BishopWings", "WingsGolden");
             }
         }
 
         private void SetQueenStarsAndWings()
         {
-            if ((int)ApplicationData.MapInformation.Levels[2] >= 1)
+            var queenLevelStatus = ApplicationData.MapInformation.Levels[(int)FigureTypeByEducationLevel.Queen];
+
+            if (queenLevelStatus >= LevelStatus.OneStar)
             {
                 ObjectManager.SetPicture("QueenStar1", starOnSprite);
                 ObjectManager.SetPicture("King", "KingActive");
                 ObjectManager.SetTag("King", "3");
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[2] >= 2)
+            if (queenLevelStatus >= LevelStatus.TwoStars)
             {
                 ObjectManager.SetPicture("QueenStar2", starOnSprite);
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[2] >= 3)
+            if (queenLevelStatus >= LevelStatus.ThreeStars)
             {
                 ObjectManager.SetPicture("QueenStar3", "StarOn");
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[2] >= 4)
+            if (queenLevelStatus >= LevelStatus.SilverWings)
             {
+                ObjectManager.FindHiddenObjectAndSetActive("QueenWings");
+            }
 
+            if (queenLevelStatus >= LevelStatus.GoldenWings)
+            {
+                ObjectManager.SetPicture("QueenWings", "WingsGolden");
             }
         }
 
         private void SetKingStarsAndWings()
         {
-            if ((int)ApplicationData.MapInformation.Levels[3] >= 1)
+            var kingLevelStatus = ApplicationData.MapInformation.Levels[(int)FigureTypeByEducationLevel.King];
+
+            if (kingLevelStatus >= LevelStatus.OneStar)
             {
                 ObjectManager.SetPicture("KingStar1", starOnSprite);
                 ObjectManager.SetPicture("Knight", "KnightActive");
                 ObjectManager.SetTag("Knight", "4");
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[3] >= 2)
+            if (kingLevelStatus >= LevelStatus.TwoStars)
             {
                 ObjectManager.SetPicture("KingStar2", starOnSprite);
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[3] >= 3)
+            if (kingLevelStatus >= LevelStatus.ThreeStars)
             {
                 ObjectManager.SetPicture("KingStar3", starOnSprite);
+            }
+
+            if (kingLevelStatus >= LevelStatus.SilverWings)
+            {
+                ObjectManager.FindHiddenObjectAndSetActive("KingWings");
+            }
+
+            if (kingLevelStatus >= LevelStatus.GoldenWings)
+            {
+                ObjectManager.SetPicture("KingWings", "WingsGolden");
             }
         }
 
         private void SetKnightStarsAndWings()
         {
-            if ((int)ApplicationData.MapInformation.Levels[4] >= 1)
+            var knightLevelStatus = ApplicationData.MapInformation.Levels[(int)FigureTypeByEducationLevel.Knight];
+
+            if (knightLevelStatus >= LevelStatus.OneStar)
             {
                 ObjectManager.SetPicture("KnightStar1", starOnSprite);
                 ObjectManager.SetPicture("Pawn", "PawnActive");
                 ObjectManager.SetTag("Pawn", "5");
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[4] >= 2)
+            if (knightLevelStatus >= LevelStatus.TwoStars)
             {
                 ObjectManager.SetPicture("KnightStar2", starOnSprite);
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[4] >= 3)
+            if (knightLevelStatus >= LevelStatus.ThreeStars)
             {
                 ObjectManager.SetPicture("KnightStar3", starOnSprite);
+            }
+
+            if (knightLevelStatus >= LevelStatus.SilverWings)
+            {
+                ObjectManager.FindHiddenObjectAndSetActive("KnightWings");
+            }
+
+            if (knightLevelStatus >= LevelStatus.GoldenWings)
+            {
+                ObjectManager.SetPicture("KnightWings", "WingsGolden");
             }
         }
 
         private void SetPawnStarsAndWings()
         {
-            if ((int)ApplicationData.MapInformation.Levels[5] >= 1)
+            var pawnLevelStatus = ApplicationData.MapInformation.Levels[(int)FigureTypeByEducationLevel.Pawn];
+
+            if (pawnLevelStatus >= LevelStatus.OneStar)
             {
                 ObjectManager.SetPicture("PawnStar1", starOnSprite);
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[5] >= 2)
+            if (pawnLevelStatus >= LevelStatus.TwoStars)
             {
                 ObjectManager.SetPicture("PawnStar2", starOnSprite);
             }
 
-            if ((int)ApplicationData.MapInformation.Levels[5] >= 3)
+            if (pawnLevelStatus >= LevelStatus.ThreeStars)
             {
                 ObjectManager.SetPicture("PawnStar3", starOnSprite);
+            }
+
+            if (pawnLevelStatus >= LevelStatus.SilverWings)
+            {
+                ObjectManager.FindHiddenObjectAndSetActive("PawnWings");
+            }
+
+            if (pawnLevelStatus >= LevelStatus.GoldenWings)
+            {
+                ObjectManager.SetPicture("PawnWings", "WingsGolden");
             }
         }
     }

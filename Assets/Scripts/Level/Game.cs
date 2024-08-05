@@ -55,6 +55,7 @@ public class Game : MonoBehaviour
     {
         if (ApplicationData.CurrentLevelMode >= LevelMode.Silver)
         {
+            ObjectManager.SetObjectNonActive("Stars");
             ObjectManager.SetObjectNonActive("InfinitySymbol");
             ObjectManager.FindHiddenObjectAndSetActive("Timer");
         }
@@ -161,25 +162,58 @@ public class Game : MonoBehaviour
             return true;
         }
 
+
         return false;
     }
+
 
     private void Win()
     {
         ObjectManager.FindHiddenObjectAndSetActive("LVLCompleted");
-
-        if ((int)ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < countStars)
+        bool someChanges = false;
+        if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
         {
-            ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] = (LevelStatus)countStars;
+            if ((int)ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < countStars)
+            {
+                ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] = (LevelStatus)countStars;
+            }
+
+            someChanges = true;
         }
 
-        DataManipulator dataManipulator = new DataManipulator();
-        dataManipulator.SaveMapInformation(ApplicationData.MapInformation);
+
+        if (ApplicationData.CurrentLevelMode >= LevelMode.Silver)
+        {
+            timerController.StopTimer();
+
+            if (ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] < LevelStatus.SilverWings)
+            {
+                ApplicationData.MapInformation.Levels[ApplicationData.CurrentLevel] = LevelStatus.SilverWings;
+                someChanges = true;
+            }
+        }
+        
+        if (someChanges)
+        {
+            DataManipulator dataManipulator = new DataManipulator();
+            dataManipulator.SaveMapInformation(ApplicationData.MapInformation);
+        }
     }
 
     private void Lose()
     {
-        firstStar.sprite = starOff.sprite;
+        if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
+        {
+            firstStar.sprite = starOff.sprite;
+        }
+
+        if (ApplicationData.CurrentLevelMode >= LevelMode.Silver)
+        {
+            timerController.StopTimer();
+        }
+
+        
+        
         ObjectManager.FindHiddenObjectAndSetActive("LVLFailed");
     }
 
