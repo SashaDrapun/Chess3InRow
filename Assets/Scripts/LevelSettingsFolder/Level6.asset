@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b6da4d657b490459361dd1f56cc7ce, type: 3}
   m_Name: Level6
   m_EditorClassIdentifier: 
-  levelName: Pawn
-  levelNumber: 6
   FiguresAvailableOnLevel: 00000000
   CountMoveFor3Stars: 10
   CountMoveFor2Stars: 20
   CountMoveFor1Star: 30
   PieceToCollectAndCountSerializable:
     keys: 00000000
-    values: 64000000
+    values: 0a000000
   CountSecondsForSilverDificulty: 180
   CountSecondsForGoldDificulty: 180
   CountMovesForGoldDificulty: 10

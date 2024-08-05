@@ -189,18 +189,22 @@ public class Game : MonoBehaviour
 
         if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
         {
+            SetStars();
             UpdateLevelStatus((LevelStatus)countStars);
         }
 
         if (ApplicationData.CurrentLevelMode >= LevelMode.Silver)
         {
             timerController.StopTimer();
+            HideStars();
+            ObjectManager.FindHiddenObjectAndSetActive("Wings");
             UpdateLevelStatus(LevelStatus.SilverWings);
         }
 
         if (ApplicationData.CurrentLevelMode >= LevelMode.Gold)
         {
             timerController.StopTimer();
+            ObjectManager.SetPicture("Wings", "GoldenWings");
             UpdateLevelStatus(LevelStatus.GoldenWings);
         }
 
@@ -209,6 +213,31 @@ public class Game : MonoBehaviour
             DataManipulator dataManipulator = new();
             dataManipulator.SaveMapInformation(ApplicationData.MapInformation);
         }
+    }
+
+    private void SetStars()
+    {
+        if (countStars >= 1)
+        {
+            ObjectManager.SetPicture("Star1", "StarOn");
+        }
+
+        if (countStars >= 2)
+        {
+            ObjectManager.SetPicture("Star2", "StarOn");
+        }
+
+        if (countStars == 3)
+        {
+            ObjectManager.SetPicture("Star3", "StarOn");
+        }
+    }
+
+    private void HideStars()
+    {
+        ObjectManager.SetObjectNonActive("Star1");
+        ObjectManager.SetObjectNonActive("Star2");
+        ObjectManager.SetObjectNonActive("Star3");
     }
 
     private void Lose()
