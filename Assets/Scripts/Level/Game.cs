@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
 {
     public LevelManager levelManager;
     public TimerController timerController;
+    public AnimationController animationController;
 
     private LevelSettings levelSettings;
     private static System.Random random = new();
@@ -187,9 +188,13 @@ public class Game : MonoBehaviour
             }
         }
 
+        animationController.AnimateWin();
+
         if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
         {
             SetStars();
+
+            animationController.AnimateStars();
             UpdateLevelStatus((LevelStatus)countStars);
         }
 
