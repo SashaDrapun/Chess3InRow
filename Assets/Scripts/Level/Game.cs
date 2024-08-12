@@ -21,6 +21,7 @@ public class Game : MonoBehaviour
     public TimerController timerController;
     public AnimationController animationController;
 
+    private LevelRewardSystem levelRewardSystem;
     private LevelSettings levelSettings;
     private static System.Random random = new();
 
@@ -33,6 +34,7 @@ public class Game : MonoBehaviour
     Image thirdStar;
 
     int countStars = 3;
+    int countMoves = 0;
 
     void Start()
     {
@@ -45,6 +47,7 @@ public class Game : MonoBehaviour
         board.Start();
 
         SetElements();
+        levelRewardSystem = new LevelRewardSystem();
         timerController.OnTimerEnded += OnTimerEnded;
     }
 
@@ -132,6 +135,8 @@ public class Game : MonoBehaviour
         {
             return;
         }
+
+        countMoves = levelProgress.CountMoves;
         CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(levelProgress);
     }
 
@@ -213,11 +218,27 @@ public class Game : MonoBehaviour
             UpdateLevelStatus(LevelStatus.GoldenWings);
         }
 
+        DataManipulator dataManipulator = new();
         if (someChanges)
         {
-            DataManipulator dataManipulator = new();
             dataManipulator.SaveMapInformation(ApplicationData.MapInformation);
         }
+
+        ApplicationData.ShopInformation = dataManipulator.LoadShopInformation();
+        ApplicationData.ShopInformation.Money += levelRewardSystem.CalculateReward(CalculateMaxMoves(), countMoves, timerController.GetRemainingTimeInSeconds());
+
+        dataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
+    }
+
+    private int CalculateMaxMoves()
+    {
+        return ApplicationData.CurrentLevelMode switch
+        {
+            LevelMode.Usual => levelSettings.CountMoveFor1Star,
+            LevelMode.Silver => 0,
+            LevelMode.Gold => levelSettings.CountMovesForGoldDificulty,
+            _ => 0,
+        };
     }
 
     private void SetStars()

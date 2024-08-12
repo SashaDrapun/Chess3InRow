@@ -13,4 +13,6 @@ public static class ApplicationData
     public static LevelMode CurrentLevelMode;
 
     public static MapInformation MapInformation;
+
+    public static ShopInformation ShopInformation;
 }

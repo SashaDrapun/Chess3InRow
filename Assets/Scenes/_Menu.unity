@@ -763,6 +763,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420034}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -867,6 +868,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e1ec1b468850f846ac2baa79112c7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01093ed9f4c17064ca002b3973d9ef10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &547278629
@@ -974,9 +987,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 653856114}
-        m_TargetAssemblyTypeName: Assets.Scripts.Menu.ShowAndHideSettings, Assembly-CSharp
-        m_MethodName: OnSettingsButtonClick
+      - m_Target: {fileID: 519420035}
+        m_TargetAssemblyTypeName: Assets.Scripts.GoToScene.GoToShop, Assembly-CSharp
+        m_MethodName: GoToShopScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

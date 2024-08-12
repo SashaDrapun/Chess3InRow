@@ -27,6 +27,12 @@ public class TimerController : MonoBehaviour
         }
     }
 
+    public int GetRemainingTimeInSeconds()
+    {
+        return Mathf.FloorToInt(timeRemaining);
+    }
+
+
     public void StartTimer(int seconds)
     {
         timeRemaining = seconds;

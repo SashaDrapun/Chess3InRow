@@ -45,5 +45,27 @@ namespace Assets.Scripts.DataService
             else Debug.LogError("No save data to delete.");
         }
 
+        public void SaveShopInformation(ShopInformation shopInformation)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/shopInformation.dat");
+            bf.Serialize(file, shopInformation);
+            file.Close();
+        }
+
+        public ShopInformation LoadShopInformation()
+        {
+            if (File.Exists(Application.persistentDataPath + "/shopInformation.dat"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/shopInformation.dat", FileMode.Open);
+                ShopInformation shopInformation = (ShopInformation)bf.Deserialize(file);
+                file.Close();
+                return shopInformation;
+            }
+
+            return new ShopInformation();
+        }
+
     }
 }
