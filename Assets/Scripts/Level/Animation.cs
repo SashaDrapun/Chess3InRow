@@ -37,25 +37,21 @@ public class AnimationController : MonoBehaviour
 
     public void AnimateStars()
     {
-        // �������� ��� Star1
         LeanTween.scale(Star1, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setDelay(1.5f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.moveLocalY(Star1, Star1.transform.localPosition.y + 30f, 0.5f).setDelay(1.5f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.scale(Star1, new Vector3(1f, 1f, 1f), 0.5f).setDelay(2f).setEase(LeanTweenType.easeOutElastic);
 
-        // �������� ��� Star2
         LeanTween.scale(Star2, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setDelay(2f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.moveLocalY(Star2, Star2.transform.localPosition.y + 30f, 0.5f).setDelay(2f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.scale(Star2, new Vector3(1f, 1f, 1f), 0.5f).setDelay(2f).setEase(LeanTweenType.easeOutElastic);
 
-        // �������� ��� Star3
         LeanTween.scale(Star3, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setDelay(2.5f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.moveLocalY(Star3, Star3.transform.localPosition.y + 30f, 0.5f).setDelay(2.5f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.scale(Star3, new Vector3(1f, 1f, 1f), 0.5f).setDelay(2.5f).setEase(LeanTweenType.easeOutElastic);
     }
 
-    void Start()
+    public void AnimateLose()
     {
-
         Vector3 currentPosition = LVLSuccess.transform.position;
         Vector3 targetPosition = new Vector3(currentPosition.x, currentPosition.y + 3.7f, currentPosition.z);
         backgroundFailedTargetPosition = new Vector3(targetPosition.x, targetPosition.y - 1f, targetPosition.z);
@@ -68,5 +64,11 @@ public class AnimationController : MonoBehaviour
 
         LeanTween.scale(MenuButton, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
         LeanTween.moveLocalY(MenuButton, MenuButton.transform.localPosition.y + 50f, 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
+    }
+
+    void Start()
+    {
+
+        
     }
 }

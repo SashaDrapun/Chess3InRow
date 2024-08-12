@@ -279,6 +279,7 @@ public class Game : MonoBehaviour
         }
 
         ObjectManager.FindHiddenObjectAndSetActive("LVLFailed");
+        animationController.AnimateLose();
     }
 
     
