@@ -8,6 +8,7 @@ namespace Assets.Scripts.DataService
 {
     public enum ShopItem
     {
+        None,
         Freezing,
         Adder,
         Fuse,
