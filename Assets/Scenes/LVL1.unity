@@ -5222,7 +5222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.19825001, y: 0.13111113}
   m_AnchorMax: {x: 0.8025156, y: 0.8683334}
-  m_AnchoredPosition: {x: 0, y: 1.5}
+  m_AnchoredPosition: {x: 1.4998779, y: -1281}
   m_SizeDelta: {x: 3, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &834906271
@@ -9536,7 +9536,7 @@ RectTransform:
   m_GameObject: {fileID: 1290035998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1695152748}
@@ -11428,6 +11428,9 @@ MonoBehaviour:
   Star3: {fileID: 369078288}
   Coin: {fileID: 1580241131}
   GoButton: {fileID: 1143585756}
+  BackgroundFailed: {fileID: 834906269}
+  againButton: {fileID: 1290035998}
+  MenuButton: {fileID: 1981147485}
 --- !u!1 &1558652479
 GameObject:
   m_ObjectHideFlags: 0
@@ -12202,7 +12205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1695152748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14353,7 +14356,7 @@ RectTransform:
   m_GameObject: {fileID: 1981147485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1695152748}
