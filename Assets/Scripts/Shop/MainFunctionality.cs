@@ -11,6 +11,8 @@ namespace Assets.Scripts.Shop
 {
     public class MainFunctionality : MonoBehaviour
     {
+        public ItemTextManager ItemTextManager;
+
         private ShopItem selectedShopItem;
 
         public MainFunctionality()
@@ -21,30 +23,35 @@ namespace Assets.Scripts.Shop
         public void FreezeBonusClick()
         {
             selectedShopItem = ShopItem.Freezing;
+            ObjectManager.OutputInformation("SellText", ItemTextManager.GetItemText((int)ShopItem.Freezing));
             SetSellItemImage("Freeze");
         }
 
         public void AddBonusClick()
         {
             selectedShopItem = ShopItem.Adder;
+            ObjectManager.OutputInformation("SellText", ItemTextManager.GetItemText((int)ShopItem.Adder));
             SetSellItemImage("AddMoves");
         }
 
         public void FuseBonusClick()
         {
             selectedShopItem = ShopItem.Fuse;
+            ObjectManager.OutputInformation("SellText", ItemTextManager.GetItemText((int)ShopItem.Fuse));
             SetSellItemImage("Boom");
         }
 
         public void RedistributorBonusClick()
         {
             selectedShopItem = ShopItem.Redistributor;
+            ObjectManager.OutputInformation("SellText", ItemTextManager.GetItemText((int)ShopItem.Redistributor));
             SetSellItemImage("Randomize");
         }
 
         public void TeleporterBonusClick()
         {
             selectedShopItem = ShopItem.Teleporter;
+            ObjectManager.OutputInformation("SellText", ItemTextManager.GetItemText((int)ShopItem.Teleporter));
             SetSellItemImage("Teleport");
         }
 

@@ -163,7 +163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.21521875, y: 0}
   m_AnchorMax: {x: 1, y: 0.45316666}
-  m_AnchoredPosition: {x: 13.5, y: -8.499756}
+  m_AnchoredPosition: {x: 13.5, y: -8.4997635}
   m_SizeDelta: {x: 27, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &134253892
@@ -661,7 +661,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37584537, y: 0.1973097}
   m_AnchorMax: {x: 0.512, y: 0.878}
-  m_AnchoredPosition: {x: 373.35, y: 32.24}
+  m_AnchoredPosition: {x: 373.35004, y: 32.240005}
   m_SizeDelta: {x: 102.62, y: -109.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636593462
@@ -1984,6 +1984,7 @@ GameObject:
   - component: {fileID: 1719561644}
   - component: {fileID: 1719561647}
   - component: {fileID: 1719561648}
+  - component: {fileID: 1719561649}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2091,6 +2092,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e403b2a671f5b2f4a8829701c8ae0cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemTextManager: {fileID: 1719561649}
+--- !u!114 &1719561649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719561643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcee608ac474beb44a44bdbd8c40503a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemTexts:
+  - {fileID: 11400000, guid: 4855e937ee6661a47bfad34285434039, type: 2}
+  - {fileID: 11400000, guid: a27ea39065ee2b94eaf58bf28181cff3, type: 2}
+  - {fileID: 11400000, guid: 55952593decd9c64eb30bc948f1554d3, type: 2}
+  - {fileID: 11400000, guid: f6f2de33b0a5c514fa1396f5165fe7fc, type: 2}
+  - {fileID: 11400000, guid: f4dca2232cea54e40890c0a7400af4c4, type: 2}
+  - {fileID: 11400000, guid: ef8f5dc9306737c49b521487b8208d6e, type: 2}
 --- !u!1 &1793993035
 GameObject:
   m_ObjectHideFlags: 0
