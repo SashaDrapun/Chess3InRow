@@ -27,7 +27,7 @@ namespace Assets.Scripts.GeneralFunctionality
 
         public static void SetPicture(Button button, string objectToSetPictureName)
         {
-
+            button.GetComponent<Image>().sprite = GameObject.Find(objectToSetPictureName).GetComponent<Image>().sprite;
         }
 
         public static void SetTag(string objectToSetTagName, string tag)

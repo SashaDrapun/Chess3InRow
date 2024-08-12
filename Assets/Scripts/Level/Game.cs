@@ -225,8 +225,9 @@ public class Game : MonoBehaviour
         }
 
         ApplicationData.ShopInformation = dataManipulator.LoadShopInformation();
-        ApplicationData.ShopInformation.Money += levelRewardSystem.CalculateReward(CalculateMaxMoves(), countMoves, timerController.GetRemainingTimeInSeconds());
-
+        int rewardMoney = levelRewardSystem.CalculateReward(CalculateMaxMoves(), countMoves, timerController.GetRemainingTimeInSeconds());
+        ApplicationData.ShopInformation.Money += rewardMoney;
+        ObjectManager.OutputInformation("EarnedMoney", "+" + rewardMoney);
         dataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
     }
 
