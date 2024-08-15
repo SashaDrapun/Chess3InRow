@@ -1,18 +1,13 @@
-using Assets.Scripts;
 using Assets.Scripts.ChessFigures;
+using Assets.Scripts.DataService;
 using Assets.Scripts.Level;
+using Assets.Scripts.LevelSettingsFolder;
+using Assets.Scripts;
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TMPro;
-using NUnit.Framework;
-using System.Collections.Generic;
-using UnityEditor;
-using System.Diagnostics;
-using Assets.Scripts.DataService;
-using Assets.Scripts.LevelSettingsFolder;
 using Assets.Scripts.GeneralFunctionality;
 
 public class Game : MonoBehaviour
@@ -20,21 +15,38 @@ public class Game : MonoBehaviour
     public LevelManager levelManager;
     public TimerController timerController;
     public AnimationController animationController;
+    public CoroutineRunner coroutineRunner;
 
     private LevelRewardSystem levelRewardSystem;
     private LevelSettings levelSettings;
-    private static System.Random random = new();
+    private static readonly System.Random random = new();
 
-    Button[,] buttons;
-    Image[] images;
+    private Button[,] buttons;
+    private Image[] images;
     private Board board;
-    Image starOff;
-    Image firstStar;
-    Image secondStar;
-    Image thirdStar;
+    private Image starOff;
+    private Image firstStar;
+    private Image secondStar;
+    private Image thirdStar;
 
-    int countStars = 3;
-    int countMoves = 0;
+    private int countStars = 3;
+    private int countMoves = 0;
+
+    private const string GoalPicturePrefix = "GoalPicture";
+    private const string GoalTextPrefix = "GoalText";
+    private const string StarImagePrefix = "Star";
+    private const string StarOnImage = "StarOn";
+    private const string StarOffImage = "StarOff";
+    private const string LvlCompletedObject = "LVLCompleted";
+    private const string LvlFailedObject = "LVLFailed";
+    private const string StarsObject = "Stars";
+    private const string InfinitySymbolObject = "InfinitySymbol";
+    private const string TimerObject = "Timer";
+    private const string WingsObject = "Wings";
+    private const string GoldenWingsImage = "GoldenWings";
+    private const string EarnedMoneyText = "EarnedMoney";
+    private const string MovesText = "Moves";
+    private const string GoalMovesText = "GoalMoves";
 
     void Start()
     {
@@ -42,8 +54,8 @@ public class Game : MonoBehaviour
         InitButtons();
         InitImages();
         SetGoals();
-        
-        this.board = new Board(ShowBox, ShowStatistics, GetRandomFigureFromAvailable);
+
+        this.board = new Board(ShowBox, ShowStatistics, GetRandomFigureFromAvailable, coroutineRunner);
         board.Start();
 
         SetElements();
@@ -65,9 +77,9 @@ public class Game : MonoBehaviour
     {
         if (ApplicationData.CurrentLevelMode >= LevelMode.Silver)
         {
-            ObjectManager.SetObjectNonActive("Stars");
-            ObjectManager.SetObjectNonActive("InfinitySymbol");
-            ObjectManager.FindHiddenObjectAndSetActive("Timer");
+            ObjectManager.SetObjectNonActive(StarsObject);
+            ObjectManager.SetObjectNonActive(InfinitySymbolObject);
+            ObjectManager.FindHiddenObjectAndSetActive(TimerObject);
         }
 
         if (ApplicationData.CurrentLevelMode == LevelMode.Silver)
@@ -87,20 +99,19 @@ public class Game : MonoBehaviour
 
         foreach (var keyValuePair in levelSettings.PieceToCollectAndCount)
         {
-            string goalImageName = "GoalPicture" + goalNumber;
+            string goalImageName = $"{GoalPicturePrefix}{goalNumber}";
             string pictureName = keyValuePair.Key.ToString();
-            string goalTextName = "GoalText" + goalNumber++;
+            string goalTextName = $"{GoalTextPrefix}{goalNumber++}";
 
             ObjectManager.FindHiddenObjectAndSetActive(goalImageName);
             ObjectManager.FindHiddenObjectAndSetActive(goalTextName);
             ObjectManager.SetPicture(goalImageName, pictureName);
-                       
-            
+
             ObjectManager.OutputInformation(goalTextName, $"0/{levelSettings.PieceToCollectAndCount[keyValuePair.Key]}");
         }
 
-        ObjectManager.OutputInformation("Moves", "0");
-        ObjectManager.OutputInformation("GoalMoves", levelSettings.CountMoveFor3Stars.ToString());
+        ObjectManager.OutputInformation(MovesText, "0");
+        ObjectManager.OutputInformation(GoalMovesText, levelSettings.CountMoveFor3Stars.ToString());
     }
 
     public void ShowBox(int x, int y, MapCellType mapElement)
@@ -122,11 +133,11 @@ public class Game : MonoBehaviour
     public void ShowStatistics(LevelProgress levelProgress)
     {
         int goalNumber = 1;
-        ObjectManager.OutputInformation("Moves", levelProgress.CountMoves.ToString());
+        ObjectManager.OutputInformation(MovesText, levelProgress.CountMoves.ToString());
 
         foreach (var keyValuePair in levelSettings.PieceToCollectAndCount)
         {
-            string goalTextName = "GoalText" + goalNumber++;
+            string goalTextName = $"{GoalTextPrefix}{goalNumber++}";
 
             ObjectManager.OutputInformation(goalTextName, $"{GetFigureProgress(levelProgress, keyValuePair.Key)}/{keyValuePair.Value}");
         }
@@ -148,14 +159,14 @@ public class Game : MonoBehaviour
             {
                 countStars = 2;
                 thirdStar.sprite = starOff.sprite;
-                ObjectManager.OutputInformation("GoalMoves", levelSettings.CountMoveFor2Stars.ToString());
+                ObjectManager.OutputInformation(GoalMovesText, levelSettings.CountMoveFor2Stars.ToString());
             }
 
             if (levelProgress.CountMoves == levelSettings.CountMoveFor2Stars)
             {
                 countStars = 1;
                 secondStar.sprite = starOff.sprite;
-                ObjectManager.OutputInformation("GoalMoves", levelSettings.CountMoveFor1Star.ToString());
+                ObjectManager.OutputInformation(GoalMovesText, levelSettings.CountMoveFor1Star.ToString());
             }
         }
     }
@@ -174,14 +185,12 @@ public class Game : MonoBehaviour
             return true;
         }
 
-
         return false;
     }
 
-
     private void Win()
     {
-        ObjectManager.FindHiddenObjectAndSetActive("LVLCompleted");
+        ObjectManager.FindHiddenObjectAndSetActive(LvlCompletedObject);
         bool someChanges = false;
 
         void UpdateLevelStatus(LevelStatus newStatus)
@@ -207,14 +216,14 @@ public class Game : MonoBehaviour
         {
             timerController.StopTimer();
             HideStars();
-            ObjectManager.FindHiddenObjectAndSetActive("Wings");
+            ObjectManager.FindHiddenObjectAndSetActive(WingsObject);
             UpdateLevelStatus(LevelStatus.SilverWings);
         }
 
         if (ApplicationData.CurrentLevelMode >= LevelMode.Gold)
         {
             timerController.StopTimer();
-            ObjectManager.SetPicture("Wings", "GoldenWings");
+            ObjectManager.SetPicture(WingsObject, GoldenWingsImage);
             UpdateLevelStatus(LevelStatus.GoldenWings);
         }
 
@@ -226,7 +235,7 @@ public class Game : MonoBehaviour
         ApplicationData.ShopInformation = DataManipulator.LoadShopInformation();
         int rewardMoney = levelRewardSystem.CalculateReward(CalculateMaxMoves(), countMoves, timerController.GetRemainingTimeInSeconds());
         ApplicationData.ShopInformation.Money += rewardMoney;
-        ObjectManager.OutputInformation("EarnedMoney", "+" + rewardMoney);
+        ObjectManager.OutputInformation(EarnedMoneyText, "+" + rewardMoney);
         DataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
     }
 
@@ -245,25 +254,25 @@ public class Game : MonoBehaviour
     {
         if (countStars >= 1)
         {
-            ObjectManager.SetPicture("Star1", "StarOn");
+            ObjectManager.SetPicture($"{StarImagePrefix}1", StarOnImage);
         }
 
         if (countStars >= 2)
         {
-            ObjectManager.SetPicture("Star2", "StarOn");
+            ObjectManager.SetPicture($"{StarImagePrefix}2", StarOnImage);
         }
 
         if (countStars == 3)
         {
-            ObjectManager.SetPicture("Star3", "StarOn");
+            ObjectManager.SetPicture($"{StarImagePrefix}3", StarOnImage);
         }
     }
 
     private void HideStars()
     {
-        ObjectManager.SetObjectNonActive("Star1");
-        ObjectManager.SetObjectNonActive("Star2");
-        ObjectManager.SetObjectNonActive("Star3");
+        ObjectManager.SetObjectNonActive($"{StarImagePrefix}1");
+        ObjectManager.SetObjectNonActive($"{StarImagePrefix}2");
+        ObjectManager.SetObjectNonActive($"{StarImagePrefix}3");
     }
 
     private void Lose()
@@ -278,11 +287,9 @@ public class Game : MonoBehaviour
             timerController.StopTimer();
         }
 
-        ObjectManager.FindHiddenObjectAndSetActive("LVLFailed");
+        ObjectManager.FindHiddenObjectAndSetActive(LvlFailedObject);
         animationController.AnimateLose();
     }
-
-    
 
     private bool IsAllGoalsAchieved(LevelProgress levelProgress)
     {
@@ -326,8 +333,6 @@ public class Game : MonoBehaviour
             _ => levelProgress.CountCollectedPawns,
         };
     }
-
-    
 
     public void Click()
     {

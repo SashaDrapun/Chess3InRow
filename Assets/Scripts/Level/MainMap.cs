@@ -1,14 +1,10 @@
 ﻿using Assets.Scripts.ChessFigures;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine.UI;
+using UnityEngine;
 using Assets.Scripts.Level;
-using Assets.Scripts.Menu;
-using Unity.VisualScripting;
 
 namespace Assets.Scripts
 {
@@ -17,7 +13,7 @@ namespace Assets.Scripts
         public MapCellType[,] map;
         public const int SIZE = 8;
         public const int PIECES = 8;
-        const int ADD_PIECES = 5;
+        private const int ADD_PIECES = 5;
         public bool[,] Mark;
         public int PiecesToDelete;
         private bool[,] counted;
@@ -28,12 +24,15 @@ namespace Assets.Scripts
         readonly ShowProgressOfTheLevel ShowProgressOfTheLevel;
         readonly GetRandomFigureFromAvailable GetRandomFigureFromAvailable;
 
-        private static readonly Random random = new();
-        Point fromPosition;
-        bool isPieceSelected;
-        FigureType typePieceSelected;
+        private static readonly System.Random random = new();
+        private Point fromPosition;
+        private bool isPieceSelected;
+        private FigureType typePieceSelected;
 
-        public MainMap(ShowBox showBox, ShowProgressOfTheLevel showProgressOfTheLevel, GetRandomFigureFromAvailable getRandomFigureFromAvailable)
+        private MonoBehaviour coroutineRunner;
+
+        public MainMap(ShowBox showBox, ShowProgressOfTheLevel showProgressOfTheLevel,
+                        GetRandomFigureFromAvailable getRandomFigureFromAvailable, MonoBehaviour coroutineRunner)
         {
             map = new MapCellType[SIZE, SIZE];
             ShowBox = showBox;
@@ -42,6 +41,7 @@ namespace Assets.Scripts
             whereUserCanGo = new bool[SIZE, SIZE];
             Mark = new bool[SIZE, SIZE];
             levelProgress = new LevelProgress();
+            this.coroutineRunner = coroutineRunner;
         }
 
         public void Refresh()
@@ -74,16 +74,23 @@ namespace Assets.Scripts
             SetMap(fromPosition.X, fromPosition.Y, 0);
             isPieceSelected = false;
             levelProgress.CountMoves++;
-            
-            CutLines();
-            AddRandomPieces();
-            ShowProgressOfTheLevel(levelProgress);
-            //do
-            //{
-            //    AddRandomPieces();
-            //}
-            //while (CutLines());
 
+            CutLines();
+
+            coroutineRunner.StartCoroutine(AddRandomPiecesAndCheckLines());
+        }
+
+        private IEnumerator AddRandomPiecesAndCheckLines()
+        {
+            do
+            {
+                AddRandomPieces();
+                ShowProgressOfTheLevel(levelProgress);
+                yield return new WaitForSeconds(0.5f); // Задержка на 1 секунду
+            }
+            while (CutLines());
+
+            
         }
 
         private void TakePiece(int x, int y)
@@ -91,7 +98,7 @@ namespace Assets.Scripts
             fromPosition.X = x;
             fromPosition.Y = y;
             isPieceSelected = true;
-            typePieceSelected = GetPieceType(map[x,y]);
+            typePieceSelected = GetPieceType(map[x, y]);
             SetWhereUserCanGo();
         }
 
@@ -117,7 +124,7 @@ namespace Assets.Scripts
             {
                 for (int y = 0; y < SIZE; y++)
                 {
-                    if (whereUserCanGo[x,y])
+                    if (whereUserCanGo[x, y])
                     {
                         ShowBox(x, y, MapCellType.AllocatedSpace);
                     }
@@ -136,50 +143,32 @@ namespace Assets.Scripts
 
         private FigureType GetPieceType(MapCellType mapElement)
         {
-            switch (mapElement)
+            return mapElement switch
             {
-                case MapCellType.EmptyPlace:
-                    return FigureType.Pawn;
-                case MapCellType.Pawn:
-                    return FigureType.Pawn;
-                case MapCellType.Knight:
-                    return FigureType.Knight;
-                case MapCellType.Bishop:
-                    return FigureType.Bishop;
-                case MapCellType.Rook:
-                    return FigureType.Rook;
-                case MapCellType.Queen:
-                    return FigureType.Queen;
-                case MapCellType.King:
-                    return FigureType.King;
-                case MapCellType.AllocatedSpace:
-                    return FigureType.Pawn;
-                default:
-                    break;
-            }
-            return FigureType.Pawn;
+                MapCellType.EmptyPlace => FigureType.Pawn,
+                MapCellType.Pawn => FigureType.Pawn,
+                MapCellType.Knight => FigureType.Knight,
+                MapCellType.Bishop => FigureType.Bishop,
+                MapCellType.Rook => FigureType.Rook,
+                MapCellType.Queen => FigureType.Queen,
+                MapCellType.King => FigureType.King,
+                MapCellType.AllocatedSpace => FigureType.Pawn,
+                _ => FigureType.Pawn,
+            };
         }
 
         private MapCellType GetMapCellFromFigure(FigureType figureType)
         {
-            switch (figureType)
+            return figureType switch
             {
-                case FigureType.Pawn:
-                    return MapCellType.Pawn;
-                case FigureType.Knight:
-                    return MapCellType.Knight;
-                case FigureType.Bishop:
-                    return MapCellType.Bishop;
-                case FigureType.Rook:
-                    return MapCellType.Rook;
-                case FigureType.Queen:
-                    return MapCellType.Queen;
-                case FigureType.King:
-                    return MapCellType.King;
-                default:
-                    break;
-            }
-            return MapCellType.Pawn;
+                FigureType.Pawn => MapCellType.Pawn,
+                FigureType.Knight => MapCellType.Knight,
+                FigureType.Bishop => MapCellType.Bishop,
+                FigureType.Rook => MapCellType.Rook,
+                FigureType.Queen => MapCellType.Queen,
+                FigureType.King => MapCellType.King,
+                _ => MapCellType.Pawn,
+            };
         }
 
         private bool CutLines()
@@ -231,7 +220,7 @@ namespace Assets.Scripts
                                 break;
                             case MapCellType.Rook:
                                 levelProgress.CountCollectedRooks++;
-                                break; 
+                                break;
                             case MapCellType.Queen:
                                 levelProgress.CountCollectedQueens++;
                                 break;
@@ -246,7 +235,6 @@ namespace Assets.Scripts
                     }
                 }
             }
-
         }
 
         public void SetPiecesToCut()
@@ -369,7 +357,7 @@ namespace Assets.Scripts
             {
                 for (int y = 0; y < SIZE; y++)
                 {
-                    if (map[x, y] == MapCellType.EmptyPlace || map[x,y] == MapCellType.AllocatedSpace)
+                    if (map[x, y] == MapCellType.EmptyPlace || map[x, y] == MapCellType.AllocatedSpace)
                     {
                         emptyPlaces.Add(new Point(x, y));
                     }

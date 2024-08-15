@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -18,9 +19,10 @@ namespace Assets.Scripts
     {
         public MainMap map;
  
-        public Board(ShowBox showBox,ShowProgressOfTheLevel showStatisticsOnTheScreen, GetRandomFigureFromAvailable getRandomFigureFromAvailable)
+        public Board(ShowBox showBox,ShowProgressOfTheLevel showStatisticsOnTheScreen,
+            GetRandomFigureFromAvailable getRandomFigureFromAvailable, MonoBehaviour coroutineRunner)
         {
-            map = new MainMap(showBox, showStatisticsOnTheScreen, getRandomFigureFromAvailable);
+            map = new MainMap(showBox, showStatisticsOnTheScreen, getRandomFigureFromAvailable, coroutineRunner);
         }
 
         public void Start()

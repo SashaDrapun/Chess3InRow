@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.LevelSettingsFolder;
+﻿using Assets.Scripts.DataService;
+using Assets.Scripts.LevelSettingsFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,12 @@ namespace Assets.Scripts.Shop
     {
         public ItemInfo[] itemInfo;
 
-        public string GetItemText(int textIndex)
+        public string GetItemText(ShopItem shopItem)
         {
-            if (textIndex >= 0 && textIndex < itemInfo.Length)
+            int itemIndex = (int)shopItem - 1;
+            if (itemIndex >= 0 && itemIndex < itemInfo.Length)
             {
-                return itemInfo[textIndex].text;
+                return itemInfo[itemIndex].text;
 
             }
             else
@@ -25,8 +27,9 @@ namespace Assets.Scripts.Shop
             }
         }
 
-        public int GetItemCost(int itemIndex)
+        public int GetItemCost(ShopItem shopItem)
         {
+            int itemIndex = (int)shopItem - 1;
             if (itemIndex >= 0 && itemIndex < itemInfo.Length)
             {
                 return itemInfo[itemIndex].cost;

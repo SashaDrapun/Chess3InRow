@@ -47,15 +47,15 @@ namespace Assets.Scripts.Shop
 
         public void OutputInformationAboutItem(ShopItem shopItem)
         {
-            string itemText = ItemTextManager.GetItemText((int)shopItem - 1);
-            int itemCost = ItemTextManager.GetItemCost((int)shopItem - 1);
+            string itemText = ItemTextManager.GetItemText(shopItem);
+            int itemCost = ItemTextManager.GetItemCost(shopItem);
             ObjectManager.OutputInformation(SellTextKey, $"Стоимость товара: {itemCost}");
         }
 
         public void BuyButtonClick()
         {
             if (selectedShopItem == ShopItem.None) return;
-            int itemCost = ItemTextManager.GetItemCost((int)selectedShopItem - 1);
+            int itemCost = ItemTextManager.GetItemCost(selectedShopItem);
 
             if (IsEnoughMoneyToBuyItem(itemCost))
             {
