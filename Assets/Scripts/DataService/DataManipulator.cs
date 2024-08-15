@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-
 
 namespace Assets.Scripts.DataService
 {
@@ -22,7 +17,6 @@ namespace Assets.Scripts.DataService
         private const string MapInformationFilePath = "/mapInformation.dat";
         private const string ShopInformationFilePath = "/shopInformation.dat";
 
-        // Private constructor to prevent instantiation
         private DataManipulator() { }
 
         public static DataManipulator GetInstance()
