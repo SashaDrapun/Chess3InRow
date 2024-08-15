@@ -12,8 +12,7 @@ namespace Assets.Scripts.Menu
     {
         public void Reset()
         {
-            DataManipulator dataManipulator = new DataManipulator();
-            dataManipulator.ResetData();
+            DataManipulator.ResetData();
         }
     }
 }

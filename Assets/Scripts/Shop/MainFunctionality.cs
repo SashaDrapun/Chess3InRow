@@ -72,8 +72,7 @@ namespace Assets.Scripts.Shop
                 ApplicationData.ShopInformation.Money -= itemCost;
                 ApplicationData.ShopInformation.CountShopItems[(int)selectedShopItem - 1]++;
 
-                DataManipulator dataManipulator = new();
-                dataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
+                DataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
 
                 ShopSceneObjectManipulator.SetScene();
             }

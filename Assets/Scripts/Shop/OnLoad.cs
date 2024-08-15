@@ -13,8 +13,7 @@ namespace Assets.Scripts.Shop
     {
         private void Start()
         {
-            DataManipulator dataManipulator = new();
-            ApplicationData.ShopInformation = dataManipulator.LoadShopInformation();
+            ApplicationData.ShopInformation = DataManipulator.LoadShopInformation();
 
             ShopSceneObjectManipulator.SetScene();
         }  

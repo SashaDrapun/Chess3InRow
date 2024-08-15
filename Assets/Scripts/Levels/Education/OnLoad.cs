@@ -15,8 +15,7 @@ namespace Assets.Scripts.Levels.Education
     {
         private void Awake()
         { 
-            DataManipulator dataManipulator = new DataManipulator();
-            ApplicationData.MapInformation = dataManipulator.LoadMapInformation();
+            ApplicationData.MapInformation = DataManipulator.LoadMapInformation();
             LoadSprites();
             LoadScene();
         }

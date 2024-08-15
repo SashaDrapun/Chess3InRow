@@ -10,70 +10,105 @@ using UnityEngine;
 
 namespace Assets.Scripts.DataService
 {
+    using System;
+    using System.IO;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using UnityEngine;
+
     public class DataManipulator
     {
-        public void SaveMapInformation(MapInformation mapInformation)
+        private static readonly DataManipulator instance = new DataManipulator();
+
+        private const string MapInformationFilePath = "/mapInformation.dat";
+        private const string ShopInformationFilePath = "/shopInformation.dat";
+
+        // Private constructor to prevent instantiation
+        private DataManipulator() { }
+
+        public static DataManipulator GetInstance()
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/mapInformation.dat");
-            bf.Serialize(file, mapInformation);
-            file.Close();
+            return instance;
         }
 
-        public MapInformation LoadMapInformation()
+        public static void SaveMapInformation(MapInformation mapInformation)
         {
-            if (File.Exists(Application.persistentDataPath + "/mapInformation.dat"))
+            GetInstance().SaveData(MapInformationFilePath, mapInformation);
+        }
+
+        public static MapInformation LoadMapInformation()
+        {
+            return GetInstance().LoadData<MapInformation>(MapInformationFilePath);
+        }
+
+        public static void ResetData()
+        {
+            DataManipulator dataManipulator = GetInstance();
+            dataManipulator.ResetFile(MapInformationFilePath);
+            dataManipulator.ResetFile(ShopInformationFilePath);
+        }
+
+        public static void SaveShopInformation(ShopInformation shopInformation)
+        {
+            GetInstance().SaveData(ShopInformationFilePath, shopInformation);
+        }
+
+        public static ShopInformation LoadShopInformation()
+        {
+            return GetInstance().LoadData<ShopInformation>(ShopInformationFilePath);
+        }
+
+        private void SaveData<T>(string filePath, T data)
+        {
+            try
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + "/mapInformation.dat", FileMode.Open);
-                MapInformation mapInformation = (MapInformation)bf.Deserialize(file);
-                file.Close();
-                return mapInformation;
+                using FileStream file = File.Create(Application.persistentDataPath + filePath);
+                BinaryFormatter bf = new();
+                bf.Serialize(file, data);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to save data to {filePath}: {ex.Message}");
+            }
+        }
+
+        private T LoadData<T>(string filePath)
+        {
+            if (File.Exists(Application.persistentDataPath + filePath))
+            {
+                try
+                {
+                    using FileStream file = File.Open(Application.persistentDataPath + filePath, FileMode.Open);
+                    BinaryFormatter bf = new();
+                    return (T)bf.Deserialize(file);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Failed to load data from {filePath}: {ex.Message}");
+                }
             }
 
-            return new MapInformation();
+            return Activator.CreateInstance<T>();
         }
 
-        public void ResetData()
+        private void ResetFile(string filePath)
         {
-            if (File.Exists(Application.persistentDataPath + "/mapInformation.dat"))
+            string fullPath = Application.persistentDataPath + filePath;
+            if (File.Exists(fullPath))
             {
-                File.Delete(Application.persistentDataPath + "/mapInformation.dat");
-                
-                Debug.Log("Data reset complete!");
+                try
+                {
+                    File.Delete(fullPath);
+                    Debug.Log($"Data reset complete for {filePath}!");
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Failed to delete data file {filePath}: {ex.Message}");
+                }
             }
-            else Debug.LogError("No save data to delete.");
-
-            if (File.Exists(Application.persistentDataPath + "/shopInformation.dat"))
+            else
             {
-                File.Delete(Application.persistentDataPath + "/shopInformation.dat");
-
-                Debug.Log("Data reset complete!");
+                Debug.LogError($"No save data to delete for {filePath}.");
             }
-            else Debug.LogError("No save data to delete.");
         }
-
-        public void SaveShopInformation(ShopInformation shopInformation)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/shopInformation.dat");
-            bf.Serialize(file, shopInformation);
-            file.Close();
-        }
-
-        public ShopInformation LoadShopInformation()
-        {
-            if (File.Exists(Application.persistentDataPath + "/shopInformation.dat"))
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + "/shopInformation.dat", FileMode.Open);
-                ShopInformation shopInformation = (ShopInformation)bf.Deserialize(file);
-                file.Close();
-                return shopInformation;
-            }
-
-            return new ShopInformation();
-        }
-
     }
 }

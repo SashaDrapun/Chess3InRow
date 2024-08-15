@@ -218,17 +218,16 @@ public class Game : MonoBehaviour
             UpdateLevelStatus(LevelStatus.GoldenWings);
         }
 
-        DataManipulator dataManipulator = new();
         if (someChanges)
         {
-            dataManipulator.SaveMapInformation(ApplicationData.MapInformation);
+            DataManipulator.SaveMapInformation(ApplicationData.MapInformation);
         }
 
-        ApplicationData.ShopInformation = dataManipulator.LoadShopInformation();
+        ApplicationData.ShopInformation = DataManipulator.LoadShopInformation();
         int rewardMoney = levelRewardSystem.CalculateReward(CalculateMaxMoves(), countMoves, timerController.GetRemainingTimeInSeconds());
         ApplicationData.ShopInformation.Money += rewardMoney;
         ObjectManager.OutputInformation("EarnedMoney", "+" + rewardMoney);
-        dataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
+        DataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
     }
 
     private int CalculateMaxMoves()
