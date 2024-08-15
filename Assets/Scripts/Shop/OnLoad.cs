@@ -15,7 +15,8 @@ namespace Assets.Scripts.Shop
         {
             DataManipulator dataManipulator = new();
             ApplicationData.ShopInformation = dataManipulator.LoadShopInformation();
-            ObjectManager.OutputInformation("CurrentMoney", ApplicationData.ShopInformation.Money.ToString());
-        }
+
+            ShopSceneObjectManipulator.SetScene();
+        }  
     }
 }

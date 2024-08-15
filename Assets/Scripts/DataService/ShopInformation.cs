@@ -11,11 +11,16 @@ namespace Assets.Scripts.DataService
     {
         public ShopInformation() 
         {
-            ShopItems = new List<ShopItem>();
+            CountShopItems = new List<int>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                CountShopItems.Add(0);
+            }
         }
 
         public int Money { get; set; }
-        public List<ShopItem> ShopItems;
+        public List<int> CountShopItems;
     }
 
     

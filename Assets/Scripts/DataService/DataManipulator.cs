@@ -43,6 +43,14 @@ namespace Assets.Scripts.DataService
                 Debug.Log("Data reset complete!");
             }
             else Debug.LogError("No save data to delete.");
+
+            if (File.Exists(Application.persistentDataPath + "/shopInformation.dat"))
+            {
+                File.Delete(Application.persistentDataPath + "/shopInformation.dat");
+
+                Debug.Log("Data reset complete!");
+            }
+            else Debug.LogError("No save data to delete.");
         }
 
         public void SaveShopInformation(ShopInformation shopInformation)

@@ -8,8 +8,9 @@ using UnityEngine;
 namespace Assets.Scripts.Shop
 {
     [CreateAssetMenu(fileName = "ItemText", menuName = "Shop/ItemText", order = 2)]
-    public class ItemText : ScriptableObject
+    public class ItemInfo : ScriptableObject
     {
+        public int cost;
         public string text;
     }
 }
