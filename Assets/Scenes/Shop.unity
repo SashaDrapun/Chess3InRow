@@ -2795,6 +2795,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemTextManager: {fileID: 1719561649}
+  freezeButton: {fileID: 1244052627}
+  addButton: {fileID: 1109090381}
+  fuseButton: {fileID: 1894615172}
+  redistributorButton: {fileID: 1455592669}
+  teleporterButton: {fileID: 1572512250}
 --- !u!114 &1719561649
 MonoBehaviour:
   m_ObjectHideFlags: 0

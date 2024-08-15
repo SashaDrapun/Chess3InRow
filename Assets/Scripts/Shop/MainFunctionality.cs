@@ -6,60 +6,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Shop
 {
     public class MainFunctionality : MonoBehaviour
     {
         public ItemManager ItemTextManager;
+        public Button freezeButton;
+        public Button addButton;
+        public Button fuseButton;
+        public Button redistributorButton;
+        public Button teleporterButton;
 
         private ShopItem selectedShopItem;
+
+        private const string SellTextKey = "SellText";
+        private const string SellItemImageKey = "SellItemImage";
 
         public MainFunctionality()
         {
             selectedShopItem = ShopItem.None;
         }
 
-        public void FreezeBonusClick()
+        private void Start()
         {
-            selectedShopItem = ShopItem.Freezing;
-            OutputInformationAboutItem(ShopItem.Freezing);
-            SetSellItemImage("Freeze");
+            freezeButton.onClick.AddListener(() => HandleBonusClick(ShopItem.Freezing, "Freeze"));
+            addButton.onClick.AddListener(() => HandleBonusClick(ShopItem.Adder, "AddMoves"));
+            fuseButton.onClick.AddListener(() => HandleBonusClick(ShopItem.Fuse, "Boom"));
+            redistributorButton.onClick.AddListener(() => HandleBonusClick(ShopItem.Redistributor, "Randomize"));
+            teleporterButton.onClick.AddListener(() => HandleBonusClick(ShopItem.Teleporter, "Teleport"));
         }
 
-        public void AddBonusClick()
+        public void HandleBonusClick(ShopItem shopItem, string imageName)
         {
-            selectedShopItem = ShopItem.Adder;
-            OutputInformationAboutItem(ShopItem.Adder);
-            SetSellItemImage("AddMoves");
-        }
-
-        public void FuseBonusClick()
-        {
-            selectedShopItem = ShopItem.Fuse;
-            OutputInformationAboutItem(ShopItem.Fuse);
-            SetSellItemImage("Boom");
-        }
-
-        public void RedistributorBonusClick()
-        {
-            selectedShopItem = ShopItem.Redistributor;
-            OutputInformationAboutItem(ShopItem.Redistributor); 
-            SetSellItemImage("Randomize");
-        }
-
-        public void TeleporterBonusClick()
-        {
-            selectedShopItem = ShopItem.Teleporter;
-            OutputInformationAboutItem(ShopItem.Teleporter);
-            SetSellItemImage("Teleport");
+            selectedShopItem = shopItem;
+            OutputInformationAboutItem(shopItem);
+            SetSellItemImage(imageName);
         }
 
         public void OutputInformationAboutItem(ShopItem shopItem)
         {
             string itemText = ItemTextManager.GetItemText((int)shopItem - 1);
             int itemCost = ItemTextManager.GetItemCost((int)shopItem - 1);
-            ObjectManager.OutputInformation("SellText", $"Cтоимость товара: {itemCost}");
+            ObjectManager.OutputInformation(SellTextKey, $"Стоимость товара: {itemCost}");
         }
 
         public void BuyButtonClick()
@@ -69,12 +59,7 @@ namespace Assets.Scripts.Shop
 
             if (IsEnoughMoneyToBuyItem(itemCost))
             {
-                ApplicationData.ShopInformation.Money -= itemCost;
-                ApplicationData.ShopInformation.CountShopItems[(int)selectedShopItem - 1]++;
-
-                DataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
-
-                ShopSceneObjectManipulator.SetScene();
+                PerformPurchase(itemCost);
             }
             else
             {
@@ -87,9 +72,18 @@ namespace Assets.Scripts.Shop
             return ApplicationData.ShopInformation.Money >= itemCost;
         }
 
-        private void SetSellItemImage(string imageFromName)
+        private void PerformPurchase(int itemCost)
         {
-            ObjectManager.SetPicture("SellItemImage", imageFromName);
+            ApplicationData.ShopInformation.Money -= itemCost;
+            ApplicationData.ShopInformation.CountShopItems[(int)selectedShopItem - 1]++;
+
+            DataManipulator.SaveShopInformation(ApplicationData.ShopInformation);
+            ShopSceneObjectManipulator.SetScene();
+        }
+
+        private void SetSellItemImage(string imageName)
+        {
+            ObjectManager.SetPicture(SellItemImageKey, imageName);
         }
     }
 }
