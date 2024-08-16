@@ -13,7 +13,7 @@ namespace Assets.Scripts
         public MapCellType[,] map;
         public const int SIZE = 8;
         public const int PIECES = 8;
-        private const int ADD_PIECES = 5;
+        private const int ADD_PIECES = 3;
         public bool[,] Mark;
         public int PiecesToDelete;
         private bool[,] counted;
