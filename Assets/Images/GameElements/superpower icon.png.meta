@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      superpower icon_0: 2210798084799351277
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
