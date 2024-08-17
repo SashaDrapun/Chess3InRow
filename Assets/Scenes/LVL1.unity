@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 49fbe6c72a410a942824d3c8645c681c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff964fe48c3181a46a72c3bb0cb614af, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9012,9 +9012,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.2, y: -1.9}
+  m_AnchoredPosition: {x: 105.21802, y: -1.9001656}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1161344073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12000,7 +12000,6 @@ MonoBehaviour:
   levelManager: {fileID: 1554147345}
   timerController: {fileID: 1554147346}
   animationController: {fileID: 1554147347}
-  coroutineRunner: {fileID: 1000747728}
 --- !u!114 &1554147341
 MonoBehaviour:
   m_ObjectHideFlags: 0
