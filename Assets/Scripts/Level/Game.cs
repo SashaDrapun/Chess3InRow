@@ -15,7 +15,6 @@ public class Game : MonoBehaviour
     public LevelManager levelManager;
     public TimerController timerController;
     public AnimationController animationController;
-    public CoroutineRunner coroutineRunner;
 
     private LevelRewardSystem levelRewardSystem;
     private LevelSettings levelSettings;
@@ -55,7 +54,7 @@ public class Game : MonoBehaviour
         InitImages();
         SetGoals();
 
-        this.board = new Board(ShowBox, ShowStatistics, GetRandomFigureFromAvailable, coroutineRunner);
+        this.board = new Board(ShowBox, ShowStatistics, GetRandomFigureFromAvailable, CoroutineRunner.Instance);
         board.Start();
 
         SetElements();
