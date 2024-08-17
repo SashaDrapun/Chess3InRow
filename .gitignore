@@ -27,9 +27,6 @@
 .vs/
 .plastic/
 
-# TextMesh Pro
-/Assets/TextMesh Pro/
-
 # Gradle cache directory
 .gradle/
 
