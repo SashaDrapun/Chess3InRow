@@ -1130,7 +1130,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u042F \u043F\u0440\u0438\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E
+    \u0432\u0430\u0441 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0435!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1339,7 +1340,7 @@ GameObject:
   - component: {fileID: 549240845}
   - component: {fileID: 549240844}
   m_Layer: 0
-  m_Name: CountFuze
+  m_Name: CountFuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1384,7 +1385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -1800,7 +1801,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 742370497}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1719561648}
+        m_TargetAssemblyTypeName: Assets.Scripts.Shop.MainFunctionality, Assembly-CSharp
+        m_MethodName: CloseButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &742370497
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -78,6 +78,7 @@ namespace Assets.Scripts.GeneralFunctionality
 
         public static void OutputInformation(string outputTextMeshProName, string outputInformation)
         {
+
             TextMeshProUGUI[] textMeshProObjects = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>();
             foreach (TextMeshProUGUI obj in textMeshProObjects)
             {

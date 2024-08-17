@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class TogglePowerPanel : MonoBehaviour
 {
-    public GameObject panel; // —сылка на панель, котора€ будет разворачиватьс€ и сворачиватьс€
-    private bool isExpanded = false; // ‘лаг дл€ отслеживани€ состо€ни€ панели
+    public GameObject panel; 
+    private bool isExpanded = false; 
 
     void Start()
     {

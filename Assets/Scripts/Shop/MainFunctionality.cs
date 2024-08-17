@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Shop
@@ -45,11 +46,25 @@ namespace Assets.Scripts.Shop
             SetSellItemImage(imageName);
         }
 
+        public void CloseButtonClick()
+        {
+            switch (ApplicationData.FromWhereGoToShop)
+            {
+                case FromWhereGoToShop.FromMenu:
+                    SceneManager.LoadScene(0);
+                    break;
+                case FromWhereGoToShop.FromMap:
+                    SceneManager.LoadScene(1);
+                    break;
+                default: break;
+            }
+        }
+
         public void OutputInformationAboutItem(ShopItem shopItem)
         {
             string itemText = ItemTextManager.GetItemText(shopItem);
             int itemCost = ItemTextManager.GetItemCost(shopItem);
-            ObjectManager.OutputInformation(SellTextKey, $"Стоимость товара: {itemCost}");
+            ObjectManager.OutputInformation(SellTextKey, $"{itemText}. Стоимость товара: {itemCost}");
         }
 
         public void BuyButtonClick()

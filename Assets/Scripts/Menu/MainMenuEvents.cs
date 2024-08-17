@@ -1,5 +1,6 @@
 using Assets.Scripts.GeneralFunctionality;
 using Assets.Scripts.Menu;
+using Assets.Scripts.Shop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,9 @@ public class MainMenuEvents : MonoBehaviour
 {
     private void Awake()
     {
-        CheckPrefsForSettings();
+        SettingsStatusService.CheckPrefsForSettings();
         LoadSettings();
+        ApplicationData.FromWhereGoToShop = FromWhereGoToShop.FromMenu;
     }
 
     private void LoadSettings()
@@ -55,19 +57,6 @@ public class MainMenuEvents : MonoBehaviour
         else
         {
             ObjectManager.SetPicture(soundsButton, "SoundsOff");
-        }
-    }
-
-    private void CheckPrefsForSettings()
-    {
-        if (!PlayerPrefs.HasKey("Music"))
-        {
-            PlayerPrefs.SetInt("Music", (int)SettingsState.On);
-        }
-
-        if (!PlayerPrefs.HasKey("Sounds"))
-        {
-            PlayerPrefs.SetInt("Sounds", (int)SettingsState.On);
         }
     }
 

@@ -29,5 +29,17 @@ namespace Assets.Scripts.Menu
         {
             PlayerPrefs.SetInt("Sounds", (int)settingsState);
         }
+        public static void CheckPrefsForSettings()
+        {
+            if (!PlayerPrefs.HasKey("Music"))
+            {
+                PlayerPrefs.SetInt("Music", (int)SettingsState.On);
+            }
+
+            if (!PlayerPrefs.HasKey("Sounds"))
+            {
+                PlayerPrefs.SetInt("Sounds", (int)SettingsState.On);
+            }
+        }
     }
 }
