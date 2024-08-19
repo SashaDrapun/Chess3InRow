@@ -241,7 +241,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      randomOFF_0: -4853936734177235684
+      randomOFF_1: 8348327320871305427
+      randomOFF_2: -3879037811340459772
+      randomOFF_3: 1367805579444291742
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

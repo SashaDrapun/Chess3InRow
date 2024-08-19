@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 using Assets.Scripts.Level;
+using Assets.Scripts.Shop;
+using Assets.Scripts.DataService;
 
 namespace Assets.Scripts
 {
@@ -51,19 +53,29 @@ namespace Assets.Scripts
             isPieceSelected = false;
         }
 
-        public void Click(int x, int y)
+        public void Click(int x, int y, ShopItem selectedBonus)
         {
             CleanWhereUserCanGo();
-            if (map[x, y] > 0)
+
+            if (selectedBonus == ShopItem.None)
             {
-                TakePiece(x, y);
+                if (map[x, y] > 0)
+                {
+                    TakePiece(x, y);
+                }
+                else
+                {
+                    MovePiece(x, y);
+                }
+
+                ShowWhereUserCanGo();
             }
             else
             {
-                MovePiece(x, y);
-            }
+                isPieceSelected = false;
 
-            ShowWhereUserCanGo();
+            }
+            
         }
 
         private void MovePiece(int x, int y)

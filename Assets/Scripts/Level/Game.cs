@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Assets.Scripts.GeneralFunctionality;
+using System.Threading;
 
 public class Game : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Game : MonoBehaviour
     private LevelRewardSystem levelRewardSystem;
     private LevelSettings levelSettings;
     private static readonly System.Random random = new();
+    private ShopItem selectedBonus;
 
     private Button[,] buttons;
     private Image[] images;
@@ -31,8 +33,8 @@ public class Game : MonoBehaviour
     private int countStars = 3;
     private int countMoves = 0;
 
-    private const string GoalPicturePrefix = "GoalPicture";
-    private const string GoalTextPrefix = "GoalText";
+    private const string MovesText = "Moves";
+    private const string GoalMovesText = "GoalMoves";
     private const string StarImagePrefix = "Star";
     private const string StarOnImage = "StarOn";
     private const string StarOffImage = "StarOff";
@@ -44,16 +46,16 @@ public class Game : MonoBehaviour
     private const string WingsObject = "Wings";
     private const string GoldenWingsImage = "GoldenWings";
     private const string EarnedMoneyText = "EarnedMoney";
-    private const string MovesText = "Moves";
-    private const string GoalMovesText = "GoalMoves";
+    private const string GoalTextPrefix = "GoalText";
 
     void Start()
     {
         LoadLevelSettings();
         InitButtons();
         InitImages();
-        SetGoals();
 
+        LevelSceneObjectManipulator.SetScene(levelSettings);
+        LevelSceneObjectManipulator.SetBonuses();
         this.board = new Board(ShowBox, ShowStatistics, GetRandomFigureFromAvailable, CoroutineRunner.Instance);
         board.Start();
 
@@ -92,26 +94,75 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void SetGoals()
+    public void OnFreezingBonusClick()
     {
-        int goalNumber = 1;
-
-        foreach (var keyValuePair in levelSettings.PieceToCollectAndCount)
+        if (selectedBonus == ShopItem.Freezing)
         {
-            string goalImageName = $"{GoalPicturePrefix}{goalNumber}";
-            string pictureName = keyValuePair.Key.ToString();
-            string goalTextName = $"{GoalTextPrefix}{goalNumber++}";
 
-            ObjectManager.FindHiddenObjectAndSetActive(goalImageName);
-            ObjectManager.FindHiddenObjectAndSetActive(goalTextName);
-            ObjectManager.SetPicture(goalImageName, pictureName);
-
-            ObjectManager.OutputInformation(goalTextName, $"0/{levelSettings.PieceToCollectAndCount[keyValuePair.Key]}");
         }
-
-        ObjectManager.OutputInformation(MovesText, "0");
-        ObjectManager.OutputInformation(GoalMovesText, levelSettings.CountMoveFor3Stars.ToString());
+        else
+        {
+            selectedBonus = ShopItem.Freezing;
+        }
     }
+
+    public void OnFuzeBonusClick()
+    {
+        if (selectedBonus == ShopItem.Fuse)
+        {
+
+        }
+        else
+        {
+            selectedBonus = ShopItem.Fuse;
+        }
+    }
+
+    public void OnAdderBonusClick()
+    {
+        if (selectedBonus == ShopItem.Adder)
+        {
+
+        }
+        else
+        {
+            selectedBonus = ShopItem.Adder;
+        }
+    }
+
+    public void OnRedistributerBonusClick()
+    {
+        if (selectedBonus == ShopItem.Redistributor)
+        {
+
+        }
+        else
+        {
+            selectedBonus = ShopItem.Redistributor;
+        }
+    }
+
+    public void OnTeleporterBonusClick()
+    {
+        if (selectedBonus == ShopItem.Teleporter)
+        {
+
+        }
+        else
+        {
+            selectedBonus = ShopItem.Teleporter;
+        }
+    }
+
+    public bool IsBonusActive(ShopItem bonus)
+    {
+        if (ApplicationData.CurrentLevelMode == LevelMode.Usual && bonus == ShopItem.Freezing) return false;
+        if (ApplicationData.CurrentLevelMode == LevelMode.Silver && bonus == ShopItem.Adder) return false;
+        if (ApplicationData.ShopInformation.CountShopItems[(int)bonus + 1] == 0) return false;
+
+        return true;
+    }
+
 
     public void ShowBox(int x, int y, MapCellType mapElement)
     {
@@ -147,10 +198,10 @@ public class Game : MonoBehaviour
         }
 
         countMoves = levelProgress.CountMoves;
-        CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(levelProgress);
+        CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(levelProgress, ref countStars);
     }
 
-    private void CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(LevelProgress levelProgress)
+    private void CheckIsItNeedToChangeCountStarsAndChangeIfNeeded(LevelProgress levelProgress, ref int countStars)
     {
         if (ApplicationData.CurrentLevelMode == LevelMode.Usual)
         {
@@ -339,8 +390,10 @@ public class Game : MonoBehaviour
         int nr = GetNumber(name);
         int x = nr % MainMap.SIZE;
         int y = nr / MainMap.SIZE;
-        board.Click(x, y);
+        board.Click(x, y, selectedBonus);
     }
+
+
 
     private void InitButtons()
     {

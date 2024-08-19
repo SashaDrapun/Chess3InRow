@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.ChessFigures;
+using Assets.Scripts.DataService;
 using Assets.Scripts.Level;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,9 @@ namespace Assets.Scripts
             map.Refresh();
         }
 
-        public void Click(int x, int y)
+        public void Click(int x, int y, ShopItem selectedBonus)
         {
-            map.Click(x, y);
+            map.Click(x, y, selectedBonus);
         }
     }
 }
