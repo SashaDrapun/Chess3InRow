@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] GameObject LVLCompleted, Background, LVLSuccess, Star1, Star2, Star3, Coin, GoButton, BackgroundFailed, againButton, MenuButton;
+    [SerializeField] GameObject LVLCompleted, Background, LVLSuccess, Star1, Star2, Star3, Coin, GoButton, BackgroundFailed, againButton, MenuButton, EarnedMoney1;
 
     private Vector3 backgroundTargetPosition;
     private Vector3 backgroundFailedTargetPosition;
@@ -15,6 +15,9 @@ public class AnimationController : MonoBehaviour
         Vector3 currentPosition = LVLSuccess.transform.position;
         Vector3 targetPosition = new Vector3(currentPosition.x, currentPosition.y + 3.7f, currentPosition.z);
         backgroundTargetPosition = new Vector3(targetPosition.x, targetPosition.y - 85f, targetPosition.z);
+        EarnedMoney1.transform.localScale = Vector3.one;
+        EarnedMoney1.transform.localPosition = new Vector3(EarnedMoney1.transform.localPosition.x, EarnedMoney1.transform.localPosition.y, EarnedMoney1.transform.localPosition.z);
+
 
         LeanTween.scale(LVLSuccess, new Vector3(1f, 1f, 1f), 2f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.move(LVLSuccess, targetPosition, 0.5f).setDelay(0.8f).setEase(LeanTweenType.easeInOutCubic);
@@ -30,9 +33,13 @@ public class AnimationController : MonoBehaviour
         LeanTween.scale(Coin, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(3f).setEase(LeanTweenType.easeOutBack);
         LeanTween.moveLocalY(Coin, Coin.transform.localPosition.y + 50f, 0.5f).setDelay(3f).setEase(LeanTweenType.easeOutBack);
 
+
+        LeanTween.scale(EarnedMoney1, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(3.5f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.moveLocalY(EarnedMoney1, EarnedMoney1.transform.localPosition.y + 50f, 0.5f).setDelay(3.5f).setEase(LeanTweenType.easeOutBack);
+
         // �������� ��� GoButton
-        LeanTween.scale(GoButton, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(3.5f).setEase(LeanTweenType.easeOutBack);
-        LeanTween.moveLocalY(GoButton, GoButton.transform.localPosition.y + 50f, 0.5f).setDelay(3.5f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.scale(GoButton, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(4f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.moveLocalY(GoButton, GoButton.transform.localPosition.y + 50f, 0.5f).setDelay(4f).setEase(LeanTweenType.easeOutBack);
     }
 
     public void AnimateStars()
