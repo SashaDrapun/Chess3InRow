@@ -25,7 +25,7 @@ public class AnimationController : MonoBehaviour
 
         LeanTween.moveLocal(Background, backgroundTargetPosition, 0.7f).setDelay(0.5f).setEase(LeanTweenType.easeOutCirc);
 
-        // �������� ��� LVLCompleted
+        // �������� ��� LVLCompleted 
         LeanTween.scale(LVLCompleted, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
         LeanTween.moveLocalY(LVLCompleted, LVLCompleted.transform.localPosition.y + 50f, 0.5f).setDelay(1f).setEase(LeanTweenType.easeOutBack);
 
@@ -34,10 +34,10 @@ public class AnimationController : MonoBehaviour
         LeanTween.moveLocalY(Coin, Coin.transform.localPosition.y + 50f, 0.5f).setDelay(3f).setEase(LeanTweenType.easeOutBack);
 
 
-        LeanTween.scale(EarnedMoney1, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(3.5f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.scale(EarnedMoney1, new Vector3(1f, 1f, 1f), 0.5f).setDelay(3.5f).setEase(LeanTweenType.easeOutBack);
         LeanTween.moveLocalY(EarnedMoney1, EarnedMoney1.transform.localPosition.y + 50f, 0.5f).setDelay(3.5f).setEase(LeanTweenType.easeOutBack);
 
-        // �������� ��� GoButton
+        // �������� ��� GoButton 
         LeanTween.scale(GoButton, new Vector3(1.2f, 1.2f, 1.2f), 0.5f).setDelay(4f).setEase(LeanTweenType.easeOutBack);
         LeanTween.moveLocalY(GoButton, GoButton.transform.localPosition.y + 50f, 0.5f).setDelay(4f).setEase(LeanTweenType.easeOutBack);
     }
