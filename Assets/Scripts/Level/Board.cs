@@ -31,9 +31,14 @@ namespace Assets.Scripts
             map.Refresh();
         }
 
-        public void Click(int x, int y, ShopItem selectedBonus)
+        public void Click(int x, int y)
         {
-            map.Click(x, y, selectedBonus);
+            map.Click(x, y);
+        }
+
+        public void UseBonus(ShopItem shopItem)
+        {
+            map.UseBonus(shopItem);
         }
     }
 }

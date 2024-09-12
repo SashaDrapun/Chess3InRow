@@ -53,6 +53,7 @@ public class Game : MonoBehaviour
         LoadLevelSettings();
         InitButtons();
         InitImages();
+        ApplicationData.ShopInformation = DataManipulator.LoadShopInformation();
 
         LevelSceneObjectManipulator.SetScene(levelSettings);
         LevelSceneObjectManipulator.SetBonuses();
@@ -96,69 +97,91 @@ public class Game : MonoBehaviour
 
     public void OnFreezingBonusClick()
     {
-        if (selectedBonus == ShopItem.Freezing)
+        if (IsBonusActive(ShopItem.Freezing))
         {
-
-        }
-        else
-        {
-            selectedBonus = ShopItem.Freezing;
+            if (selectedBonus == ShopItem.Freezing)
+            {
+                
+            }
+            else
+            {
+                ObjectManager.SetPicture("Freezing", "FreezePicked");
+                selectedBonus = ShopItem.Freezing;
+            }
         }
     }
 
     public void OnFuzeBonusClick()
     {
-        if (selectedBonus == ShopItem.Fuse)
+        if (IsBonusActive(ShopItem.Fuse))
         {
+            if (selectedBonus == ShopItem.Fuse)
+            {
 
+            }
+            else
+            {
+                ObjectManager.SetPicture("Fuze", "FuzePicked");
+                selectedBonus = ShopItem.Fuse;
+            }
         }
-        else
-        {
-            selectedBonus = ShopItem.Fuse;
-        }
+        
     }
 
     public void OnAdderBonusClick()
     {
-        if (selectedBonus == ShopItem.Adder)
+        if (IsBonusActive(ShopItem.Adder))
         {
+            if (selectedBonus == ShopItem.Adder)
+            {
 
-        }
-        else
-        {
-            selectedBonus = ShopItem.Adder;
+            }
+            else
+            {
+                ObjectManager.SetPicture("Adder", "AdderPicked");
+                selectedBonus = ShopItem.Adder;
+            }
         }
     }
 
     public void OnRedistributerBonusClick()
     {
-        if (selectedBonus == ShopItem.Redistributor)
+        if (IsBonusActive(ShopItem.Redistributor))
         {
-
-        }
-        else
-        {
-            selectedBonus = ShopItem.Redistributor;
-        }
+            if (selectedBonus == ShopItem.Redistributor)
+            {
+                board.UseBonus(selectedBonus);
+            }
+            else
+            {
+                ObjectManager.SetPicture("Redistributor", "RedistributorPicked");
+                selectedBonus = ShopItem.Redistributor;
+            }
+        }           
     }
 
     public void OnTeleporterBonusClick()
     {
-        if (selectedBonus == ShopItem.Teleporter)
+        if (IsBonusActive(ShopItem.Teleporter))
         {
-
+            if (selectedBonus == ShopItem.Teleporter)
+            {
+                board.UseBonus(selectedBonus);
+            }
+            else
+            {
+                ObjectManager.SetPicture("Teleporter", "TeleporterPicked");
+                selectedBonus = ShopItem.Teleporter;
+            }
         }
-        else
-        {
-            selectedBonus = ShopItem.Teleporter;
-        }
+            
     }
 
     public bool IsBonusActive(ShopItem bonus)
     {
         if (ApplicationData.CurrentLevelMode == LevelMode.Usual && bonus == ShopItem.Freezing) return false;
         if (ApplicationData.CurrentLevelMode == LevelMode.Silver && bonus == ShopItem.Adder) return false;
-        if (ApplicationData.ShopInformation.CountShopItems[(int)bonus + 1] == 0) return false;
+        if (ApplicationData.ShopInformation.CountShopItems[(int)bonus - 1] == 0) return false;
 
         return true;
     }
@@ -390,7 +413,7 @@ public class Game : MonoBehaviour
         int nr = GetNumber(name);
         int x = nr % MainMap.SIZE;
         int y = nr / MainMap.SIZE;
-        board.Click(x, y, selectedBonus);
+        board.Click(x, y);
     }
 
 

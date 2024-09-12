@@ -37,13 +37,14 @@ namespace Assets.Scripts.Level
         {
             for (int i = 0; i < ApplicationData.ShopInformation.CountShopItems.Count; i++)
             {
-                string objectCountName = $"{(ShopItem)(i + 1)}Count";
+                BonusType currentBonus = (BonusType)(i + 1);
+                string objectCountName = $"{currentBonus}Count";
                 
                 int countBonuses = ApplicationData.ShopInformation.CountShopItems[i];
 
-                if (countBonuses == 0)
+                if (!IsBonusActive(currentBonus))
                 {
-                    string objectName = $"{(ShopItem)(i + 1)}";
+                    string objectName = $"{currentBonus}";
                     ObjectManager.SetPicture(objectName, $"{objectName}NonActive");
                 }
 
@@ -72,6 +73,15 @@ namespace Assets.Scripts.Level
 
             ObjectManager.OutputInformation(MovesText, "0");
             ObjectManager.OutputInformation(GoalMovesText, levelSettings.CountMoveFor3Stars.ToString());
+        }
+
+        private static bool IsBonusActive(BonusType bonus)
+        {
+            if (ApplicationData.CurrentLevelMode == LevelMode.Usual && bonus == BonusType.Freezing) return false;
+            if (ApplicationData.CurrentLevelMode == LevelMode.Silver && bonus == BonusType.Adder) return false;
+            if (ApplicationData.ShopInformation.CountShopItems[(int)bonus-1] == 0) return false;
+
+            return true;
         }
     }
 }

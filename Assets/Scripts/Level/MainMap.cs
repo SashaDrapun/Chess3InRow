@@ -53,29 +53,87 @@ namespace Assets.Scripts
             isPieceSelected = false;
         }
 
-        public void Click(int x, int y, ShopItem selectedBonus)
+        public void Click(int x, int y)
         {
             CleanWhereUserCanGo();
 
-            if (selectedBonus == ShopItem.None)
+            if (map[x, y] > 0)
             {
-                if (map[x, y] > 0)
-                {
-                    TakePiece(x, y);
-                }
-                else
-                {
-                    MovePiece(x, y);
-                }
-
-                ShowWhereUserCanGo();
+                TakePiece(x, y);
             }
             else
             {
-                isPieceSelected = false;
-
+                MovePiece(x, y);
             }
+
+            ShowWhereUserCanGo();
+        }
+
+        public void UseBonus(ShopItem shopItem)
+        {
+            if (shopItem == ShopItem.Teleporter)
+            {
+                TeleportItems();
+            }
+
+            if (shopItem == ShopItem.Redistributor)
+            {
+                
+                RedistributeItems();
+            }
+        }
+
+        private void RedistributeItems()
+        {
+            int countPieces = GetCountItemsOnMap();
+            this.ClearMap();
+            AddRandomPieces(countPieces);
+        }
+
+        private void TeleportItems()
+        {
+            List<MapCellType> itemsOnMap = GetItemsOnMap();
+            this.ClearMap();
+            foreach (var mapItem in itemsOnMap)
+            {
+                AddMapElement(mapItem);
+            }
+        }
+
+        private List<MapCellType> GetItemsOnMap()
+        {
+            List<MapCellType> result = new List<MapCellType>();
             
+            for (int x = 0; x < SIZE; x++)
+            {
+                for (int y = 0; y < SIZE; y++)
+                {
+                    if (map[x, y] != MapCellType.NotOnMap && map[x, y] != MapCellType.AllocatedSpace && map[x, y] != MapCellType.EmptyPlace)
+                    {
+                        result.Add(map[x, y]);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private int GetCountItemsOnMap()
+        {
+            int count = 0;
+
+            for (int x = 0; x < SIZE; x++)
+            {
+                for (int y = 0; y < SIZE; y++)
+                {
+                    if (map[x, y] != MapCellType.NotOnMap && map[x, y] != MapCellType.AllocatedSpace && map[x, y] != MapCellType.EmptyPlace)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
         }
 
         private void MovePiece(int x, int y)
@@ -345,6 +403,14 @@ namespace Assets.Scripts
             ShowBox(x, y, mapElement);
         }
 
+        private void AddRandomPieces(int count)
+        {
+            for (int j = 0; j < count; j++)
+            {
+                AddRandomPiece();
+            }
+        }
+
         private void AddRandomPieces()
         {
             for (int j = 0; j < ADD_PIECES; j++)
@@ -360,6 +426,13 @@ namespace Assets.Scripts
             MapCellType piece = GetMapCellFromFigure(randomFigure);
 
             SetMap(randomPlace.X, randomPlace.Y, piece);
+        }
+
+        private void AddMapElement(MapCellType mapCellType)
+        {
+            Point randomPlace = GetRandomEmptyPlace();
+
+            SetMap(randomPlace.X, randomPlace.Y, mapCellType);
         }
 
         private Point GetRandomEmptyPlace()
