@@ -145,7 +145,7 @@ TextureImporter:
         x: 1
         y: 1
         width: 1549
-        height: 1023
+        height: 1019
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,8 +169,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      settingsnew_0: 2927003212715531133
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
